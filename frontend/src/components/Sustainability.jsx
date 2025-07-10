@@ -145,7 +145,7 @@ const Sustainability = () => {
                 alt="NAFDAC Certified" 
                 className="h-16 w-auto opacity-80"
               />
-              <img 
+              {/* <img 
                 src={assets.son} 
                 alt="SON Certified" 
                 className="h-16 w-auto opacity-80"
@@ -154,7 +154,7 @@ const Sustainability = () => {
                 src={assets.iso} 
                 alt="ISO Certified" 
                 className="h-16 w-auto opacity-80"
-              />
+              /> */}
             </div>
             <p className="mt-8 text-gray-600 max-w-2xl mx-auto">
               All our products meet international quality standards while preserving traditional Nigerian craftsmanship

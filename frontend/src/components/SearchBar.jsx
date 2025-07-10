@@ -10,7 +10,7 @@ const SearchBar = () => {
     const location = useLocation();
 
     useEffect(()=>{
-        if (location.pathname.includes('menu')) {
+        if (location.pathname.includes('products')) {
             setVisible(true);
         }
         else {

@@ -46,12 +46,12 @@ const Hero = () => {
               >
                 <button>Explore Collections</button>
               </Link>
-              <Link
-                to="/training"
+              <a
+                href="wa.me/8028293058"
                 className="px-8 py-3 border-2 border-purple-primary text-purple-primary rounded-lg font-medium hover:bg-purple-50 transition-colors"
               >
-                <button>Enroll For Training</button>
-              </Link>
+                <button>Talk to Us</button>
+              </a>
             </div>
 
             <div className="mt-10 flex justify-center md:justify-start">

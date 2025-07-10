@@ -84,7 +84,7 @@ const App = () => {
         {!loading && (
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Collection />} />
+            <Route path="/products" element={<Collection />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/product/:productId" element={<Product />} />
