@@ -17,6 +17,7 @@ import Testimonials from "../components/Testimonials";
 import Sustainability from "../components/Sustainability";
 import Contact from "../components/Contact";
 import Chatbot from "../components/Chatbot";
+import DeliveryInfo from "../components/DeliveryInfo";
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
       <Hero />
       <LatestCollection />
       <BestSeller />
+      <DeliveryInfo />
       <AboutUs />
       <TrainingPrograms />
       <NigerianHeritage />
