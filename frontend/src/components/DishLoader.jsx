@@ -7,13 +7,13 @@ const DishLoader = () => {
         <div className="relative w-24 h-24 mx-auto mb-6">
           {/* Plate */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-20 h-20 rounded-full border-4 border-[#008753] border-t-transparent animate-spin"></div>
+            <div className="w-20 h-20 rounded-full border-4 border-[#6d28d9] border-t-transparent animate-spin"></div>
           </div>
           
           {/* Food Icon */}
           <div className="absolute inset-0 flex items-center justify-center">
             <svg 
-              className="w-12 h-12 text-[#008753] animate-pulse" 
+              className="w-12 h-12 text-[#6d28d9] animate-pulse" 
               viewBox="0 0 24 24" 
               fill="none" 
               stroke="currentColor" 
@@ -27,7 +27,7 @@ const DishLoader = () => {
         </div>
         
         <p className="prata-regular text-xl text-[#008753] mt-2">
-          Preparing your meal...
+          Loading Exquisite Scents...
         </p>
       </div>
     </div>

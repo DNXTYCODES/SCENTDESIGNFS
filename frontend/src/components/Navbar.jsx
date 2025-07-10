@@ -77,7 +77,7 @@ const Navbar = () => {
                             )}
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink 
                             to='/training' 
                             className={({isActive}) => 
@@ -106,7 +106,7 @@ const Navbar = () => {
                                 </>
                             )}
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         <NavLink 
                             to='/contact' 
@@ -229,7 +229,7 @@ const Navbar = () => {
                         >
                             PRODUCTS
                         </NavLink>
-                        <NavLink 
+                        {/* <NavLink 
                             onClick={() => setVisible(false)} 
                             className={({isActive}) => 
                                 `py-4 px-6 text-lg ${isActive ? 'text-purple-800 font-semibold bg-purple-50' : 'text-gray-700'}`
@@ -246,7 +246,7 @@ const Navbar = () => {
                             to='/workshops'
                         >
                             WORKSHOPS
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink 
                             onClick={() => setVisible(false)} 
                             className={({isActive}) => 

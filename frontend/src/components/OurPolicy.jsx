@@ -10,7 +10,7 @@ const OurPolicy = () => {
           <div className='flex-1 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow'>
             <div className='bg-[#008753]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
               <img 
-                src={assets.delivery_icon} 
+                src={assets.exchange_icon2} 
                 className='w-8' 
                 alt="Fast Delivery" 
               />
@@ -36,7 +36,7 @@ const OurPolicy = () => {
               Premium Ingredients
             </p>
             <p className='text-gray-600'>
-              Locally sourced, authentic ingredients
+              Authentic ingredients
             </p>
           </div>
 
@@ -44,7 +44,7 @@ const OurPolicy = () => {
           <div className='flex-1 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow'>
             <div className='bg-[#008753]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
               <img 
-                src={assets.support_icon} 
+                src={assets.support_icon2} 
                 className='w-8' 
                 alt="Customer Support" 
               />
