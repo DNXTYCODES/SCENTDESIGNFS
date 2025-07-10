@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
 
   const onSubmitHandler = async (event) => {
-    event.preventfDefault();
+    event.preventDefault();
     try {
       if (currentState === 'Sign Up') {
         const response = await axios.post(backendUrl + '/api/user/register', {name, email, password})
@@ -266,4 +266,4 @@ export default Login
 //   )
 // }
 
-// export default Login
+// export default Login
