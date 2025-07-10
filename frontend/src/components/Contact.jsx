@@ -6,7 +6,7 @@ const Contact = () => {
     {
       city: "IBADAN HQ",
       address: "7 oyesina close, opposite 7 ibikunle avenue, old bodija, Ibadan, Nigeria",
-      phone: "+234 901 234 5678",
+      phone: "+234 802 829 3058",
       hours: "Mon-Fri: 9AM-6PM | Sat: 10AM-4PM"
     }
   ];
@@ -64,7 +64,7 @@ const Contact = () => {
                 </p>
                 <p className="flex items-start">
                   <FiPhone className="mr-2 mt-1 text-amber-500" />
-                  <span>+234 902 345 6789 (Wholesale)</span>
+                  <span>+234 802 829 3058 (Whatsapp)</span>
                 </p>
                 <p className="flex items-start">
                   <FiMail className="mr-2 mt-1 text-amber-500" />

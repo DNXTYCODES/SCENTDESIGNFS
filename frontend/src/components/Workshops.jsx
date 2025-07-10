@@ -83,9 +83,12 @@ const Workshops = () => {
                   Special Feature:
                 </p>
                 <p className="text-purple-900">{event.highlight}</p>
+                
+            <a href="wa.me/8028293058">
                 <button className="w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition-colors">
                   Reserve Spot
                 </button>
+            </a>
               </div>
             </div>
           ))}
@@ -115,9 +118,12 @@ const Workshops = () => {
                 </ul>
               </div>
             </div>
+            
+            <a href="wa.me/8028293058">
             <button className="mt-8 px-8 py-3 bg-amber-500 text-purple-900 rounded-full hover:bg-amber-400 transition-colors font-bold">
               Inquire About Private Workshops
             </button>
+            </a>
           </div>
         </div>
       </div>

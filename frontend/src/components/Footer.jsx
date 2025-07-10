@@ -99,7 +99,7 @@ const Footer = () => {
                 alt="PalmPay" 
                 className="h-8 w-auto opacity-80"
               />
-              <img 
+              {/* <img 
                 src={assets.verve} 
                 alt="Verve" 
                 className="h-8 w-auto opacity-80"
@@ -108,13 +108,13 @@ const Footer = () => {
                 src={assets.mastercard} 
                 alt="Mastercard" 
                 className="h-8 w-auto opacity-80"
-              />
+              /> */}
             </div>
           </div>
           <div className="mt-4 text-center md:text-left text-sm text-gray-400">
-            <p>
+            {/* <p>
               RC Number: 1234567 | VAT: NG-1234-56789 | View our <a href="#" className="text-amber-500 hover:underline">NAFDAC Certification</a>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

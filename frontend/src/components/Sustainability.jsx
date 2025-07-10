@@ -71,20 +71,20 @@ const Sustainability = () => {
               <div className="grid md:grid-cols-2 gap-8">
                 {[
                   {
-                    stat: "₦28M",
+                    stat: "Millions",
                     label: "Paid to Rural Harvesters (2023)"
                   },
                   {
                     stat: "120+",
-                    label: "Women Cooperative Partnerships"
+                    label: "Cooperative Partnerships"
                   },
-                  {
-                    stat: "15",
-                    label: "Local Language Training Manuals"
-                  },
+                  // {
+                  //   stat: "15",
+                  //   label: "Local Language Training Manuals"
+                  // },
                   {
                     stat: "7",
-                    label: "State Government Partnerships"
+                    label: "State Partnerships"
                   }
                 ].map((item, index) => (
                   <div key={index} className="bg-white/10 p-6 rounded-xl">
@@ -97,7 +97,7 @@ const Sustainability = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* <div className="grid md:grid-cols-3 gap-8">
           {[
             {
               title: "Ethical Sourcing",
@@ -132,7 +132,7 @@ const Sustainability = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className="mt-16 bg-white rounded-2xl p-8 shadow-xl border border-purple-100">
           <div className="max-w-4xl mx-auto text-center">
