@@ -123,8 +123,8 @@ const Product = () => {
     return (
       <div className="flex justify-center items-center min-h-screen bg-amber-50">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#008753]"></div>
-          <p className="mt-4 text-lg text-[#008753]">Loading delicious meal details...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6d28d9;]"></div>
+          <p className="mt-4 text-lg text-[#6d28d9;]">Loading Fragrance...</p>
         </div>
       </div>
     );
@@ -438,7 +438,7 @@ const Product = () => {
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                         rows="4"
                         required
-                        placeholder="Share your experience with this meal..."
+                        placeholder="Share your experience with this Perfume..."
                         disabled={isSubmitting}
                       ></textarea>
                     </div>
