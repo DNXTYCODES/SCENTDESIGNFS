@@ -135,13 +135,13 @@ const AboutPage = () => {
                 name: "Chike Obi",
                 role: "Botanical Expert",
                 bio: "PhD in Ethnobotany, specialist in Nigerian aromatic plants",
-                image: assets.cs2
+                image: assets.cs1
               },
               {
                 name: "Zainab Mohammed",
                 role: "Creative Director",
                 bio: "Blending Northern Nigerian traditions with modern aesthetics",
-                image: assets.cs3
+                image: assets.cs1
               },
               {
                 name: "Emeka Nwankwo",

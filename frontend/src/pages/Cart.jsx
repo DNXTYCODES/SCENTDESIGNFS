@@ -52,17 +52,17 @@ const Cart = () => {
               alt="Empty cart" 
             />
           </div>
-          <h3 className="prata-regular text-2xl text-[#008753] mb-2">
+          <h3 className="prata-regular text-2xl text-[#6d28d9;] mb-2">
             Your Cart is Empty
           </h3>
           <p className="text-gray-600 max-w-md mx-auto mb-6">
             Add some delicious meals to your cart!
           </p>
           <button
-            onClick={() => navigate('/menu')}
-            className="px-6 py-2 bg-[#008753] text-white rounded-lg hover:bg-[#006641] transition-colors"
+            onClick={() => navigate('/products')}
+            className="px-6 py-2 bg-[#6d28d9;] text-white rounded-lg hover:bg-[#006641] transition-colors"
           >
-            Browse Menu
+            Browse products
           </button>
         </div>
       ) : (

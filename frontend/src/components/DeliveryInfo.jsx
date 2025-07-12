@@ -30,7 +30,7 @@ const DeliveryInfo = () => {
 
           <div className="bg-white rounded-xl p-6 shadow-sm border border-purple-100">
             <h3 className="text-xl font-semibold text-purple-primary mb-4 flex items-center gap-2">
-              <img src={assets.delivery_truck} alt="Delivery" className="w-6 h-6" />
+              <img src={assets.fd} alt="Delivery" className="w-6 h-6" />
               Delivery Estimates
             </h3>
             <ul className="space-y-3 text-gray-700">
@@ -54,14 +54,14 @@ const DeliveryInfo = () => {
         <div className="w-full md:w-1/2">
           <div className="bg-white rounded-xl p-6 h-full shadow-sm border border-purple-100">
             <h3 className="text-xl font-semibold text-purple-primary mb-6 flex items-center gap-2">
-              <img src={assets.payment} alt="Payment" className="w-6 h-6" />
+              <img src={assets.opay} alt="Payment" className="w-6 h-6" />
               Payment Options
             </h3>
 
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-3">
                 <div className="bg-purple-100 p-2 rounded-lg">
-                  <img src={assets.cod} alt="Cash on delivery" className="w-8 h-8" />
+                  <img src={assets.palmpay} alt="Cash on delivery" className="w-8 h-8" />
                 </div>
                 <h4 className="font-medium text-lg text-purple-primary">Payment on Delivery</h4>
               </div>
@@ -73,7 +73,7 @@ const DeliveryInfo = () => {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <div className="bg-purple-100 p-2 rounded-lg">
-                  <img src={assets.online_payment} alt="Online payment" className="w-8 h-8" />
+                  <img src={assets.opay} alt="Online payment" className="w-8 h-8" />
                 </div>
                 <h4 className="font-medium text-lg text-purple-primary">Online Payment</h4>
               </div>

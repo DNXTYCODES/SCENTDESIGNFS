@@ -1,4 +1,5 @@
 
+import fd from './fd.webp'
 import check_icon from './check_icon.jpg'
 import lab4 from './lab4.jpeg'
 import lab2 from './lab2.webp'
@@ -71,6 +72,7 @@ import palmpay from './palmpay.jpeg'
 
 
 export const assets = {
+    fd,
     check_icon,
     sdlab,
     ceowdoc,
