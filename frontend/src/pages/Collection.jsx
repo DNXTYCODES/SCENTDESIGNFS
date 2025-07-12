@@ -3,18 +3,26 @@ import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/assets';
 import Title from '../components/Title';
 import ProductItem from '../components/ProductItem';
+import { FiFilter } from 'react-icons/fi';
 
 const Collection = () => {
   const { getAvailableProducts, search, showSearch } = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [sortType, setSortType] = useState('relevant');
   const [loading, setLoading] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  
+  // Extract unique categories from products
+  const categories = [...new Set(allProducts.map(product => product.category))].sort();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
         const availableProducts = await getAvailableProducts();
+        setAllProducts(availableProducts);
         applyFilter(availableProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -26,6 +34,16 @@ const Collection = () => {
     fetchProducts();
   }, [search, showSearch]);
 
+  // Toggle category selection
+  const toggleCategory = (category) => {
+    setSelectedCategories(prev => 
+      prev.includes(category) 
+        ? prev.filter(c => c !== category) 
+        : [...prev, category]
+    );
+  };
+
+  // Apply all filters (search and categories)
   const applyFilter = (products) => {
     let productsCopy = [...products];
 
@@ -36,10 +54,18 @@ const Collection = () => {
       );
     }
 
+    // Apply category filter if any categories are selected
+    if (selectedCategories.length > 0) {
+      productsCopy = productsCopy.filter(item => 
+        selectedCategories.includes(item.category)
+      );
+    }
+
     setFilterProducts(productsCopy);
     sortProduct(productsCopy);
   };
 
+  // Handle sorting
   const sortProduct = (productsList) => {
     let sortedProducts = [...productsList];
 
@@ -64,6 +90,13 @@ const Collection = () => {
     sortProduct(filterProducts);
   };
 
+  // Update filters when categories change
+  useEffect(() => {
+    if (allProducts.length > 0) {
+      applyFilter(allProducts);
+    }
+  }, [selectedCategories]);
+
   return (
     <div className='pt-10 border-t'>
       <div className='max-w-6xl mx-auto px-4'>
@@ -71,7 +104,15 @@ const Collection = () => {
           <Title text1={'OUR'} text2={'MENU'} />
           
           <div className='flex items-center gap-3'>
-            <label htmlFor="sort-select" className='text-sm text-gray-600'>
+            {/* Mobile filter toggle button */}
+            <button 
+              className="sm:hidden flex items-center gap-1 text-sm bg-[#008753] text-white px-3 py-2 rounded-lg"
+              onClick={() => setShowFilter(!showFilter)}
+            >
+              <FiFilter /> Filter
+            </button>
+            
+            <label htmlFor="sort-select" className='text-sm text-gray-600 hidden sm:block'>
               Sort by:
             </label>
             <select 
@@ -79,7 +120,7 @@ const Collection = () => {
               onChange={handleSortChange}
               value={sortType}
               className='border-2 border-[#008753] text-sm px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#008753]'
-              aria-label="Sort food items"
+              aria-label="Sort perfume items"
             >
               <option value="relevant">Most Relevant</option>
               <option value="low-high">Price: Low to High</option>
@@ -88,56 +129,267 @@ const Collection = () => {
           </div>
         </div>
 
-        {showSearch && search && (
-          <div className='mb-6'>
-            <p className='text-lg'>
-              Showing results for: <span className='font-semibold text-[#008753]'>"{search}"</span>
-            </p>
-            <p className='text-sm text-gray-600'>
-              {filterProducts.length} {filterProducts.length === 1 ? 'item' : 'items'} found
-            </p>
-          </div>
-        )}
-
-        {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#008753]"></div>
-          </div>
-        ) : filterProducts.length > 0 ? (
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-            {filterProducts.map((item, index) => (
-              <ProductItem 
-                key={index} 
-                name={item.name} 
-                id={item._id} 
-                price={item.price} 
-                image={item.image} 
-              />
-            ))}
-          </div>
-        ) : (
-          <div className='text-center py-12'>
-            <div className='bg-[#008753]/10 p-6 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6'>
-              <img 
-                src={assets.search_icon} 
-                className='w-12 opacity-70' 
-                alt="No results found" 
-              />
+        <div className='flex flex-col sm:flex-row gap-8'>
+          {/* Category Filter Sidebar */}
+          <div className={`w-full sm:w-64 ${showFilter ? 'block' : 'hidden'} sm:block`}>
+            <div className='border border-gray-300 p-5 rounded-lg'>
+              <div className='flex justify-between items-center mb-4'>
+                <p className='prata-regular text-base font-medium'>CATEGORIES</p>
+                {selectedCategories.length > 0 && (
+                  <button 
+                    className='text-xs text-[#008753] hover:underline'
+                    onClick={() => setSelectedCategories([])}
+                  >
+                    Clear all
+                  </button>
+                )}
+              </div>
+              
+              <div className='flex flex-col gap-3 text-sm font-light text-gray-700'>
+                {categories.map((category, index) => (
+                  <label key={index} className='flex items-center gap-2 cursor-pointer'>
+                    <input 
+                      className='w-4 h-4 accent-[#008753]'
+                      type="checkbox" 
+                      checked={selectedCategories.includes(category)}
+                      onChange={() => toggleCategory(category)}
+                    />
+                    <span className='capitalize'>{category}</span>
+                  </label>
+                ))}
+              </div>
             </div>
-            <h3 className='prata-regular text-2xl text-[#008753] mb-2'>
-              No Food Items Found
-            </h3>
-            <p className='text-gray-600 max-w-md mx-auto'>
-              We couldn't find any dishes matching your search. Try different keywords.
-            </p>
           </div>
-        )}
+
+          {/* Product Grid */}
+          <div className='flex-1'>
+            {showSearch && search && (
+              <div className='mb-6'>
+                <p className='text-lg'>
+                  Showing results for: <span className='font-semibold text-[#008753]'>"{search}"</span>
+                </p>
+                {selectedCategories.length > 0 && (
+                  <p className='text-sm text-gray-600 mt-1'>
+                    Filtered by: {selectedCategories.join(', ')}
+                  </p>
+                )}
+                <p className='text-sm text-gray-600'>
+                  {filterProducts.length} {filterProducts.length === 1 ? 'item' : 'items'} found
+                </p>
+              </div>
+            )}
+
+            {loading ? (
+              <div className="flex justify-center py-20">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#008753]"></div>
+              </div>
+            ) : filterProducts.length > 0 ? (
+              <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+                {filterProducts.map((item, index) => (
+                  <ProductItem 
+                    key={index} 
+                    name={item.name} 
+                    id={item._id} 
+                    price={item.price} 
+                    image={item.image} 
+                    category={item.category}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className='text-center py-12'>
+                <div className='bg-[#008753]/10 p-6 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6'>
+                  <img 
+                    src={assets.search_icon} 
+                    className='w-12 opacity-70' 
+                    alt="No results found" 
+                  />
+                </div>
+                <h3 className='prata-regular text-2xl text-[#008753] mb-2'>
+                  No Perfumes found
+                </h3>
+                <p className='text-gray-600 max-w-md mx-auto'>
+                  {selectedCategories.length > 0
+                    ? "No items match your selected categories. Try different filters."
+                    : "We couldn't find any dishes matching your search. Try different keywords."}
+                </p>
+                {selectedCategories.length > 0 && (
+                  <button
+                    className="mt-4 text-[#008753] hover:underline"
+                    onClick={() => setSelectedCategories([])}
+                  >
+                    Clear all filters
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Collection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useContext, useEffect, useState } from 'react'
+// import { ShopContext } from '../context/ShopContext'
+// import { assets } from '../assets/assets';
+// import Title from '../components/Title';
+// import ProductItem from '../components/ProductItem';
+
+// const Collection = () => {
+//   const { getAvailableProducts, search, showSearch } = useContext(ShopContext);
+//   const [filterProducts, setFilterProducts] = useState([]);
+//   const [sortType, setSortType] = useState('relevant');
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchProducts = async () => {
+//       try {
+//         setLoading(true);
+//         const availableProducts = await getAvailableProducts();
+//         applyFilter(availableProducts);
+//       } catch (error) {
+//         console.error("Error fetching products:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+    
+//     fetchProducts();
+//   }, [search, showSearch]);
+
+//   const applyFilter = (products) => {
+//     let productsCopy = [...products];
+
+//     // Apply search filter
+//     if (showSearch && search) {
+//       productsCopy = productsCopy.filter(item => 
+//         item.name.toLowerCase().includes(search.toLowerCase())
+//       );
+//     }
+
+//     setFilterProducts(productsCopy);
+//     sortProduct(productsCopy);
+//   };
+
+//   const sortProduct = (productsList) => {
+//     let sortedProducts = [...productsList];
+
+//     switch (sortType) {
+//       case 'low-high':
+//         sortedProducts.sort((a, b) => a.price - b.price);
+//         break;
+//       case 'high-low':
+//         sortedProducts.sort((a, b) => b.price - a.price);
+//         break;
+//       default:
+//         // Keep original order
+//         break;
+//     }
+
+//     setFilterProducts(sortedProducts);
+//   };
+
+//   const handleSortChange = (e) => {
+//     const newSortType = e.target.value;
+//     setSortType(newSortType);
+//     sortProduct(filterProducts);
+//   };
+
+//   return (
+//     <div className='pt-10 border-t'>
+//       <div className='max-w-6xl mx-auto px-4'>
+//         <div className='flex justify-between items-center mb-8'>
+//           <Title text1={'OUR'} text2={'MENU'} />
+          
+//           <div className='flex items-center gap-3'>
+//             <label htmlFor="sort-select" className='text-sm text-gray-600'>
+//               Sort by:
+//             </label>
+//             <select 
+//               id="sort-select"
+//               onChange={handleSortChange}
+//               value={sortType}
+//               className='border-2 border-[#008753] text-sm px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#008753]'
+//               aria-label="Sort perfume items"
+//             >
+//               <option value="relevant">Most Relevant</option>
+//               <option value="low-high">Price: Low to High</option>
+//               <option value="high-low">Price: High to Low</option>
+//             </select>
+//           </div>
+//         </div>
+
+//         {showSearch && search && (
+//           <div className='mb-6'>
+//             <p className='text-lg'>
+//               Showing results for: <span className='font-semibold text-[#008753]'>"{search}"</span>
+//             </p>
+//             <p className='text-sm text-gray-600'>
+//               {filterProducts.length} {filterProducts.length === 1 ? 'item' : 'items'} found
+//             </p>
+//           </div>
+//         )}
+
+//         {loading ? (
+//           <div className="flex justify-center py-20">
+//             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#008753]"></div>
+//           </div>
+//         ) : filterProducts.length > 0 ? (
+//           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+//             {filterProducts.map((item, index) => (
+//               <ProductItem 
+//                 key={index} 
+//                 name={item.name} 
+//                 id={item._id} 
+//                 price={item.price} 
+//                 image={item.image} 
+//               />
+//             ))}
+//           </div>
+//         ) : (
+//           <div className='text-center py-12'>
+//             <div className='bg-[#008753]/10 p-6 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6'>
+//               <img 
+//                 src={assets.search_icon} 
+//                 className='w-12 opacity-70' 
+//                 alt="No results found" 
+//               />
+//             </div>
+//             <h3 className='prata-regular text-2xl text-[#008753] mb-2'>
+//               No perfume Items Found
+//             </h3>
+//             <p className='text-gray-600 max-w-md mx-auto'>
+//               We couldn't find any dishes matching your search. Try different keywords.
+//             </p>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Collection;
 
 
 
@@ -176,7 +428,7 @@ export default Collection;
 //   const [filterProducts, setFilterProducts] = useState([]);
 //   const [sortType, setSortType] = useState('relavent')
 
-//   // Food categories filtering - temporarily commented out
+//   // perfume categories filtering - temporarily commented out
 //   /*
 //   const [showFilter, setShowFilter] = useState(false);
 //   const [category, setCategory] = useState([]);
@@ -202,7 +454,7 @@ export default Collection;
 //     }
 
 //     /*
-//     // Food category filtering - temporarily commented out
+//     // perfume category filtering - temporarily commented out
 //     if (category.length > 0) {
 //       productsCopy = productsCopy.filter(item => category.includes(item.category));
 //     }
@@ -254,7 +506,7 @@ export default Collection;
 //               id="sort-select"
 //               onChange={(e) => setSortType(e.target.value)} 
 //               className='border-2 border-[#008753] text-sm px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#008753]'
-//               aria-label="Sort food items"
+//               aria-label="Sort perfume items"
 //             >
 //               <option value="relavent">Most Relevant</option>
 //               <option value="low-high">Price: Low to High</option>
@@ -263,7 +515,7 @@ export default Collection;
 //           </div>
 //         </div>
 
-//         {/* Food Category Filter - Temporarily Commented Out */}
+//         {/* perfume Category Filter - Temporarily Commented Out */}
 //         {/*
 //         <div className='mb-8 bg-amber-50 p-4 rounded-lg'>
 //           <p 
@@ -279,7 +531,7 @@ export default Collection;
 //           </p>
           
 //           <div className={`mt-4 ${showFilter ? 'block' : 'hidden'}`}>
-//             <p className='prata-regular mb-3 text-base text-[#008753]'>FOOD CATEGORIES</p>
+//             <p className='prata-regular mb-3 text-base text-[#008753]'>perfume CATEGORIES</p>
 //             <div className='grid grid-cols-2 md:grid-cols-3 gap-4 text-gray-700'>
 //               <label className='flex items-center gap-2 cursor-pointer'>
 //                 <input 
@@ -366,7 +618,7 @@ export default Collection;
 //               />
 //             </div>
 //             <h3 className='prata-regular text-2xl text-[#008753] mb-2'>
-//               No Food Items Found
+//               No perfume Items Found
 //             </h3>
 //             <p className='text-gray-600 max-w-md mx-auto'>
 //               We couldn't find any dishes matching your search. Try different keywords or browse our full menu.

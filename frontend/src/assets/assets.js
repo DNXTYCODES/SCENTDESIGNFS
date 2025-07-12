@@ -1,4 +1,5 @@
 
+import filter from './filter.webp'
 import fd from './fd.webp'
 import check_icon from './check_icon.jpg'
 import lab4 from './lab4.jpeg'
@@ -72,6 +73,7 @@ import palmpay from './palmpay.jpeg'
 
 
 export const assets = {
+    filter,
     fd,
     check_icon,
     sdlab,
