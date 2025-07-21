@@ -6,7 +6,7 @@ const Hero = () => {
   const slides = [
     { type: "image", src: assets.ceowpeople, caption: "Nigerian Craftsmanship" },
     { type: "image", src: assets.carouselmodel1, caption: "Premium Fragrances" },
-    { type: "image", src: assets.carouselbw, caption: "Scent Design Expertise" },
+    { type: "image", src: assets.ngn, caption: "Scent Design Expertise" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,7 +32,7 @@ const Hero = () => {
             </div>
 
             <h1 className="prata-regular text-4xl md:text-5xl lg:text-6xl text-purple-primary mb-4 leading-tight">
-              Nigerian Craftsmanship in <span className="text-gold-500">Every Bottle</span>
+              Fragrance Is <span className="text-gold-500">Our Passion</span>!
             </h1>
 
             <p className="text-gray-700 mb-8 text-lg">
