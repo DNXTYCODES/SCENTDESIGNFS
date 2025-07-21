@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
+import Title from "./Title";
 import ProductItem from "./ProductItem";
 import { Link } from 'react-router-dom';
 import DishLoader from "./DishLoader";
@@ -14,7 +15,9 @@ const LatestCollection = () => {
       try {
         setLoading(true);
         const availableProducts = await getAvailableProducts();
-        setLatestProducts(availableProducts.slice(0, 10));
+        // Sort by date (newest first) and take the first 10
+        const sortedProducts = [...availableProducts].sort((a, b) => new Date(b.date) - new Date(a.date));
+        setLatestProducts(sortedProducts.slice(0, 10));
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -26,26 +29,21 @@ const LatestCollection = () => {
   }, []);
 
   return (
-    <div className="py-12 bg-purple-50">
+    <div className="py-12 bg-amber-50">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-[2px] bg-purple-600"></div>
-            <p className="font-medium text-sm text-purple-600">
-              NEW ARRIVALS
-            </p>
-          </div>
-          <h2 className="prata-regular text-4xl text-purple-900 mb-4">
-            Our <span className="text-amber-600">Latest</span> Fragrances
+          <h2 className="prata-regular text-4xl text-[#008753] mb-4">
+            Our <span className="text-amber-600">Popular</span> Dishes
           </h2>
+          <div className="w-24 h-1 bg-[#008753] mx-auto"></div>
           <p className="mt-6 max-w-2xl mx-auto text-gray-700">
-            Discover our newest scent creations crafted with premium Nigerian botanicals
+            Customer favorites - the most loved traditional dishes prepared with authentic recipes
           </p>
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <DishLoader size="lg" message="Loading our latest fragrances..." />
+          <div className="flex justify-center items-center py-20 min-h-[400px]">
+            <DishLoader size="lg" message="Preparing our popular dishes..." />
           </div>
         ) : (
           <>
@@ -56,7 +54,9 @@ const LatestCollection = () => {
                   id={item._id}
                   image={item.image}
                   name={item.name}
-                  price={item.price}
+                  basePrice={item.basePrice}
+                  inStock={item.inStock}
+                  variations={item.variations}  // Added variations prop
                 />
               ))}
             </div>
@@ -64,9 +64,9 @@ const LatestCollection = () => {
             <div className="text-center mt-12">
               <Link 
                 to="/products" 
-                className="inline-block px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-colors"
+                className="inline-block px-8 py-3 border-2 border-[#008753] text-[#008753] rounded-lg font-medium hover:bg-[#008753] hover:text-white transition-colors"
               >
-                View All Collections
+                View Full Products
               </Link>
             </div>
           </>
@@ -77,6 +77,111 @@ const LatestCollection = () => {
 };
 
 export default LatestCollection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useContext, useEffect, useState } from "react";
+// import { ShopContext } from "../context/ShopContext";
+// import ProductItem from "./ProductItem";
+// import { Link } from 'react-router-dom';
+// import DishLoader from "./DishLoader";
+
+// const LatestCollection = () => {
+//   const { getAvailableProducts } = useContext(ShopContext);
+//   const [latestProducts, setLatestProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchProducts = async () => {
+//       try {
+//         setLoading(true);
+//         const availableProducts = await getAvailableProducts();
+//         setLatestProducts(availableProducts.slice(0, 10));
+//       } catch (error) {
+//         console.error("Error fetching products:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+    
+//     fetchProducts();
+//   }, []);
+
+//   return (
+//     <div className="py-12 bg-purple-50">
+//       <div className="max-w-6xl mx-auto px-4">
+//         <div className="text-center mb-12">
+//           <div className="flex items-center justify-center gap-2 mb-4">
+//             <div className="w-8 h-[2px] bg-purple-600"></div>
+//             <p className="font-medium text-sm text-purple-600">
+//               NEW ARRIVALS
+//             </p>
+//           </div>
+//           <h2 className="prata-regular text-4xl text-purple-900 mb-4">
+//             Our <span className="text-amber-600">Latest</span> Fragrances
+//           </h2>
+//           <p className="mt-6 max-w-2xl mx-auto text-gray-700">
+//             Discover our newest scent creations crafted with premium Nigerian botanicals
+//           </p>
+//         </div>
+
+//         {loading ? (
+//           <div className="flex justify-center items-center py-20">
+//             <DishLoader size="lg" message="Loading our latest fragrances..." />
+//           </div>
+//         ) : (
+//           <>
+//             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+//               {latestProducts.map((item, index) => (
+//                 <ProductItem
+//                   key={index}
+//                   id={item._id}
+//                   image={item.image}
+//                   name={item.name}
+//                   price={item.price}
+//                 />
+//               ))}
+//             </div>
+
+//             <div className="text-center mt-12">
+//               <Link 
+//                 to="/products" 
+//                 className="inline-block px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-colors"
+//               >
+//                 View All Collections
+//               </Link>
+//             </div>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LatestCollection;
 
 
 

@@ -18,6 +18,7 @@ import Sustainability from "../components/Sustainability";
 import Contact from "../components/Contact";
 import Chatbot from "../components/Chatbot";
 import DeliveryInfo from "../components/DeliveryInfo";
+import CustomerReviews from "../components/CustomerReviews";
 
 const Home = () => {
   return (
@@ -26,6 +27,7 @@ const Home = () => {
       <Hero />
       <LatestCollection />
       <BestSeller />
+      <CustomerReviews />
       <Testimonials />
       <DeliveryInfo />
       <AboutUs />
