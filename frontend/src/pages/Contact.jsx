@@ -38,7 +38,7 @@ const Contact = () => {
                 Call Us
               </a>
               <a 
-                href="mailto:info@scentdesign.ng" 
+                href="mailto:scentdesign@gmail.com" 
                 className="px-6 py-3 md:px-8 md:py-3 border-2 border-purple-600 text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-colors flex items-center gap-2 text-sm md:text-base"
               >
                 <FiMail className="text-xl" />
