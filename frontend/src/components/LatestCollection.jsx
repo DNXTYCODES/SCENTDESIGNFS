@@ -32,12 +32,12 @@ const LatestCollection = () => {
     <div className="py-12 bg-amber-50">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="prata-regular text-4xl text-[#008753] mb-4">
-            Our <span className="text-amber-600">Popular</span> Dishes
+          <h2 className="prata-regular text-4xl text-[#6d28d9] mb-4">
+            Our <span className="text-amber-600">Recent</span> Scents
           </h2>
-          <div className="w-24 h-1 bg-[#008753] mx-auto"></div>
+          <div className="w-24 h-1 bg-[#6d28d9] mx-auto"></div>
           <p className="mt-6 max-w-2xl mx-auto text-gray-700">
-            Customer favorites - the most loved traditional dishes prepared with authentic recipes
+            Our recently Uploaded Scents - Catch up on the recent scents made available
           </p>
         </div>
 
@@ -63,10 +63,10 @@ const LatestCollection = () => {
 
             <div className="text-center mt-12">
               <Link 
-                to="/products" 
-                className="inline-block px-8 py-3 border-2 border-[#008753] text-[#008753] rounded-lg font-medium hover:bg-[#008753] hover:text-white transition-colors"
+                to="/menu" 
+                className="inline-block px-8 py-3 border-2 border-[#6d28d9] text-[#6d28d9] rounded-lg font-medium hover:bg-[#6d28d9] hover:text-white transition-colors"
               >
-                View Full Products
+                View Full Menu
               </Link>
             </div>
           </>
@@ -77,6 +77,103 @@ const LatestCollection = () => {
 };
 
 export default LatestCollection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useContext, useEffect, useState } from "react";
+// import { ShopContext } from "../context/ShopContext";
+// import Title from "./Title";
+// import ProductItem from "./ProductItem";
+// import { Link } from 'react-router-dom';
+// import DishLoader from "./DishLoader";
+
+// const LatestCollection = () => {
+//   const { getAvailableProducts } = useContext(ShopContext);
+//   const [latestProducts, setLatestProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchProducts = async () => {
+//       try {
+//         setLoading(true);
+//         const availableProducts = await getAvailableProducts();
+//         // Sort by date (newest first) and take the first 10
+//         const sortedProducts = [...availableProducts].sort((a, b) => new Date(b.date) - new Date(a.date));
+//         setLatestProducts(sortedProducts.slice(0, 10));
+//       } catch (error) {
+//         console.error("Error fetching products:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+    
+//     fetchProducts();
+//   }, []);
+
+//   return (
+//     <div className="py-12 bg-amber-50">
+//       <div className="max-w-6xl mx-auto px-4">
+//         <div className="text-center mb-12">
+//           <h2 className="prata-regular text-4xl text-[#6d28d9] mb-4">
+//             Our <span className="text-amber-600">Popular</span> Dishes
+//           </h2>
+//           <div className="w-24 h-1 bg-[#6d28d9] mx-auto"></div>
+//           <p className="mt-6 max-w-2xl mx-auto text-gray-700">
+//             Customer favorites - the most loved traditional dishes prepared with authentic recipes
+//           </p>
+//         </div>
+
+//         {loading ? (
+//           <div className="flex justify-center items-center py-20 min-h-[400px]">
+//             <DishLoader size="lg" message="Preparing our popular dishes..." />
+//           </div>
+//         ) : (
+//           <>
+//             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+//               {latestProducts.map((item, index) => (
+//                 <ProductItem
+//                   key={index}
+//                   id={item._id}
+//                   image={item.image}
+//                   name={item.name}
+//                   basePrice={item.basePrice}
+//                   inStock={item.inStock}
+//                   variations={item.variations}  // Added variations prop
+//                 />
+//               ))}
+//             </div>
+
+//             <div className="text-center mt-12">
+//               <Link 
+//                 to="/products" 
+//                 className="inline-block px-8 py-3 border-2 border-[#6d28d9] text-[#6d28d9] rounded-lg font-medium hover:bg-[#6d28d9] hover:text-white transition-colors"
+//               >
+//                 View Full Products
+//               </Link>
+//             </div>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LatestCollection;
 
 
 
@@ -235,10 +332,10 @@ export default LatestCollection;
 //     <div className="py-12 bg-amber-50">
 //       <div className="max-w-6xl mx-auto px-4">
 //         <div className="text-center mb-12">
-//           <h2 className="prata-regular text-4xl text-[#008753] mb-4">
+//           <h2 className="prata-regular text-4xl text-[#6d28d9] mb-4">
 //             Our <span className="text-amber-600">Popular</span> Dishes
 //           </h2>
-//           <div className="w-24 h-1 bg-[#008753] mx-auto"></div>
+//           <div className="w-24 h-1 bg-[#6d28d9] mx-auto"></div>
 //           <p className="mt-6 max-w-2xl mx-auto text-gray-700">
 //             Customer favorites - the most loved traditional dishes prepared with authentic recipes
 //           </p>
@@ -265,7 +362,7 @@ export default LatestCollection;
 //             <div className="text-center mt-12">
 //               <Link 
 //                 to="/menu" 
-//                 className="inline-block px-8 py-3 border-2 border-[#008753] text-[#008753] rounded-lg font-medium hover:bg-[#008753] hover:text-white transition-colors"
+//                 className="inline-block px-8 py-3 border-2 border-[#6d28d9] text-[#6d28d9] rounded-lg font-medium hover:bg-[#6d28d9] hover:text-white transition-colors"
 //               >
 //                 View Full Menu
 //               </Link>
@@ -327,10 +424,10 @@ export default LatestCollection;
 //       <div className="max-w-6xl mx-auto px-4">
 //         {/* Section Header */}
 //         <div className="text-center mb-12">
-//           <h2 className="prata-regular text-4xl text-[#008753] mb-4">
+//           <h2 className="prata-regular text-4xl text-[#6d28d9] mb-4">
 //             Our <span className="text-amber-600">Popular</span> Dishes
 //           </h2>
-//           <div className="w-24 h-1 bg-[#008753] mx-auto"></div>
+//           <div className="w-24 h-1 bg-[#6d28d9] mx-auto"></div>
 //           <p className="mt-6 max-w-2xl mx-auto text-gray-700">
 //             Customer favorites - the most loved traditional dishes prepared with authentic recipes
 //           </p>
@@ -359,7 +456,7 @@ export default LatestCollection;
 //             <div className="text-center mt-12">
 //               <Link 
 //                 to="/menu" 
-//                 className="inline-block px-8 py-3 border-2 border-[#008753] text-[#008753] rounded-lg font-medium hover:bg-[#008753] hover:text-white transition-colors"
+//                 className="inline-block px-8 py-3 border-2 border-[#6d28d9] text-[#6d28d9] rounded-lg font-medium hover:bg-[#008753] hover:text-white transition-colors"
 //               >
 //                 View Full Menu
 //               </Link>

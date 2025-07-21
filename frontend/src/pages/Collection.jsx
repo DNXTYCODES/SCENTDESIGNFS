@@ -91,7 +91,7 @@ const Collection = () => {
           <div className='flex items-center gap-3'>
             {/* Mobile filter toggle button */}
             <button 
-              className="sm:hidden flex items-center gap-1 text-sm bg-[#008753] text-white px-3 py-2 rounded-lg"
+              className="sm:hidden flex items-center gap-1 text-sm bg-[#6d28d9] text-white px-3 py-2 rounded-lg"
               onClick={() => setShowFilter(!showFilter)}
             >
               <FiFilter /> Filter
@@ -104,7 +104,7 @@ const Collection = () => {
               id="sort-select"
               onChange={handleSortChange}
               value={sortType}
-              className='border-2 border-[#008753] text-sm px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#008753]'
+              className='border-2 border-[#6d28d9] text-sm px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#6d28d9]'
               aria-label="Sort food items"
             >
               <option value="relevant">Most Relevant</option>
@@ -122,7 +122,7 @@ const Collection = () => {
                 <p className='prata-regular text-base font-medium'>CATEGORIES</p>
                 {selectedCategories.length > 0 && (
                   <button 
-                    className='text-xs text-[#008753] hover:underline'
+                    className='text-xs text-[#6d28d9] hover:underline'
                     onClick={clearCategories}
                   >
                     Clear all
@@ -134,7 +134,7 @@ const Collection = () => {
                 {categories.map((category, index) => (
                   <label key={index} className='flex items-center gap-2 cursor-pointer'>
                     <input 
-                      className='w-4 h-4 accent-[#008753]'
+                      className='w-4 h-4 accent-[#6d28d9]'
                       type="checkbox" 
                       checked={selectedCategories.includes(category)}
                       onChange={() => toggleCategory(category)}
@@ -151,7 +151,7 @@ const Collection = () => {
             {showSearch && search && (
               <div className='mb-6'>
                 <p className='text-lg'>
-                  Showing results for: <span className='font-semibold text-[#008753]'>"{search}"</span>
+                  Showing results for: <span className='font-semibold text-[#6d28d9]'>"{search}"</span>
                 </p>
                 {selectedCategories.length > 0 && (
                   <p className='text-sm text-gray-600 mt-1'>
@@ -166,7 +166,7 @@ const Collection = () => {
 
             {loading ? (
               <div className="flex justify-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#008753]"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6d28d9]"></div>
               </div>
             ) : filteredAndSortedProducts.length > 0 ? (
               <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
@@ -184,14 +184,14 @@ const Collection = () => {
               </div>
             ) : (
               <div className='text-center py-12'>
-                <div className='bg-[#008753]/10 p-6 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6'>
+                <div className='bg-[#6d28d9]/10 p-6 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6'>
                   <img 
                     src={assets.search_icon} 
                     className='w-12 opacity-70' 
                     alt="No results found" 
                   />
                 </div>
-                <h3 className='prata-regular text-2xl text-[#008753] mb-2'>
+                <h3 className='prata-regular text-2xl text-[#6d28d9] mb-2'>
                   No Food Items Found
                 </h3>
                 <p className='text-gray-600 max-w-md mx-auto'>
@@ -201,7 +201,7 @@ const Collection = () => {
                 </p>
                 {selectedCategories.length > 0 && (
                   <button
-                    className="mt-4 text-[#008753] hover:underline"
+                    className="mt-4 text-[#6d28d9] hover:underline"
                     onClick={clearCategories}
                   >
                     Clear all filters

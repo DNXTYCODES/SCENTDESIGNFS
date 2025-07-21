@@ -388,7 +388,7 @@ const Add = ({ token }) => {
         </div>
 
         {/* Wrap Option */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <div className="flex items-center gap-2 mb-2">
             <input
               type="checkbox"
@@ -423,7 +423,7 @@ const Add = ({ token }) => {
               />
             </div>
           )}
-        </div>
+        </div> */}
       </div>
 
       <button

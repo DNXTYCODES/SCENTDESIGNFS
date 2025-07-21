@@ -112,7 +112,7 @@ const CustomerReviews = () => {
 
   if (isLoading) {
     return (
-      <section className="bg-gradient-to-r from-[#008753]/10 to-amber-50 py-20 px-4">
+      <section className="bg-gradient-to-r from-[#6d28d9]/10 to-amber-50 py-20 px-4">
         <div className="max-w-6xl mx-auto text-center py-20">
           Loading reviews...
         </div>
@@ -121,19 +121,19 @@ const CustomerReviews = () => {
   }
 
   return (
-    <section className="bg-gradient-to-r from-[#008753]/10 to-amber-50 py-20 px-4">
+    <section className="bg-gradient-to-r from-[#6d28d9]/10 to-amber-50 py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-[2px] bg-[#008753]"></div>
-            <p className="font-medium text-sm text-[#008753]">
+            <div className="w-8 h-[2px] bg-[#6d28d9]"></div>
+            <p className="font-medium text-sm text-[#6d28d9]">
               TESTIMONIALS
             </p>
-            <div className="w-8 h-[2px] bg-[#008753]"></div>
+            <div className="w-8 h-[2px] bg-[#6d28d9]"></div>
           </div>
           
-          <h2 className="prata-regular text-4xl text-[#008753] mb-4">
+          <h2 className="prata-regular text-4xl text-[#6d28d9] mb-4">
             What Our <span className="text-amber-600">Customers</span> Say
           </h2>
           
@@ -147,7 +147,7 @@ const CustomerReviews = () => {
           <div className="text-center mb-8">
             <button
               onClick={() => setShowReviewModal(true)}
-              className="bg-[#008753] hover:bg-[#006e42] text-white px-6 py-3 rounded-full font-medium transition-colors"
+              className="bg-[#6d28d9] hover:bg-[#006e42] text-white px-6 py-3 rounded-full font-medium transition-colors"
             >
               {userReview ? "Update Your Review" : "Leave a Review"}
             </button>
@@ -177,7 +177,7 @@ const CustomerReviews = () => {
                   </p>
                   
                   <div>
-                    <h3 className="prata-regular text-xl text-[#008753]">
+                    <h3 className="prata-regular text-xl text-[#6d28d9]">
                       {reviews[currentIndex].user?.name || "Customer"}
                     </h3>
                     <p className="text-gray-500 text-sm">
@@ -195,7 +195,7 @@ const CustomerReviews = () => {
             {/* Navigation Arrows */}
             <button 
               onClick={prevReview}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white rounded-full p-3 shadow-md hover:bg-[#008753] hover:text-white transition-colors"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white rounded-full p-3 shadow-md hover:bg-[#6d28d9] hover:text-white transition-colors"
               aria-label="Previous review"
             >
               <FiChevronLeft className="text-xl" />
@@ -203,7 +203,7 @@ const CustomerReviews = () => {
             
             <button 
               onClick={nextReview}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white rounded-full p-3 shadow-md hover:bg-[#008753] hover:text-white transition-colors"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white rounded-full p-3 shadow-md hover:bg-[#6d28d9] hover:text-white transition-colors"
               aria-label="Next review"
             >
               <FiChevronRight className="text-xl" />
@@ -216,7 +216,7 @@ const CustomerReviews = () => {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-3 h-3 rounded-full ${
-                    index === currentIndex ? "bg-[#008753]" : "bg-gray-300"
+                    index === currentIndex ? "bg-[#6d28d9]" : "bg-gray-300"
                   }`}
                   aria-label={`Go to review ${index + 1}`}
                 />
@@ -231,7 +231,7 @@ const CustomerReviews = () => {
             {token && (
               <button
                 onClick={() => setShowReviewModal(true)}
-                className="mt-4 bg-[#008753] hover:bg-[#006e42] text-white px-6 py-2 rounded-full font-medium transition-colors"
+                className="mt-4 bg-[#6d28d9] hover:bg-[#006e42] text-white px-6 py-2 rounded-full font-medium transition-colors"
               >
                 Leave a Review
               </button>
@@ -242,19 +242,19 @@ const CustomerReviews = () => {
         {/* Stats Section */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           <div className="text-center p-6 bg-white rounded-2xl shadow-sm">
-            <p className="prata-regular text-3xl text-[#008753]">{stats.averageRating}/5</p>
+            <p className="prata-regular text-3xl text-[#6d28d9]">{stats.averageRating}/5</p>
             <p className="text-gray-600">Average Rating</p>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-sm">
-            <p className="prata-regular text-3xl text-[#008753]">{stats.recommendationRate}%</p>
+            <p className="prata-regular text-3xl text-[#6d28d9]">{stats.recommendationRate}%</p>
             <p className="text-gray-600">Would Recommend</p>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-sm">
-            <p className="prata-regular text-3xl text-[#008753]">{stats.happyCustomers}+</p>
+            <p className="prata-regular text-3xl text-[#6d28d9]">{stats.happyCustomers}+</p>
             <p className="text-gray-600">Happy Customers</p>
           </div>
           <div className="text-center p-6 bg-white rounded-2xl shadow-sm">
-            <p className="prata-regular text-3xl text-[#008753]">{stats.avgDeliveryTime} min</p>
+            <p className="prata-regular text-3xl text-[#6d28d9]">{stats.avgDeliveryTime} min</p>
             <p className="text-gray-600">Avg. Delivery Time</p>
           </div>
         </div>

@@ -8,7 +8,7 @@ const Testimonials = () => {
       name: "Chioma Nwokeke",
       location: "Ibadan",
       role: "Luxury Retailer",
-      text: "Scent Design's Bespoke Fragrances has become our top-selling fragrance at our Ikoyi boutique. Our GCC clients appreciate the authentic Yoruba heritage in each bottle.",
+      text: "Scent Design's Bespoke Fragrances has become our top-selling fragrance at our Ikoyi boutique. Our GCC clients appreciate the authentic Fragrance in each bottle.",
       image: assets.cs3
     },
     {

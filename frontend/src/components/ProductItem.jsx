@@ -28,7 +28,7 @@ const ProductItem = ({ id, image, name, basePrice, inStock, variations }) => {
       
       {/* Multiple Options Indicator */}
       {hasMultipleOptions && (
-        <div className="absolute top-2 left-2 bg-[#008753] text-white rounded-full w-7 h-7 flex items-center justify-center z-10 group-hover:animate-pulse">
+        <div className="absolute top-2 left-2 bg-[#6d28d9] text-white rounded-full w-7 h-7 flex items-center justify-center z-10 group-hover:animate-pulse">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             <path d="M5 2a1 1 0 00-1 1v1a1 1 0 001 1h1a1 1 0 001-1V3a1 1 0 00-1-1H5z" />
@@ -42,7 +42,7 @@ const ProductItem = ({ id, image, name, basePrice, inStock, variations }) => {
         </div>
       )}
       
-      <div className='overflow-hidden rounded-xl border border-[#008753]/20 relative'>
+      <div className='overflow-hidden rounded-xl border border-[#6d28d9]/20 relative'>
         <img 
           className={`w-full aspect-square object-cover group-hover:scale-105 transition-all duration-300 ${!inStock ? 'opacity-70' : ''}`} 
           src={image[0]} 
@@ -51,10 +51,10 @@ const ProductItem = ({ id, image, name, basePrice, inStock, variations }) => {
         />
       </div>
       <div className="mt-3">
-        <h3 className='prata-regular text-lg text-[#008753] group-hover:text-amber-600 transition-colors truncate'>
+        <h3 className='prata-regular text-lg text-[#6d28d9] group-hover:text-amber-600 transition-colors truncate'>
           {name}
         </h3>
-        <p className={`text-[#008753] font-medium mt-1 ${!inStock ? 'line-through' : ''}`}>
+        <p className={`text-[#6d28d9] font-medium mt-1 ${!inStock ? 'line-through' : ''}`}>
           {currency}{basePrice}
         </p>
         {!inStock && (
@@ -62,7 +62,7 @@ const ProductItem = ({ id, image, name, basePrice, inStock, variations }) => {
         )}
       </div>
       <div className="mt-2 flex items-center">
-        <div className="w-6 h-[2px] bg-[#008753] mr-2"></div>
+        <div className="w-6 h-[2px] bg-[#6d28d9] mr-2"></div>
         <span className="text-xs text-gray-600">View Details</span>
       </div>
     </Link>

@@ -257,7 +257,7 @@ const Product = () => {
         pauseOnHover: true,
         draggable: true,
         style: {
-          backgroundColor: '#008753',
+          backgroundColor: '#6d28d9',
           color: 'white',
           borderRadius: '8px'
         }
@@ -271,8 +271,8 @@ const Product = () => {
     return (
       <div className="flex justify-center items-center min-h-screen bg-amber-50">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#008753]"></div>
-          <p className="mt-4 text-lg text-[#008753]">Loading delicious meal details...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6d28d9]"></div>
+          <p className="mt-4 text-lg text-[#6d28d9]">Loading Perfume details...</p>
         </div>
       </div>
     );
@@ -294,7 +294,7 @@ const Product = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-scaleIn">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="prata-regular text-xl text-[#008753]">
+              <h3 className="prata-regular text-xl text-[#6d28d9]">
                 Important Selection Needed
               </h3>
               <button 
@@ -317,23 +317,23 @@ const Product = () => {
                 <div className="ml-3">
                   <p className="text-gray-700 font-medium mb-2">{errorMessage}</p>
                   <p className="text-gray-600 text-sm">
-                    Why is this important? These selections help us prepare your meal exactly 
+                    Why is this important? These selections help us prepare your Perfume Delivery exactly 
                     how you want it. Without them, we wouldn't know what to serve you!
                   </p>
                 </div>
               </div>
               
-              <div className="bg-[#008753]/10 p-4 rounded-lg">
-                <h4 className="font-medium text-[#008753] mb-2">How to fix:</h4>
+              <div className="bg-[#6d28d9]/10 p-4 rounded-lg">
+                <h4 className="font-medium text-[#6d28d9] mb-2">How to fix:</h4>
                 <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
                   {missingOptions.includes("Base") && (
-                    <li>Select a <span className="font-medium">Base Dish</span> option from the dropdown</li>
+                    <li>Select a <span className="font-medium">Base Scent</span> option from the dropdown</li>
                   )}
                   {missingOptions.includes("Side") && (
-                    <li>Choose your <span className="font-medium">Side Dish</span> from the available options</li>
+                    <li>Choose your <span className="font-medium">Side Scent</span> from the available options</li>
                   )}
                   {missingOptions.includes("size") && (
-                    <li>Pick either a <span className="font-medium">Meal Size</span> or the <span className="font-medium">Wrap</span> option</li>
+                    <li>Pick either a <span className="font-medium">Perfume Size</span> or the <span className="font-medium">Wrap</span> option</li>
                   )}
                   <li>All required options will be highlighted in the form</li>
                 </ul>
@@ -343,7 +343,7 @@ const Product = () => {
             <div className="flex justify-end">
               <button
                 onClick={() => setShowErrorModal(false)}
-                className="px-4 py-2 bg-[#008753] text-white rounded-lg hover:bg-[#006641] transition-colors"
+                className="px-4 py-2 bg-[#6d28d9] text-white rounded-lg hover:bg-[#006641] transition-colors"
               >
                 I Understand
               </button>
@@ -357,7 +357,7 @@ const Product = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-scaleIn">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="prata-regular text-xl text-[#008753]">
+              <h3 className="prata-regular text-xl text-[#6d28d9]">
                 Confirm Your Order
               </h3>
               <button 
@@ -384,7 +384,7 @@ const Product = () => {
               </p>
               
               <div className="flex justify-center items-center gap-2 mb-4">
-                <span className="text-lg font-bold text-[#008753]">
+                <span className="text-lg font-bold text-[#6d28d9]">
                   {currency}
                   {(calculatedPrice * quantity).toFixed(2)}
                 </span>
@@ -407,7 +407,7 @@ const Product = () => {
               </button>
               <button
                 onClick={confirmAddToCart}
-                className="flex-1 px-4 py-3 bg-[#008753] text-white rounded-lg hover:bg-[#006641] transition-colors"
+                className="flex-1 px-4 py-3 bg-[#6d28d9] text-white rounded-lg hover:bg-[#006641] transition-colors"
               >
                 Confirm & Add to Cart
               </button>
@@ -421,19 +421,19 @@ const Product = () => {
         <nav className="mb-8 text-sm text-gray-600" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <a href="/" className="hover:text-[#008753] transition-colors">Home</a>
+              <a href="/" className="hover:text-[#6d28d9] transition-colors">Home</a>
               <svg className="w-3 h-3 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
               </svg>
             </li>
             <li className="flex items-center">
-              <a href="/products" className="hover:text-[#008753] transition-colors">Products</a>
+              <a href="/products" className="hover:text-[#6d28d9] transition-colors">Products</a>
               <svg className="w-3 h-3 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
               </svg>
             </li>
             <li className="flex items-center">
-              <span className="text-[#008753] font-medium">{productData.name}</span>
+              <span className="text-[#6d28d9] font-medium">{productData.name}</span>
             </li>
           </ol>
         </nav>
@@ -455,7 +455,7 @@ const Product = () => {
               {productData.image.map((item, index) => (
                 <div 
                   key={index}
-                  className={`flex-shrink-0 cursor-pointer border-2 rounded-lg overflow-hidden ${mainImage === item ? 'border-[#008753]' : 'border-transparent'}`}
+                  className={`flex-shrink-0 cursor-pointer border-2 rounded-lg overflow-hidden ${mainImage === item ? 'border-[#6d28d9]' : 'border-transparent'}`}
                   onClick={() => setMainImage(item)}
                 >
                   <img
@@ -471,7 +471,7 @@ const Product = () => {
 
           {/* Product Info */}
           <div className="flex-1">
-            <h1 className="prata-regular text-3xl text-[#008753] mb-2">
+            <h1 className="prata-regular text-3xl text-[#6d28d9] mb-2">
               {productData.name}
             </h1>
             
@@ -483,7 +483,7 @@ const Product = () => {
             )}
             
             {productData.bestseller && (
-              <div className="inline-block bg-[#008753] text-white px-3 py-1 rounded-lg text-sm mb-4">
+              <div className="inline-block bg-[#6d28d9] text-white px-3 py-1 rounded-lg text-sm mb-4">
                 BESTSELLER
               </div>
             )}
@@ -500,7 +500,7 @@ const Product = () => {
               <p className="pl-2 text-gray-600">({reviews.length} customer reviews)</p>
             </div>
             
-            <p className="text-3xl font-bold text-[#008753] mb-6">
+            <p className="text-3xl font-bold text-[#6d28d9] mb-6">
               {currency}
               {calculatedPrice.toFixed(2)}
             </p>
@@ -529,7 +529,7 @@ const Product = () => {
                     ))}
                   </select>
                   {!selectedBase && missingOptions.includes("Base") && (
-                    <p className="text-red-500 text-sm mt-1">Please select a base dish option</p>
+                    <p className="text-red-500 text-sm mt-1">Please select a base Scent option</p>
                   )}
                 </div>
               )}
@@ -556,7 +556,7 @@ const Product = () => {
                     ))}
                   </select>
                   {!selectedSide && missingOptions.includes("Side") && (
-                    <p className="text-red-500 text-sm mt-1">Please select a side dish option</p>
+                    <p className="text-red-500 text-sm mt-1">Please select a side Scent option</p>
                   )}
                 </div>
               )}
@@ -565,7 +565,7 @@ const Product = () => {
               {productData.variations?.sizes?.length > 0 && (
                 <div>
                   <label className={`block mb-1 font-medium ${!selectedSize && !selectedWrap && missingOptions.includes("size") ? 'text-red-500' : ''}`}>
-                    Meal Size or Wrap *
+                    Perfume Size *
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {productData.variations.sizes.map((size, index) => (
@@ -579,8 +579,8 @@ const Product = () => {
                         disabled={selectedWrap}
                         className={`px-4 py-2 border rounded-lg ${
                           selectedSize === size.size && !selectedWrap
-                            ? 'bg-[#008753] text-white border-[#008753]'
-                            : 'border-gray-300 hover:border-[#008753]'
+                            ? 'bg-[#6d28d9] text-white border-[#6d28d9]'
+                            : 'border-gray-300 hover:border-[#6d28d9]'
                         } ${selectedWrap ? 'opacity-50 cursor-not-allowed' : ''} ${
                           !selectedSize && !selectedWrap && missingOptions.includes("size") 
                             ? 'border-red-500 bg-red-50' 
@@ -609,7 +609,7 @@ const Product = () => {
                         setSelectedWrap(e.target.checked);
                         if (e.target.checked) setSelectedSize('');
                       }}
-                      className="w-5 h-5 text-[#008753] rounded focus:ring-[#008753]"
+                      className="w-5 h-5 text-[#6d28d9] rounded focus:ring-[#6d28d9]"
                     />
                     <span className="font-medium">
                       Wrap it Yourself ({currency}{productData.variations.wrap.price})
@@ -627,7 +627,7 @@ const Product = () => {
             </p>
             
             <div className="mb-8">
-              <h3 className="prata-regular text-xl text-[#008753] mb-3">Key Features:</h3>
+              <h3 className="prata-regular text-xl text-[#6d28d9] mb-3">Key Features:</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>Prepared with authentic African/Carribean spices</li>
                 <li>Made fresh daily with local ingredients</li>
@@ -664,7 +664,7 @@ const Product = () => {
                 onClick={showConfirmation}
                 className={`flex-1 px-8 py-3 rounded-lg font-medium transition-colors ${
                   productData.inStock 
-                    ? 'bg-[#008753] text-white hover:bg-[#006641]' 
+                    ? 'bg-[#6d28d9] text-white hover:bg-[#006641]' 
                     : 'bg-gray-400 text-white cursor-not-allowed'
                 }`}
                 disabled={!productData.inStock}
@@ -673,8 +673,8 @@ const Product = () => {
               </button>
             </div>
             
-            <div className="bg-[#008753]/10 p-5 rounded-lg">
-              <h3 className="prata-regular text-lg text-[#008753] mb-2">Our Promise:</h3>
+            <div className="bg-[#6d28d9]/10 p-5 rounded-lg">
+              <h3 className="prata-regular text-lg text-[#6d28d9] mb-2">Our Promise:</h3>
               <ul className="text-gray-700 space-y-1">
                 <li className="flex items-start">
                   <img src={assets.check_icon} alt="Check" className="w-5 mr-2 mt-0.5" />
@@ -696,16 +696,16 @@ const Product = () => {
         {/* Customer Reviews Section */}
         <div className="mt-16 bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="p-6">
-            <h2 className="prata-regular text-3xl text-[#008753] mb-6">
+            <h2 className="prata-regular text-3xl text-[#6d28d9] mb-6">
               Customer Reviews
             </h2>
             
             <div className="flex flex-col md:flex-row gap-8">
               {/* Review Summary */}
               <div className="md:w-1/3">
-                <div className="bg-[#008753]/10 p-6 rounded-lg">
+                <div className="bg-[#6d28d9]/10 p-6 rounded-lg">
                   <div className="text-center mb-4">
-                    <p className="text-5xl font-bold text-[#008753]">
+                    <p className="text-5xl font-bold text-[#6d28d9]">
                       {averageRating.toFixed(1)}
                     </p>
                     <div className="flex justify-center gap-1 my-2">
@@ -734,7 +734,7 @@ const Product = () => {
                             <span className="w-16">{star} stars</span>
                             <div className="flex-1 h-2 bg-gray-200 rounded-full mx-2 overflow-hidden">
                               <div 
-                                className="h-full bg-[#008753] rounded-full" 
+                                className="h-full bg-[#6d28d9] rounded-full" 
                                 style={{ width: `${percentage}%` }}
                               ></div>
                             </div>
@@ -751,7 +751,7 @@ const Product = () => {
               <div className="md:w-2/3">
                 {/* Review Form */}
                 <div className="mb-10">
-                  <h3 className="prata-regular text-xl text-[#008753] mb-4">
+                  <h3 className="prata-regular text-xl text-[#6d28d9] mb-4">
                     {userReview ? "Edit Your Review" : "Write a Review"}
                   </h3>
                   <form onSubmit={handleReviewSubmit}>
@@ -787,14 +787,14 @@ const Product = () => {
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                         rows="4"
                         required
-                        placeholder="Share your experience with this meal..."
+                        placeholder="Share your experience with this Perfume..."
                         disabled={isSubmitting}
                       ></textarea>
                     </div>
                     
                     <button
                       type="submit"
-                      className="px-6 py-2 bg-[#008753] text-white rounded-lg hover:bg-[#006641] transition-colors disabled:opacity-50"
+                      className="px-6 py-2 bg-[#6d28d9] text-white rounded-lg hover:bg-[#006641] transition-colors disabled:opacity-50"
                       disabled={isSubmitting || rating === 0}
                     >
                       {isSubmitting ? (
@@ -807,7 +807,7 @@ const Product = () => {
                     
                     {!token && (
                       <p className="text-gray-600 mt-3">
-                        You must be <a href="/login" className="text-[#008753] hover:underline">logged in</a> to submit a review.
+                        You must be <a href="/login" className="text-[#6d28d9] hover:underline">logged in</a> to submit a review.
                       </p>
                     )}
                   </form>
@@ -815,13 +815,13 @@ const Product = () => {
                 
                 {/* Reviews List */}
                 <div>
-                  <h3 className="prata-regular text-xl text-[#008753] mb-4">
+                  <h3 className="prata-regular text-xl text-[#6d28d9] mb-4">
                     Customer Reviews ({reviews.length})
                   </h3>
                   
                   {isReviewLoading ? (
                     <div className="text-center py-8">
-                      <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#008753]"></div>
+                      <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#6d28d9]"></div>
                       <p className="mt-2 text-gray-600">Loading reviews...</p>
                     </div>
                   ) : reviews.length === 0 ? (
@@ -867,7 +867,7 @@ const Product = () => {
 
         {/* Related Products */}
         <div className="mt-16">
-          <h2 className="prata-regular text-3xl text-[#008753] mb-8 text-center">
+          <h2 className="prata-regular text-3xl text-[#6d28d9] mb-8 text-center">
             You Might Also Like
           </h2>
           <RelatedProducts category={productData.category} />
@@ -1050,19 +1050,19 @@ export default Product;
 //         <nav className="mb-8 text-sm text-gray-600" aria-label="Breadcrumb">
 //           <ol className="list-none p-0 inline-flex">
 //             <li className="flex items-center">
-//               <a href="/" className="hover:text-[#008753] transition-colors">Home</a>
+//               <a href="/" className="hover:text-[#6d28d9] transition-colors">Home</a>
 //               <svg className="w-3 h-3 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
 //               </svg>
 //             </li>
 //             <li className="flex items-center">
-//               <a href="/menu" className="hover:text-[#008753] transition-colors">Menu</a>
+//               <a href="/menu" className="hover:text-[#6d28d9] transition-colors">Menu</a>
 //               <svg className="w-3 h-3 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
 //               </svg>
 //             </li>
 //             <li className="flex items-center">
-//               <span className="text-[#008753] font-medium">{productData.name}</span>
+//               <span className="text-[#6d28d9] font-medium">{productData.name}</span>
 //             </li>
 //           </ol>
 //         </nav>
@@ -1084,7 +1084,7 @@ export default Product;
 //               {productData.image.map((item, index) => (
 //                 <div 
 //                   key={index}
-//                   className={`flex-shrink-0 cursor-pointer border-2 rounded-lg overflow-hidden ${mainImage === item ? 'border-[#008753]' : 'border-transparent'}`}
+//                   className={`flex-shrink-0 cursor-pointer border-2 rounded-lg overflow-hidden ${mainImage === item ? 'border-[#6d28d9]' : 'border-transparent'}`}
 //                   onClick={() => setMainImage(item)}
 //                 >
 //                   <img
@@ -1100,12 +1100,12 @@ export default Product;
 
 //           {/* Product Info */}
 //           <div className="flex-1">
-//             <h1 className="prata-regular text-3xl text-[#008753] mb-2">
+//             <h1 className="prata-regular text-3xl text-[#6d28d9] mb-2">
 //               {productData.name}
 //             </h1>
             
 //             {productData.bestseller && (
-//               <div className="inline-block bg-[#008753] text-white px-3 py-1 rounded-lg text-sm mb-4">
+//               <div className="inline-block bg-[#6d28d9] text-white px-3 py-1 rounded-lg text-sm mb-4">
 //                 BESTSELLER
 //               </div>
 //             )}
@@ -1122,7 +1122,7 @@ export default Product;
 //               <p className="pl-2 text-gray-600">({reviews.length} customer reviews)</p>
 //             </div>
             
-//             <p className="text-3xl font-bold text-[#008753] mb-6">
+//             <p className="text-3xl font-bold text-[#6d28d9] mb-6">
 //               {currency}
 //               {productData.price}
 //             </p>

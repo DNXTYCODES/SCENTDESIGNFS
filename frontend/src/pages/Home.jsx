@@ -27,8 +27,8 @@ const Home = () => {
       <Hero />
       <LatestCollection />
       <BestSeller />
-      <CustomerReviews />
       <Testimonials />
+      <CustomerReviews />
       <DeliveryInfo />
       <AboutUs />
       <TrainingPrograms />
