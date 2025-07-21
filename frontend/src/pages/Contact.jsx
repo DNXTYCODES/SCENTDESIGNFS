@@ -1,11 +1,12 @@
 import React from 'react';
 import { FiMapPin, FiPhone, FiMail, FiClock, FiCalendar, FiMessageSquare, FiFacebook, FiInstagram, FiTwitter, FiChevronDown } from 'react-icons/fi';
+import { assets } from '../assets/assets';
 
 const Contact = () => {
   // Mock assets - in a real app, these would be imported
-  const assets = {
-    carousel3: "https://images.unsplash.com/photo-1600003263720-95b45a4035d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-  };
+  // const assets = {
+  //   carousel3: "https://images.unsplash.com/photo-1600003263720-95b45a4035d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-purple-50">
@@ -50,7 +51,7 @@ const Contact = () => {
           <div className="md:w-1/2 flex justify-center">
             <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-xl border-4 border-white">
               <img 
-                src={assets.carousel3} 
+                src={assets.cs4} 
                 alt="Scent Design Customer Service" 
                 className="w-full h-auto"
               />
