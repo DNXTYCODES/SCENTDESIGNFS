@@ -8,14 +8,14 @@ const OurPolicy = () => {
         <div className='flex flex-col sm:flex-row justify-around gap-8 text-center px-4'>
           {/* Delivery Policy */}
           <div className='flex-1 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-            <div className='bg-[#008753]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
+            <div className='bg-[#6d28d9]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
               <img 
                 src={assets.exchange_icon2} 
                 className='w-8' 
                 alt="Fast Delivery" 
               />
             </div>
-            <p className='font-semibold text-lg text-[#008753] mb-2'>
+            <p className='font-semibold text-lg text-[#6d28d9] mb-2'>
               Fast Delivery
             </p>
             <p className='text-gray-600'>
@@ -25,14 +25,14 @@ const OurPolicy = () => {
 
           {/* Quality Policy */}
           <div className='flex-1 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-            <div className='bg-[#008753]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
+            <div className='bg-[#6d28d9]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
               <img 
                 src={assets.quality_icon} 
                 className='w-8' 
                 alt="Quality Ingredients" 
               />
             </div>
-            <p className='font-semibold text-lg text-[#008753] mb-2'>
+            <p className='font-semibold text-lg text-[#6d28d9] mb-2'>
               Premium Ingredients
             </p>
             <p className='text-gray-600'>
@@ -42,14 +42,14 @@ const OurPolicy = () => {
 
           {/* Support Policy */}
           <div className='flex-1 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-            <div className='bg-[#008753]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
+            <div className='bg-[#6d28d9]/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5'>
               <img 
                 src={assets.support_icon2} 
                 className='w-8' 
                 alt="Customer Support" 
               />
             </div>
-            <p className='font-semibold text-lg text-[#008753] mb-2'>
+            <p className='font-semibold text-lg text-[#6d28d9] mb-2'>
               24/7 Support
             </p>
             <p className='text-gray-600'>

@@ -9,22 +9,22 @@ const Workshops = () => {
       title: "Ibadan Scent Design Workshop",
       location: "7 oyesina close, opposite 7 ibikunle avenue, old bodija",
       price: 75000,
-      highlight: "Guest Master Perfumer from Paris"
+      highlight: "international Guest Master Perfumer"
     },
-    {
-      date: "April 5-7, 2024",
-      title: "Traditional Sokoto Attar Making",
-      location: "Sokoto Cultural Center",
-      price: 45000,
-      highlight: "Ancient clay distillation techniques"
-    },
-    {
-      date: "May 24-26, 2024", 
-      title: "Port Harcourt Marine Scents",
-      location: "Niger Delta Eco Resort",
-      price: 65000,
-      highlight: "Coastal botanical exploration"
-    }
+    // {
+    //   date: "April 5-7, 2024",
+    //   title: "Ibadan Scent Design Workshop",
+    //   location: "7 oyesina close, opposite 7 ibikunle avenue, old bodija",
+    //   price: 45000,
+    //   highlight: "Distillation techniques"
+    // },
+    // {
+    //   date: "May 24-26, 2024", 
+    //   title: "Ibadan Scent Design Workshop",
+    //   location: "7 oyesina close, opposite 7 ibikunle avenue, old bodija",
+    //   price: 65000,
+    //   highlight: "Perfume business Marketing Classes"
+    // }
   ];
 
   return (
@@ -61,17 +61,17 @@ const Workshops = () => {
               <div className="p-6 border-b border-purple-100">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <p className="text-sm text-purple-600 flex items-center">
+                    {/* <p className="text-sm text-purple-600 flex items-center">
                       <FiCalendar className="mr-2" />
                       {event.date}
-                    </p>
+                    </p> */}
                     <h3 className="prata-regular text-xl font-bold mt-2 text-purple-900">
                       {event.title}
                     </h3>
                   </div>
-                  <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm">
+                  {/* <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm">
                     ₦{event.price.toLocaleString('en-NG')}
-                  </span>
+                  </span> */}
                 </div>
                 <p className="text-gray-600 flex items-center">
                   <FiMapPin className="mr-2" />

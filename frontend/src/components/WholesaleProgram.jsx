@@ -8,7 +8,7 @@ const WholesaleProgram = () => {
     {
       name: "Basic Partner",
       minOrder: 500000,
-      discount: "25%",
+      discount: "5%",
       features: [
         "10+ fragrance options",
         "Monthly inventory refresh",
@@ -20,7 +20,7 @@ const WholesaleProgram = () => {
     {
       name: "Professional Partner",
       minOrder: 1500000,
-      discount: "35%",
+      discount: "10%",
       features: [
         "25+ exclusive fragrances",
         "Bi-weekly inventory updates",
@@ -33,7 +33,7 @@ const WholesaleProgram = () => {
     {
       name: "Enterprise Partner",
       minOrder: 5000000,
-      discount: "45%",
+      discount: "15%",
       features: [
         "Full product catalog access",
         "Weekly new releases",
@@ -50,7 +50,7 @@ const WholesaleProgram = () => {
     { 
       icon: <GiReceiveMoney className="text-4xl text-purple-600" />,
       title: "Bulk Discounts",
-      text: "Enjoy volume-based pricing with discounts up to 45%"
+      text: "Enjoy volume-based pricing with discounts up to 15%"
     },
     {
       icon: <FaShippingFast className="text-4xl text-purple-600" />,
@@ -186,7 +186,7 @@ const WholesaleProgram = () => {
               <p className="text-gray-600">Successful Retail Partners Across Nigeria</p>
             </div>
             <div className="p-6 bg-white rounded-xl shadow-lg border border-purple-100">
-              <div className="text-purple-600 text-4xl mb-4">₦250M+</div>
+              <div className="text-purple-600 text-4xl mb-4">₦25M+</div>
               <p className="text-gray-600">Annual Wholesale Revenue Generated</p>
             </div>
             <div className="p-6 bg-white rounded-xl shadow-lg border border-purple-100">

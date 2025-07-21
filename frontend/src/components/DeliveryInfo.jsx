@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 
 const DeliveryInfo = () => {
   return (
-    <div className="bg-purple-gradient rounded-3xl p-8">
+    <div id="delivery" className="bg-purple-gradient rounded-3xl p-8">
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left Column - Address */}
         <div className="w-full md:w-1/2">

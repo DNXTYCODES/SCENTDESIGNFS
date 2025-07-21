@@ -26,15 +26,15 @@ const Home = () => {
       <Hero />
       <LatestCollection />
       <BestSeller />
+      <Testimonials />
       <DeliveryInfo />
       <AboutUs />
       <TrainingPrograms />
       <NigerianHeritage />
-      <LocalIngredients />
+      {/* <LocalIngredients /> */}
       <WholesaleProgram />
       <Workshops />
-      <Testimonials />
-      <Sustainability />
+      {/* <Sustainability /> */}
       <OurPolicy />
       <Contact />
       <NewsletterBox />

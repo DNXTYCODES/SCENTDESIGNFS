@@ -1,13 +1,4 @@
 
-
-
-
-
-
-
-
-
-
 import React from 'react';
 import { FiFacebook, FiInstagram, FiTwitter, FiLinkedin } from 'react-icons/fi';
 import { assets } from '../assets/assets';
@@ -22,20 +13,20 @@ const Footer = () => {
               <img src={assets.scentdesignlogo} alt="Scent Design Logo" className="h-16 w-auto opacity-90" />
             </div>
             <p className="text-gray-300 mb-4">
-              Nigerian Craftsmanship in Every Bottle
+              Fragrance Is Our Passion
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-amber-500 transition-colors">
-                <FiFacebook className="text-xl" />
+              <a href="https://www.facebook.com/scentdesignng" className="text-gray-300 hover:text-amber-500 transition-colors">
+                <FiFacebook className="text-xl"/>
               </a>
-              <a href="#" className="text-gray-300 hover:text-amber-500 transition-colors">
-                <FiInstagram className="text-xl" />
+              <a href="https://www.instagram.com/scentdesignng" className="text-gray-300 hover:text-amber-500 transition-colors">
+                <FiInstagram className="text-xl"/>
               </a>
-              <a href="#" className="text-gray-300 hover:text-amber-500 transition-colors">
+              <a href="https://www.x.com/scentdesignng" className="text-gray-300 hover:text-amber-500 transition-colors">
                 <FiTwitter className="text-xl" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-amber-500 transition-colors">
-                <FiLinkedin className="text-xl" />
+              <a href='https://www.Linkedin.com/scentdesignng' className="text-gray-300 hover:text-amber-500 transition-colors">
+                <FiLinkedin className="text-xl"/>
               </a>
             </div>
           </div>
@@ -54,11 +45,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Customer Service</h4>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-amber-500 transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">Shipping Policy</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">Returns & Exchanges</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">FAQ</a></li>
-              <li><a href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</a></li>
+              <li><a href="/contact" className="hover:text-amber-500 transition-colors">Contact Us</a></li>
+              <li><a href="#delivery" className="hover:text-amber-500 transition-colors">Shipping Policy</a></li>
+              {/* <li><a href="#" className="hover:text-amber-500 transition-colors">Returns & Exchanges</a></li> */}
+              <li><a href="/faq" className="hover:text-amber-500 transition-colors">FAQ</a></li>
+              {/* <li><a href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</a></li> */}
             </ul>
           </div>
           
@@ -88,7 +79,7 @@ const Footer = () => {
             <p className="text-gray-300 mb-4 md:mb-0">
               © {new Date().getFullYear()} Scent Design Nigeria Limited. All rights reserved.
             </p>
-            <div className="flex items-center space-x-4">
+            {/* <div className="flex items-center space-x-4">
               <img 
                 src={assets.opay} 
                 alt="OPay" 
@@ -99,7 +90,7 @@ const Footer = () => {
                 alt="PalmPay" 
                 className="h-8 w-auto opacity-80"
               />
-              {/* <img 
+              <img 
                 src={assets.verve} 
                 alt="Verve" 
                 className="h-8 w-auto opacity-80"
@@ -108,8 +99,8 @@ const Footer = () => {
                 src={assets.mastercard} 
                 alt="Mastercard" 
                 className="h-8 w-auto opacity-80"
-              /> */}
-            </div>
+              />
+            </div> */}
           </div>
           <div className="mt-4 text-center md:text-left text-sm text-gray-400">
             {/* <p>

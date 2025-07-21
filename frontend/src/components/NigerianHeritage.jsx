@@ -61,7 +61,7 @@ const NigerianHeritage = () => {
             ))}
           </div>
 
-          <div className="bg-white p-8 rounded-2xl shadow-xl border border-purple-100">
+          {/* <div className="bg-white p-8 rounded-2xl shadow-xl border border-purple-100">
             <h3 className="prata-regular text-3xl font-bold mb-6 text-purple-900">
               Regional Fragrance Styles
             </h3>
@@ -100,10 +100,10 @@ const NigerianHeritage = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
-        <div className="mt-16 bg-purple-900 text-white rounded-2xl p-12 shadow-2xl">
+        {/* <div className="mt-16 bg-purple-900 text-white rounded-2xl p-12 shadow-2xl">
           <div className="max-w-4xl mx-auto text-center">
             <div className="text-5xl mb-6">🌿</div>
             <h3 className="prata-regular text-3xl font-bold mb-4">
@@ -125,7 +125,7 @@ const NigerianHeritage = () => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -60,16 +60,16 @@ const Contact = () => {
               <div className="space-y-4">
                 <p className="flex items-start">
                   <FiMail className="mr-2 mt-1 text-amber-500" />
-                  <span>wholesale@scentdesign.ng</span>
+                  <span>scentdesign@gmail.com</span>
                 </p>
                 <p className="flex items-start">
                   <FiPhone className="mr-2 mt-1 text-amber-500" />
                   <span>+234 802 829 3058 (Whatsapp)</span>
                 </p>
-                <p className="flex items-start">
+                {/* <p className="flex items-start">
                   <FiMail className="mr-2 mt-1 text-amber-500" />
-                  <span>training@scentdesign.ng (Academy)</span>
-                </p>
+                  <span>scentdesign@gmail.com (Academy)</span>
+                </p> */}
               </div>
             </div>
           </div>

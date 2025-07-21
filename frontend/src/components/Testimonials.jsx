@@ -15,7 +15,7 @@ const Testimonials = () => {
       name: "Divine Bello",
       location: "Abuja",
       role: "Customer",
-      text: "The Sokoto Mon Parfum captures our Northern essence perfectly. We've adopted it as the official gift for foreign dignitaries visiting the Emir's palace.",
+      text: "We've adopted it as the official gift for foreign dignitaries visiting Our Establishment.",
       image: assets.cs2
     },
     {

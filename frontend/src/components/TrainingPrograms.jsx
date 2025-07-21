@@ -72,12 +72,12 @@ const TrainingPrograms = () => {
               <div className="mb-4">{course.icon}</div>
               <h3 className="prata-regular text-2xl font-bold mb-4 text-purple-900">{course.title}</h3>
               
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <span className="text-3xl font-bold text-purple-600">
                   ₦{course.price.toLocaleString('en-NG')}
                 </span>
                 <span className="text-gray-600 ml-2">/{course.duration}</span>
-              </div>
+              </div> */}
 
               <div className="mb-8">
                 <h4 className="text-lg font-semibold mb-3">Curriculum Highlights:</h4>

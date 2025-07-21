@@ -101,12 +101,12 @@ const Collection = () => {
     <div className='pt-10 border-t'>
       <div className='max-w-6xl mx-auto px-4'>
         <div className='flex justify-between items-center mb-8'>
-          <Title text1={'OUR'} text2={'MENU'} />
+          <Title text1={'OUR'} text2={'PERFUMES'} />
           
           <div className='flex items-center gap-3'>
             {/* Mobile filter toggle button */}
             <button 
-              className="sm:hidden flex items-center gap-1 text-sm bg-[#008753] text-white px-3 py-2 rounded-lg"
+              className="sm:hidden flex items-center gap-1 text-sm bg-[#6d28d9] text-white px-3 py-2 rounded-lg"
               onClick={() => setShowFilter(!showFilter)}
             >
               <FiFilter /> Filter
@@ -119,7 +119,7 @@ const Collection = () => {
               id="sort-select"
               onChange={handleSortChange}
               value={sortType}
-              className='border-2 border-[#008753] text-sm px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#008753]'
+              className='border-2 border-[#6d28d9] text-sm px-3 py-2 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-[#008753]'
               aria-label="Sort perfume items"
             >
               <option value="relevant">Most Relevant</option>
