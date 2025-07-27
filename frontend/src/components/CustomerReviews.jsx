@@ -21,7 +21,7 @@ const CustomerReviews = () => {
     averageRating: 4.9,
     recommendationRate: 98,
     happyCustomers: 2000,
-    avgDeliveryTime: 15
+    avgDeliveryTime: 60
   });
 
   useEffect(() => {

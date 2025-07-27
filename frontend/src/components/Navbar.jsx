@@ -71,7 +71,7 @@ const Navbar = () => {
                         >
                             {({isActive}) => (
                                 <>
-                                    <span>PRODUCTS</span>
+                                    <span>PERFUMES</span>
                                     <hr className={`w-2/4 h-[2px] mt-1 ${isActive ? 'bg-purple-800' : 'bg-transparent'}`} />
                                 </>
                             )}
@@ -227,7 +227,7 @@ const Navbar = () => {
                             } 
                             to='/products'
                         >
-                            PRODUCTS
+                            PERFUMES
                         </NavLink>
                         {/* <NavLink 
                             onClick={() => setVisible(false)} 

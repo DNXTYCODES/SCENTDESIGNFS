@@ -27,7 +27,7 @@ const Hero = () => {
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
               <div className="w-8 h-[2px] bg-purple-primary"></div>
               <p className="font-medium text-sm text-purple-primary">
-                AUTHENTIC FRAGRANCES
+                AUTHENTIC PERFUME FRAGRANCES
               </p>
             </div>
 
@@ -44,13 +44,13 @@ const Hero = () => {
                 to="/products"
                 className="px-8 py-3 bg-purple-primary text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
               >
-                <button>Explore Collections</button>
+                <button>Explore Our Perfumes</button>
               </Link>
               <a
-                href="https://wa.me/8028293058"
+                href="https://wa.me/+2348028293058"
                 className="px-8 py-3 border-2 border-purple-primary text-purple-primary rounded-lg font-medium hover:bg-purple-50 transition-colors"
               >
-                <button>Talk to Us</button>
+                <button>Make Inquiries</button>
               </a>
             </div>
 
@@ -62,7 +62,7 @@ const Hero = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-purple-primary"></div>
-                  <p className="text-sm">Traditional Recipes</p>
+                  <p className="text-sm">Long Lasting Scents</p>
                 </div>
               </div>
             </div>

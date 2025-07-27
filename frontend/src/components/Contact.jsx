@@ -45,7 +45,7 @@ const Contact = () => {
                   </p>
                   <p className="flex items-start text-gray-600">
                     <FiMail className="mr-2 mt-1 text-purple-600" />
-                    info@scentdesign.ng
+                    lamboparfums@gmail.com
                   </p>
                   <p className="flex items-start text-gray-600">
                     <FiCalendar className="mr-2 mt-1 text-purple-600" />
@@ -60,15 +60,15 @@ const Contact = () => {
               <div className="space-y-4">
                 <p className="flex items-start">
                   <FiMail className="mr-2 mt-1 text-amber-500" />
-                  <span>scentdesign@gmail.com</span>
+                  <span>lamboparfums@gmail.com</span>
                 </p>
                 <p className="flex items-start">
                   <FiPhone className="mr-2 mt-1 text-amber-500" />
-                  <span>+234 802 829 3058 (Whatsapp)</span>
+                  <span>+234 802 829 3058 (Whatsapp/Call)</span>
                 </p>
                 {/* <p className="flex items-start">
                   <FiMail className="mr-2 mt-1 text-amber-500" />
-                  <span>scentdesign@gmail.com (Academy)</span>
+                  <span>lamboparfums@gmail.com (Academy)</span>
                 </p> */}
               </div>
             </div>

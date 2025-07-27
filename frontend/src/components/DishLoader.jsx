@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DishLoader = ({ size = 'md', message = 'Preparing your meal...' }) => {
+const DishLoader = ({ size = 'md', message = 'Preparing Fragrances...' }) => {
   // Size configuration
   const sizeConfig = {
     sm: {

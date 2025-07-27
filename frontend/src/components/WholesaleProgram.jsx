@@ -123,15 +123,17 @@ const WholesaleProgram = () => {
                     </li>
                   ))}
                 </ul>
+                  <a href="https://wa.me/+2348028293058">
                 <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors">
                   Join {tier.name}
                 </button>
+                  </a>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-purple-900 text-white rounded-2xl p-8 shadow-xl">
+        {/* <div className="bg-purple-900 text-white rounded-2xl p-8 shadow-xl">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
               <h3 className="prata-regular text-3xl font-bold mb-2">Become a Wholesale Partner</h3>
@@ -174,7 +176,7 @@ const WholesaleProgram = () => {
               </div>
             </form>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-20 text-center">
           <h3 className="prata-regular text-2xl font-bold text-purple-900 mb-8">
@@ -182,15 +184,15 @@ const WholesaleProgram = () => {
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6 bg-white rounded-xl shadow-lg border border-purple-100">
-              <div className="text-purple-600 text-4xl mb-4">50+</div>
+              <div className="text-purple-600 text-4xl mb-4">55+</div>
               <p className="text-gray-600">Successful Retail Partners Across Nigeria</p>
             </div>
             <div className="p-6 bg-white rounded-xl shadow-lg border border-purple-100">
-              <div className="text-purple-600 text-4xl mb-4">₦25M+</div>
+              <div className="text-purple-600 text-4xl mb-4">₦17M+</div>
               <p className="text-gray-600">Annual Wholesale Revenue Generated</p>
             </div>
             <div className="p-6 bg-white rounded-xl shadow-lg border border-purple-100">
-              <div className="text-purple-600 text-4xl mb-4">98%</div>
+              <div className="text-purple-600 text-4xl mb-4">100%</div>
               <p className="text-gray-600">Partner Satisfaction Rate</p>
             </div>
           </div>

@@ -43,7 +43,7 @@ const LatestCollection = () => {
 
         {loading ? (
           <div className="flex justify-center items-center py-20 min-h-[400px]">
-            <DishLoader size="lg" message="Preparing our popular dishes..." />
+            <DishLoader size="lg" message="Preparing our popular scents..." />
           </div>
         ) : (
           <>
@@ -66,7 +66,7 @@ const LatestCollection = () => {
                 to="/menu" 
                 className="inline-block px-8 py-3 border-2 border-[#6d28d9] text-[#6d28d9] rounded-lg font-medium hover:bg-[#6d28d9] hover:text-white transition-colors"
               >
-                View Full Menu
+                View Full Collection
               </Link>
             </div>
           </>

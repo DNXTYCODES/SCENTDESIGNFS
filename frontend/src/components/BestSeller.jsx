@@ -68,7 +68,7 @@ const BestSeller = () => {
                 to="/menu" 
                 className="inline-block px-8 py-3 bg-[#6d28d9] text-white rounded-lg font-medium hover:bg-[#006641] transition-colors"
               >
-                Explore All Dishes
+                Explore All Fragrances
               </Link>
             </div>
           </>

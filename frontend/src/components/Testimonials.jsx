@@ -79,23 +79,23 @@ const Testimonials = () => {
         <div className="mt-16 bg-purple-900 text-white rounded-2xl p-8 shadow-xl">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="prata-regular text-3xl font-bold mb-6">Featured In</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="bg-white/10 p-6 rounded-xl">
-                <p className="text-xl font-bold">Vanguard</p>
+                <p className="text-l font-bold">Vanguard</p>
               </div>
               <div className="bg-white/10 p-6 rounded-xl">
-                <p className="text-xl font-bold">ThisDay</p>
+                <p className="text-l font-bold">ThisDay</p>
               </div>
               <div className="bg-white/10 p-6 rounded-xl">
-                <p className="text-xl font-bold">BellaNaija</p>
+                <p className="text-l font-bold">BellaNaija</p>
               </div>
               <div className="bg-white/10 p-6 rounded-xl">
-                <p className="text-xl font-bold">Guardian</p>
+                <p className="text-l font-bold">Guardian</p>
               </div>
-            </div>
+            </div> */}
             <p className="mt-8 text-lg max-w-2xl mx-auto">
               "Scent Design NG is revolutionizing African perfumery with its commitment to quality and cultural authenticity"
-              <span className="block mt-2 text-amber-500">- BusinessDay Nigeria</span>
+              <span className="block mt-2 text-amber-500">- BuzinessDay Nigeria</span>
             </p>
           </div>
         </div>

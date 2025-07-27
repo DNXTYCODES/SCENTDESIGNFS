@@ -11,7 +11,7 @@ const NewsletterBox = () => {
     setMessage("");
 
     try {
-      const response = await fetch("https://flyboybackend.onrender.com/api/newsletter/subscribe", {
+      const response = await fetch("https://scentdesigngfsbackend.onrender.com/api/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

@@ -108,7 +108,7 @@ const TrainingPrograms = () => {
           ))}
         </div>
 
-        <div className="mt-16 bg-purple-900 text-white rounded-2xl p-8 shadow-xl relative overflow-hidden">
+        {/* <div className="mt-16 bg-purple-900 text-white rounded-2xl p-8 shadow-xl relative overflow-hidden">
           <img 
             src={assets.class1} 
             alt="Scholarship workshop"
@@ -145,7 +145,7 @@ const TrainingPrograms = () => {
             </button>
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
