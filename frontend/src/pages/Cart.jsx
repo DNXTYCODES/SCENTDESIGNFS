@@ -3,6 +3,7 @@ import { ShopContext } from '../context/ShopContext';
 import Title from '../components/Title';
 import { assets } from '../assets/assets';
 import CartTotal from '../components/CartTotal';
+import DeliveryInfo from '../components/DeliveryInfo';
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext);
@@ -141,7 +142,13 @@ const Cart = () => {
           </div>
         </>
       )}
+
+      
+
+        <DeliveryInfo />
     </div>
+
+    
   );
 };
 

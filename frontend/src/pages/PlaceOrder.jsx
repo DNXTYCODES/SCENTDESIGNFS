@@ -5,6 +5,7 @@ import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ReviewModal from '../components/ReviewModal';
+import DeliveryInfo from '../components/DeliveryInfo';
 
 const PlaceOrder = () => {
     const { 
@@ -468,8 +469,8 @@ const PlaceOrder = () => {
                                     )}
                                 </div>
                                 <div>
-                                    <p className='font-medium'>Cash on Delivery</p>
-                                    <p className='text-sm text-gray-500'>Pay when your order arrives</p>
+                                    <p className='font-medium'>Payment before Delivery</p>
+                                    <p className='text-sm text-gray-500'>Pay before your order is processed</p>
                                 </div>
                             </div>
                         </div>
@@ -498,6 +499,10 @@ const PlaceOrder = () => {
                     </div>
                 </div>
             </form>
+
+            
+
+        <DeliveryInfo />
             
             {/* Review Modal */}
             <ReviewModal

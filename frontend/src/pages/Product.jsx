@@ -4,6 +4,7 @@ import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import RelatedProducts from '../components/RelatedProducts';
 import { toast } from 'react-toastify';
+import DeliveryInfo from '../components/DeliveryInfo';
 
 const Product = () => {
   const { productId } = useParams();
@@ -626,7 +627,7 @@ const Product = () => {
               {productData.description}
             </p>
             
-            <div className="mb-8">
+            {/* <div className="mb-8">
               <h3 className="prata-regular text-xl text-[#6d28d9] mb-3">Key Features:</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>Prepared with authentic African/Carribean spices</li>
@@ -634,7 +635,7 @@ const Product = () => {
                 <li>Family recipe passed down for generations</li>
                 <li>Perfectly balanced flavors</li>
               </ul>
-            </div>
+            </div> */}
             
             <div className="flex flex-wrap items-center gap-4 mb-8">
               {/* Quantity controls */}
@@ -873,6 +874,9 @@ const Product = () => {
           <RelatedProducts category={productData.category} />
         </div>
       </div>
+      
+
+        <DeliveryInfo />
     </div>
   );
 };
