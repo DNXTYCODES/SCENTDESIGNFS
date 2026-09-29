@@ -1,0 +1,327 @@
+[
+ {
+  "n": "Night Oud",
+  "c": "Men",
+  "p": [
+   [
+    100,
+    25000
+   ]
+  ],
+  "d": "Eau de parfum, 100ml. Deep oud in a bold black-capped bottle. By Parfums Lambo.",
+  "col": "#3a0f5c",
+  "f": 1,
+  "img": "/img/no.webp"
+ },
+ {
+  "n": "Paradox Silver Knight",
+  "c": "Men",
+  "p": [
+   [
+    100,
+    24000
+   ]
+  ],
+  "d": "Confident amber fragrance in a sleek glass bottle.",
+  "col": "#26192f",
+  "f": 1,
+  "img": "/img/sk.webp"
+ },
+ {
+  "n": "Royal Oud",
+  "c": "Men",
+  "p": [
+   [
+    50,
+    15000
+   ],
+   [
+    100,
+    25000
+   ]
+  ],
+  "d": "Deep woody oud with amber and spice.",
+  "col": "#3a0f5c",
+  "f": 1,
+  "img": ""
+ },
+ {
+  "n": "Butterfly Bloom",
+  "c": "Women",
+  "p": [
+   [
+    50,
+    12000
+   ],
+   [
+    100,
+    20000
+   ]
+  ],
+  "d": "Fresh jasmine and rose with soft musk.",
+  "col": "#a63ee8",
+  "f": 1,
+  "img": ""
+ },
+ {
+  "n": "Golden Wheat",
+  "c": "Unisex",
+  "p": [
+   [
+    50,
+    13500
+   ],
+   [
+    100,
+    22000
+   ]
+  ],
+  "d": "Warm vanilla, honey and sandalwood.",
+  "col": "#c9963b",
+  "f": 1,
+  "img": ""
+ },
+ {
+  "n": "Ibadan Nights",
+  "c": "Men",
+  "p": [
+   [
+    50,
+    14000
+   ],
+   [
+    100,
+    23000
+   ]
+  ],
+  "d": "Cool citrus over cedar and leather.",
+  "col": "#26192f",
+  "img": ""
+ },
+ {
+  "n": "Velvet Petal",
+  "c": "Women",
+  "p": [
+   [
+    50,
+    12500
+   ],
+   [
+    100,
+    21000
+   ]
+  ],
+  "d": "Sweet peony, pear and vanilla.",
+  "col": "#d15aa6",
+  "img": ""
+ },
+ {
+  "n": "Pure Musk Oil",
+  "c": "Body oils",
+  "p": [
+   [
+    30,
+    6000
+   ],
+   [
+    50,
+    9000
+   ]
+  ],
+  "d": "Long-lasting alcohol-free musk oil.",
+  "col": "#e8c47a",
+  "img": ""
+ },
+ {
+  "n": "Gift Set Trio",
+  "c": "Gift sets",
+  "p": [
+   [
+    1,
+    35000
+   ]
+  ],
+  "d": "Three 30ml perfumes in a gift box.",
+  "col": "#7a1fc4",
+  "img": "/img/gb.jpg"
+ },
+ {
+  "n": "Amber Mist",
+  "c": "Unisex",
+  "p": [
+   [
+    50,
+    13000
+   ],
+   [
+    100,
+    21500
+   ]
+  ],
+  "d": "Soft amber with a hint of coconut.",
+  "col": "#b8722c",
+  "img": ""
+ },
+ {
+  "n": "Midnight Cedar",
+  "c": "Men",
+  "p": [
+   [
+    50,
+    14500
+   ],
+   [
+    100,
+    24000
+   ]
+  ],
+  "d": "Dark cedar, black pepper and musk.",
+  "col": "#1c0530",
+  "img": ""
+ },
+ {
+  "n": "Sultan's Gold",
+  "c": "Men",
+  "p": [
+   [
+    50,
+    16000
+   ],
+   [
+    100,
+    27000
+   ]
+  ],
+  "d": "Rich saffron, oud and amber.",
+  "col": "#a8741f",
+  "img": ""
+ },
+ {
+  "n": "Silk Jasmine",
+  "c": "Women",
+  "p": [
+   [
+    50,
+    12500
+   ],
+   [
+    100,
+    20500
+   ]
+  ],
+  "d": "Creamy jasmine, white tea and musk.",
+  "col": "#c78be8",
+  "img": ""
+ },
+ {
+  "n": "Rose Reverie",
+  "c": "Women",
+  "p": [
+   [
+    50,
+    13000
+   ],
+   [
+    100,
+    21500
+   ]
+  ],
+  "d": "Damask rose, lychee and soft woods.",
+  "col": "#c2417a",
+  "img": ""
+ },
+ {
+  "n": "Desert Bloom",
+  "c": "Unisex",
+  "p": [
+   [
+    50,
+    13500
+   ],
+   [
+    100,
+    22000
+   ]
+  ],
+  "d": "Dry florals, sand musk and incense.",
+  "col": "#d9a86c",
+  "img": ""
+ },
+ {
+  "n": "White Amber Oil",
+  "c": "Body oils",
+  "p": [
+   [
+    30,
+    6500
+   ],
+   [
+    50,
+    9500
+   ]
+  ],
+  "d": "Smooth amber oil, alcohol-free.",
+  "col": "#f0d9a0",
+  "img": ""
+ },
+ {
+  "n": "Rose Oud Oil",
+  "c": "Body oils",
+  "p": [
+   [
+    30,
+    7000
+   ],
+   [
+    50,
+    10000
+   ]
+  ],
+  "d": "Rose and oud concentrated oil.",
+  "col": "#8a1f4a",
+  "img": ""
+ },
+ {
+  "n": "Sandal Oil",
+  "c": "Body oils",
+  "p": [
+   [
+    30,
+    6800
+   ],
+   [
+    50,
+    9800
+   ]
+  ],
+  "d": "Creamy sandalwood body oil.",
+  "col": "#c9a26a",
+  "img": ""
+ },
+ {
+  "n": "Ladies Gift Box",
+  "c": "Gift sets",
+  "p": [
+   [
+    1,
+    32000
+   ]
+  ],
+  "d": "Two perfumes and a body oil in a gift box.",
+  "col": "#a63ee8",
+  "img": "/img/gb.jpg"
+ },
+ {
+  "n": "Gentlemen Gift Box",
+  "c": "Gift sets",
+  "p": [
+   [
+    1,
+    34000
+   ]
+  ],
+  "d": "Two perfumes and a body oil in a gift box.",
+  "col": "#3a0f5c",
+  "img": ""
+ }
+]
