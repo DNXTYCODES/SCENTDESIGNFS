@@ -1,49 +1,646 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>SDN Admin</title>
-<style>body{font:15px/1.5 system-ui,sans-serif;margin:0;background:#f8f3fd;color:#26192f}.w{max-width:1000px;margin:0 auto;padding:16px}h1,h2{margin:.3em 0}
-button{font:inherit;cursor:pointer;border:0;border-radius:6px;padding:7px 12px;background:#7a1fc4;color:#fff}button.g{background:#eadcf7;color:#3a0f5c}button.r{background:#c0392b}
-input,select,textarea{font:inherit;padding:8px;border:1px solid #d5c6e4;border-radius:6px;width:100%;box-sizing:border-box}
-.c{background:#fff;border:1px solid #e6dcef;border-radius:10px;padding:14px;margin:14px 0;overflow:auto}table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #eee;text-align:left;vertical-align:middle}
-img.t{width:44px;height:44px;object-fit:contain;background:#f8f3fd;border-radius:6px}.b{background:#d4183d;color:#fff;border-radius:99px;padding:1px 8px;font-size:.8rem}.s{text-decoration:line-through;color:#888}
-dialog{border:0;border-radius:12px;max-width:520px;width:92%}.rw{display:flex;gap:8px;margin:4px 0}label{display:block;font-weight:600;margin-top:10px;font-size:.85rem}.top{display:flex;justify-content:space-between;align-items:center;gap:8px}@media(max-width:640px){.w{padding:10px}button{min-height:40px}dialog{max-height:90vh;overflow:auto}h1{font-size:1.3rem}
-#prods tr{display:grid;grid-template-columns:52px 1fr;gap:2px 10px;padding:10px 0;border-bottom:1px solid #eee}#prods td{border:0;padding:2px}#prods td:nth-child(n+3){grid-column:2}}
-</style></head><body><div class="w">
-<div id="login"><div class="c" style="max-width:340px;margin:60px auto"><h2>SDN Admin</h2><label>Password<input id="pw" type="password" autocomplete="current-password"></label><p id="lerr" style="color:#c0392b"></p><button id="lb">Log in</button></div></div>
-<div id="app" hidden><div class="top"><h1>Scent Design Admin</h1><span><a href="/" target="_blank">View site</a> <button class="g" id="lo">Log out</button></span></div>
-<div class="c"><h2>Category discounts</h2><small>Applies to every product in the category. A discount set on a single product overrides it. Leave the end date empty for no expiry.</small>
-<table><thead><tr><th>Category</th><th>% off</th><th>Ends</th><th></th></tr></thead><tbody id="cats"></tbody></table></div>
-<div class="c"><div class="top"><h2>Products</h2><button id="add">+ Add product</button></div><table><tbody id="prods"></tbody></table></div></div>
-<dialog id="ed"></dialog></div>
-<script>
-const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';'),fmt=n=>'₦'+n.toLocaleString('en-NG');let D;
-async function api(u,o={}){const r=await fetch(u,{credentials:'same-origin',...o});if(r.status===401&&!u.includes('login')){show(false);throw Error('Please log in')}const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||'Error '+r.status);return j}
-const jb=(m,b)=>({method:m,headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
-function show(v){$('#login').hidden=v;$('#app').hidden=!v}
-async function load(){try{D=await api('/api/admin/data');show(true);draw()}catch(e){show(false)}}
-function draw(){const cs=[...new Set(D.products.map(p=>p.c))];
-$('#cats').innerHTML=cs.map(c=>{const d=D.catDiscounts[c]||{};return`<tr><td>${esc(c)}</td><td><input class="pp" type="number" min="1" max="95" value="${d.pct||''}" placeholder="%" style="width:80px"></td><td><input class="ee" type="date" value="${d.end||''}" style="width:150px"></td><td style="white-space:nowrap"><button data-a="setc" data-c="${esc(c)}">Apply</button> <button class="g" data-a="clrc" data-c="${esc(c)}">Remove</button></td></tr>`}).join('');
-$('#prods').innerHTML=D.products.map(p=>`<tr><td>${p.img?`<img class="t" src="${esc(p.img)}" alt="">`:''}</td><td><b>${esc(p.n)}</b><br><small>${esc(p.c)}</small></td><td>${p.p.map(s=>(s[2]>s[1]?`<span class="s">${fmt(s[2])}</span> `:'')+fmt(s[1])+` <small>(${s[0]})</small>`).join('<br>')}</td><td>${p.disc?`<span class="b">-${p.disc}%</span><br><small>${p.dsrc}${p.dend?' until '+p.dend:''}</small>`:''}</td><td style="white-space:nowrap"><button class="g" data-a="edit" data-id="${p.id}">Edit</button> <button class="g" data-a="disc" data-id="${p.id}">Discount</button> <button class="r" data-a="del" data-id="${p.id}">Delete</button></td></tr>`).join('')||'<tr><td>No products yet</td></tr>'}
-function szRow(s,p){return`<div class="rw"><input type="number" class="zs" placeholder="Size (ml)" value="${s}"><input type="number" class="zp" placeholder="Price ₦" value="${p}"><button type="button" class="g" data-a="rmsz">×</button></div>`}
-function edit(id){const p=id?D.products.find(x=>x.id==id):{n:'',c:'',d:'',col:'#7a1fc4',f:0,p:[['','']],img:''};
-$('#ed').innerHTML=`<form id="ef"><h2>${id?'Edit':'Add'} product</h2><input type="hidden" name="id" value="${id||''}"><label>Name<input name="n" required value="${esc(p.n)}"></label><label>Category<input name="c" required list="cl" value="${esc(p.c)}"></label><datalist id="cl">${[...new Set(D.products.map(x=>x.c))].map(c=>`<option value="${esc(c)}">`).join('')}</datalist><label>Description<textarea name="d" rows="3">${esc(p.d)}</textarea></label><label>Sizes and full prices (before discount)</label><div id="sz">${p.p.map(s=>szRow(s[0],s[1])).join('')}</div><button type="button" class="g" data-a="addsz">+ Add size</button><label>Photo (JPG, PNG, WEBP, max 5MB)<input type="file" name="img" accept="image/jpeg,image/png,image/webp,image/gif"></label>${p.img?'<label><input type="checkbox" name="rmimg" value="1" style="width:auto"> Remove current photo</label>':''}<label>Bottle colour (used when no photo)<input type="color" name="col" value="${p.col}"></label><label><input type="checkbox" name="f" value="1" ${p.f?'checked':''} style="width:auto"> Best seller</label><p class="er" style="color:#c0392b"></p><div class="rw"><button>Save</button><button type="button" class="g" data-a="x">Cancel</button></div></form>`;$('#ed').showModal()}
-function disc(id){const p=D.products.find(x=>x.id==id),d=p.discount||{};
-$('#ed').innerHTML=`<form id="df" data-id="${id}"><h2>Discount: ${esc(p.n)}</h2><small>Overrides any category discount.</small><label>Percent off<input type="number" name="pct" min="1" max="95" value="${d.pct||''}"></label><label>Ends on (optional)<input type="date" name="end" value="${d.end||''}"></label><p class="er" style="color:#c0392b"></p><div class="rw"><button>Apply</button><button type="button" class="g" data-a="nod">Remove</button><button type="button" class="g" data-a="x">Cancel</button></div></form>`;$('#ed').showModal()}
-async function run(f,btn){try{await f();await load()}catch(e){(btn.closest('dialog')?.querySelector('.er')||{}).textContent=e.message;if(!btn.closest('dialog'))alert(e.message)}}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id,tr=b.closest('tr');
-if(a==='x')$('#ed').close();
-else if(a==='addsz')$('#sz').insertAdjacentHTML('beforeend',szRow('',''));
-else if(a==='rmsz')b.parentElement.remove();
-else if(a==='edit')edit(id);else if(a==='disc')disc(id);
-else if(a==='del'){const p=D.products.find(x=>x.id==id);if(confirm('Delete "'+p.n+'"? This cannot be undone.'))run(()=>api('/api/admin/products/'+id,{method:'DELETE'}),b)}
-else if(a==='setc')run(()=>api('/api/admin/category-discount',jb('PUT',{category:b.dataset.c,pct:tr.querySelector('.pp').value,end:tr.querySelector('.ee').value})),b);
-else if(a==='clrc')run(()=>api('/api/admin/category-discount',jb('PUT',{category:b.dataset.c,pct:0})),b);
-else if(a==='nod')run(async()=>{await api('/api/admin/products/'+b.form.dataset.id+'/discount',jb('PUT',{pct:0}));$('#ed').close()},b)});
-$('#add').onclick=()=>edit();
-$('#ed').addEventListener('submit',e=>{e.preventDefault();const f=e.target,btn=f.querySelector('button:not([type])');
-if(f.id==='df')run(async()=>{await api('/api/admin/products/'+f.dataset.id+'/discount',jb('PUT',{pct:f.pct.value,end:f.end.value}));$('#ed').close()},btn);
-else run(async()=>{const fd=new FormData(f),id=fd.get('id');fd.delete('id');if(!f.img.files.length)fd.delete('img');
- fd.set('p',JSON.stringify([...f.querySelectorAll('#sz .rw')].map(r=>[r.querySelector('.zs').value,r.querySelector('.zp').value])));
- await api(id?'/api/admin/products/'+id:'/api/admin/products',{method:id?'PUT':'POST',body:fd});$('#ed').close()},btn)});
-$('#lb').onclick=async()=>{try{await api('/api/admin/login',jb('POST',{password:$('#pw').value}));$('#pw').value='';load()}catch(e){$('#lerr').textContent=e.message}};
-$('#pw').onkeydown=e=>{if(e.key==='Enter')$('#lb').click()};
-$('#lo').onclick=async()=>{await api('/api/admin/logout',{method:'POST'});show(false)};load();
-</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>SDN Admin</title>
+    <style>
+      body {
+        font:
+          15px/1.5 system-ui,
+          sans-serif;
+        margin: 0;
+        background: #f8f3fd;
+        color: #26192f;
+      }
+      .w {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 16px;
+      }
+      h1,
+      h2 {
+        margin: 0.3em 0;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+        border-radius: 6px;
+        padding: 7px 12px;
+        background: #7a1fc4;
+        color: #fff;
+      }
+      button.g {
+        background: #eadcf7;
+        color: #3a0f5c;
+      }
+      button.r {
+        background: #c0392b;
+      }
+      input,
+      select,
+      textarea {
+        font: inherit;
+        padding: 8px;
+        border: 1px solid #d5c6e4;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .c {
+        background: #fff;
+        border: 1px solid #e6dcef;
+        border-radius: 10px;
+        padding: 14px;
+        margin: 14px 0;
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+        vertical-align: middle;
+      }
+      img.t {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+        background: #f8f3fd;
+        border-radius: 6px;
+      }
+      .b {
+        background: #d4183d;
+        color: #fff;
+        border-radius: 99px;
+        padding: 1px 8px;
+        font-size: 0.8rem;
+      }
+      .s {
+        text-decoration: line-through;
+        color: #888;
+      }
+      dialog {
+        border: 0;
+        border-radius: 12px;
+        max-width: 520px;
+        width: 92%;
+      }
+      .rw {
+        display: flex;
+        gap: 8px;
+        margin: 4px 0;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-top: 10px;
+        font-size: 0.85rem;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+      @media (max-width: 640px) {
+        .w {
+          padding: 10px;
+        }
+        button {
+          min-height: 40px;
+        }
+        dialog {
+          max-height: 90vh;
+          overflow: auto;
+        }
+        h1 {
+          font-size: 1.3rem;
+        }
+        #prods tr {
+          display: grid;
+          grid-template-columns: 52px 1fr;
+          gap: 2px 10px;
+          padding: 10px 0;
+          border-bottom: 1px solid #eee;
+        }
+        #prods td {
+          border: 0;
+          padding: 2px;
+        }
+        #prods td:nth-child(n + 3) {
+          grid-column: 2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="w">
+      <div id="login">
+        <div class="c" style="max-width: 340px; margin: 60px auto">
+          <h2>SDN Admin</h2>
+          <label
+            >Password<input
+              id="pw"
+              type="password"
+              autocomplete="current-password"
+          /></label>
+          <p id="lerr" style="color: #c0392b"></p>
+          <button id="lb">Log in</button>
+        </div>
+      </div>
+      <div id="app" hidden>
+        <div class="top">
+          <h1>Scent Design Admin</h1>
+          <span
+            ><a href="/" target="_blank">View site</a>
+            <button class="g" id="lo">Log out</button></span
+          >
+        </div>
+        <div class="c">
+          <h2>Overview</h2>
+          <div id="stats" class="rw"></div>
+        </div>
+        <div class="c">
+          <h2>Categories</h2>
+          <form id="cf" class="rw">
+            <label style="flex: 1"
+              >New category<input
+                name="name"
+                maxlength="40"
+                required
+                placeholder="e.g. Home fragrances" /></label
+            ><button style="align-self: end">Add category</button>
+          </form>
+          <small
+            >Discounts apply to all products in a category unless a product has
+            its own discount. Categories with products cannot be deleted.</small
+          >
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>% off</th>
+                <th>Ends</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cats"></tbody>
+          </table>
+        </div>
+        <div class="c">
+          <h2>Business details and socials</h2>
+          <form id="sf">
+            <div class="rw">
+              <label style="flex: 1"
+                >Business name<input
+                  name="businessName"
+                  required
+                  maxlength="100" /></label
+              ><label style="flex: 1"
+                >Public email / contact inbox<input
+                  name="email"
+                  type="email"
+                  maxlength="200"
+              /></label>
+            </div>
+            <div class="rw">
+              <label style="flex: 1"
+                >Phone<input name="phone" maxlength="40" /></label
+              ><label style="flex: 1"
+                >WhatsApp number (international, digits only)<input
+                  name="wa"
+                  maxlength="30"
+              /></label>
+            </div>
+            <label
+              >Address<textarea
+                name="address"
+                rows="2"
+                maxlength="300"
+              ></textarea>
+            </label>
+            <div class="rw">
+              <label style="flex: 1"
+                >Opening hours<input name="hours" maxlength="160" /></label
+              ><label style="flex: 1"
+                >Google Maps link<input
+                  name="mapUrl"
+                  type="url"
+                  maxlength="500"
+              /></label>
+            </div>
+            <label
+              >Site description for search results<textarea
+                name="description"
+                rows="2"
+                maxlength="300"
+              ></textarea>
+            </label>
+            <h3>Bank transfer</h3>
+            <div class="rw">
+              <label style="flex: 1"
+                >Account name<input name="bankName" maxlength="100" /></label
+              ><label style="flex: 1"
+                >Account number<input name="bankNo" maxlength="40" /></label
+              ><label style="flex: 1"
+                >Bank<input name="bankBank" maxlength="100"
+              /></label>
+            </div>
+            <h3>Social links</h3>
+            <div class="rw">
+              <label style="flex: 1"
+                >Instagram<input name="Instagram" type="url" /></label
+              ><label style="flex: 1"
+                >Facebook<input name="Facebook" type="url"
+              /></label>
+            </div>
+            <div class="rw">
+              <label style="flex: 1"
+                >TikTok<input name="TikTok" type="url" /></label
+              ><label style="flex: 1">X<input name="X" type="url" /></label
+              ><label style="flex: 1"
+                >YouTube<input name="YouTube" type="url"
+              /></label>
+            </div>
+            <p class="er" style="color: #c0392b"></p>
+            <button>Save site details</button>
+          </form>
+          <small
+            >Contact form delivery also needs SMTP_USER and SMTP_PASS configured
+            on the server. Gmail requires an app password.</small
+          >
+        </div>
+        <div class="c">
+          <div class="top">
+            <h2>Products</h2>
+            <span
+              ><button class="g" id="export">Export CSV</button>
+              <button id="add">+ Add product</button></span
+            >
+          </div>
+          <div class="rw">
+            <label style="flex: 2"
+              >Search products<input
+                id="search"
+                type="search"
+                placeholder="Name or description" /></label
+            ><label style="flex: 1"
+              >Category<select id="filter">
+                <option value="">All categories</option>
+              </select></label
+            >
+          </div>
+          <table>
+            <tbody id="prods"></tbody>
+          </table>
+        </div>
+      </div>
+      <dialog id="ed"></dialog>
+    </div>
+    <script>
+      const $ = (s) => document.querySelector(s),
+        esc = (s) =>
+          String(s ?? "").replace(
+            /[&<>"']/g,
+            (c) => "&#" + c.charCodeAt(0) + ";",
+          ),
+        fmt = (n) => "₦" + n.toLocaleString("en-NG");
+      let D;
+      async function api(u, o = {}) {
+        const r = await fetch(u, { credentials: "same-origin", ...o });
+        if (r.status === 401 && !u.includes("login")) {
+          show(false);
+          throw Error("Please log in");
+        }
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) throw Error(j.error || "Error " + r.status);
+        return j;
+      }
+      const jb = (m, b) => ({
+        method: m,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(b),
+      });
+      function show(v) {
+        $("#login").hidden = v;
+        $("#app").hidden = !v;
+      }
+      async function load() {
+        try {
+          D = await api("/api/admin/data");
+          show(true);
+          draw();
+        } catch (e) {
+          show(false);
+        }
+      }
+      function draw() {
+        const cs = D.categories || [...new Set(D.products.map((p) => p.c))];
+        $("#stats").innerHTML =
+          `<span class="pad"><b>${D.products.length}</b> products</span><span class="pad"><b>${cs.length}</b> categories</span><span class="pad"><b>${D.products.filter((p) => p.f).length}</b> best sellers</span><span class="pad"><b>${D.products.filter((p) => p.disc).length}</b> discounted</span>`;
+        $("#cats").innerHTML =
+          cs
+            .map((c) => {
+              const d = D.catDiscounts[c] || {};
+              return `<tr><td><input class="cn" value="${esc(c)}" maxlength="40" aria-label="Category name"></td><td><input class="pp" type="number" min="1" max="95" value="${d.pct || ""}" placeholder="%" style="width:80px"></td><td><input class="ee" type="date" value="${d.end || ""}" style="width:150px"></td><td style="white-space:nowrap"><button data-a="savecat" data-c="${esc(c)}">Save</button> <button data-a="setc" data-c="${esc(c)}">Discount</button> <button class="r" data-a="delcat" data-c="${esc(c)}">Delete</button></td></tr>`;
+            })
+            .join("") || '<tr><td colspan="4">No categories yet.</td></tr>';
+        const filter = $("#filter").value;
+        $("#filter").innerHTML =
+          '<option value="">All categories</option>' +
+          cs
+            .map((c) => `<option value="${esc(c)}">${esc(c)}</option>`)
+            .join("");
+        $("#filter").value = cs.includes(filter) ? filter : "";
+        const s = D.settings || {},
+          f = $("#sf");
+        for (const [k, v] of Object.entries({
+          businessName: s.businessName,
+          email: s.email,
+          phone: s.phone,
+          wa: s.wa,
+          address: s.address,
+          hours: s.hours,
+          mapUrl: s.mapUrl,
+          description: s.description,
+          bankName: s.bank?.name,
+          bankNo: s.bank?.no,
+          bankBank: s.bank?.bank,
+          ...s.social,
+        }))
+          if (f.elements[k]) f.elements[k].value = v || "";
+        drawProducts();
+      }
+      function drawProducts() {
+        const q = $("#search").value.toLowerCase(),
+          cat = $("#filter").value,
+          ps = D.products.filter(
+            (p) =>
+              (!cat || p.c === cat) &&
+              (!q || (p.n + " " + p.d + " " + p.c).toLowerCase().includes(q)),
+          );
+        $("#prods").innerHTML =
+          ps
+            .map(
+              (p) =>
+                `<tr><td>${p.img ? `<img class="t" src="${esc(p.img)}" alt="">` : ""}</td><td><b>${esc(p.n)}</b><br><small>${esc(p.c)}</small></td><td>${p.p.map((s) => (s[2] > s[1] ? `<span class="s">${fmt(s[2])}</span> ` : "") + fmt(s[1]) + ` <small>(${s[0]})</small>`).join("<br>")}</td><td>${p.disc ? `<span class="b">-${p.disc}%</span><br><small>${p.dsrc}${p.dend ? " until " + p.dend : ""}</small>` : ""}</td><td style="white-space:nowrap"><button class="g" data-a="edit" data-id="${p.id}">Edit</button> <button class="g" data-a="disc" data-id="${p.id}">Discount</button> <button class="r" data-a="del" data-id="${p.id}">Delete</button></td></tr>`,
+            )
+            .join("") || "<tr><td>No matching products</td></tr>";
+      }
+      function szRow(s, p) {
+        return `<div class="rw"><input type="number" class="zs" placeholder="Size (ml)" value="${s}"><input type="number" class="zp" placeholder="Price ₦" value="${p}"><button type="button" class="g" data-a="rmsz">×</button></div>`;
+      }
+      function edit(id) {
+        const p = id
+          ? D.products.find((x) => x.id == id)
+          : {
+              n: "",
+              c: "",
+              d: "",
+              col: "#7a1fc4",
+              f: 0,
+              p: [["", ""]],
+              img: "",
+            };
+        $("#ed").innerHTML =
+          `<form id="ef"><h2>${id ? "Edit" : "Add"} product</h2><input type="hidden" name="id" value="${id || ""}"><label>Name<input name="n" required value="${esc(p.n)}"></label><label>Category<input name="c" required list="cl" value="${esc(p.c)}"></label><datalist id="cl">${D.categories.map((c) => `<option value="${esc(c)}">`).join("")}</datalist><label>Description<textarea name="d" rows="3">${esc(p.d)}</textarea></label><label>Sizes and full prices (before discount)</label><div id="sz">${p.p.map((s) => szRow(s[0], s[1])).join("")}</div><button type="button" class="g" data-a="addsz">+ Add size</button><label>Photo (JPG, PNG, WEBP, max 5MB)<input type="file" name="img" accept="image/jpeg,image/png,image/webp,image/gif"></label>${p.img ? '<label><input type="checkbox" name="rmimg" value="1" style="width:auto"> Remove current photo</label>' : ""}<label>Bottle colour (used when no photo)<input type="color" name="col" value="${p.col}"></label><label><input type="checkbox" name="f" value="1" ${p.f ? "checked" : ""} style="width:auto"> Best seller</label><p class="er" style="color:#c0392b"></p><div class="rw"><button>Save</button><button type="button" class="g" data-a="x">Cancel</button></div></form>`;
+        $("#ed").showModal();
+      }
+      function disc(id) {
+        const p = D.products.find((x) => x.id == id),
+          d = p.discount || {};
+        $("#ed").innerHTML =
+          `<form id="df" data-id="${id}"><h2>Discount: ${esc(p.n)}</h2><small>Overrides any category discount.</small><label>Percent off<input type="number" name="pct" min="1" max="95" value="${d.pct || ""}"></label><label>Ends on (optional)<input type="date" name="end" value="${d.end || ""}"></label><p class="er" style="color:#c0392b"></p><div class="rw"><button>Apply</button><button type="button" class="g" data-a="nod">Remove</button><button type="button" class="g" data-a="x">Cancel</button></div></form>`;
+        $("#ed").showModal();
+      }
+      async function run(f, btn) {
+        try {
+          await f();
+          await load();
+        } catch (e) {
+          (btn.closest("dialog")?.querySelector(".er") || {}).textContent =
+            e.message;
+          if (!btn.closest("dialog")) alert(e.message);
+        }
+      }
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-a]");
+        if (!b) return;
+        const a = b.dataset.a,
+          id = b.dataset.id,
+          tr = b.closest("tr");
+        if (a === "x") $("#ed").close();
+        else if (a === "addsz")
+          $("#sz").insertAdjacentHTML("beforeend", szRow("", ""));
+        else if (a === "rmsz") b.parentElement.remove();
+        else if (a === "edit") edit(id);
+        else if (a === "disc") disc(id);
+        else if (a === "del") {
+          const p = D.products.find((x) => x.id == id);
+          if (confirm('Delete "' + p.n + '"? This cannot be undone.'))
+            run(
+              () => api("/api/admin/products/" + id, { method: "DELETE" }),
+              b,
+            );
+        } else if (a === "savecat") {
+          const old = b.dataset.c,
+            name = tr.querySelector(".cn").value;
+          run(
+            () =>
+              api(
+                "/api/admin/categories/" + encodeURIComponent(old),
+                jb("PUT", { name }),
+              ),
+            b,
+          );
+        } else if (a === "delcat") {
+          const c = b.dataset.c;
+          if (
+            confirm(
+              'Delete category "' +
+                c +
+                '"? Categories with products cannot be removed.',
+            )
+          )
+            run(
+              () =>
+                api("/api/admin/categories/" + encodeURIComponent(c), {
+                  method: "DELETE",
+                }),
+              b,
+            );
+        } else if (a === "setc")
+          run(
+            () =>
+              api(
+                "/api/admin/category-discount",
+                jb("PUT", {
+                  category: b.dataset.c,
+                  pct: tr.querySelector(".pp").value,
+                  end: tr.querySelector(".ee").value,
+                }),
+              ),
+            b,
+          );
+        else if (a === "clrc")
+          run(
+            () =>
+              api(
+                "/api/admin/category-discount",
+                jb("PUT", { category: b.dataset.c, pct: 0 }),
+              ),
+            b,
+          );
+        else if (a === "nod")
+          run(async () => {
+            await api(
+              "/api/admin/products/" + b.form.dataset.id + "/discount",
+              jb("PUT", { pct: 0 }),
+            );
+            $("#ed").close();
+          }, b);
+      });
+      $("#add").onclick = () => edit();
+      $("#search").oninput = drawProducts;
+      $("#filter").onchange = drawProducts;
+      $("#cf").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const b = e.submitter;
+        run(async () => {
+          await api(
+            "/api/admin/categories",
+            jb("POST", { name: e.target.elements.name.value }),
+          );
+          e.target.reset();
+        }, b);
+      });
+      $("#sf").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const f = e.target,
+          b = f.querySelector('button[type="submit"],button:not([type])'),
+          d = Object.fromEntries(new FormData(f));
+        run(
+          () =>
+            api(
+              "/api/admin/settings",
+              jb("PUT", {
+                businessName: d.businessName,
+                email: d.email,
+                phone: d.phone,
+                wa: d.wa,
+                address: d.address,
+                hours: d.hours,
+                mapUrl: d.mapUrl,
+                description: d.description,
+                bank: { name: d.bankName, no: d.bankNo, bank: d.bankBank },
+                social: {
+                  Instagram: d.Instagram,
+                  Facebook: d.Facebook,
+                  TikTok: d.TikTok,
+                  X: d.X,
+                  YouTube: d.YouTube,
+                },
+              }),
+            ),
+          b,
+        );
+      });
+      $("#export").onclick = () => {
+        const q = (v) =>
+            '"' +
+            String(v ?? "")
+              .replace(/[\r\n]+/g, " ")
+              .replace(/"/g, '""')
+              .replace(/^[=+\-@]/, "'$&") +
+            '"',
+          rows = [
+            [
+              "Name",
+              "Category",
+              "Description",
+              "Best seller",
+              "Discount percent",
+              "Sizes ml",
+              "Prices NGN",
+            ],
+            ...D.products.map((p) => [
+              p.n,
+              p.c,
+              p.d,
+              p.f ? "Yes" : "No",
+              p.disc || 0,
+              p.p.map((s) => s[0]).join(" | "),
+              p.p.map((s) => s[2]).join(" | "),
+            ]),
+          ],
+          csv = rows.map((r) => r.map(q).join(",")).join("\r\n"),
+          a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+        a.download = "scent-design-products.csv";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      };
+      $("#ed").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const f = e.target,
+          btn = f.querySelector("button:not([type])");
+        if (f.id === "df")
+          run(async () => {
+            await api(
+              "/api/admin/products/" + f.dataset.id + "/discount",
+              jb("PUT", { pct: f.pct.value, end: f.end.value }),
+            );
+            $("#ed").close();
+          }, btn);
+        else
+          run(async () => {
+            const fd = new FormData(f),
+              id = fd.get("id");
+            fd.delete("id");
+            if (!f.img.files.length) fd.delete("img");
+            fd.set(
+              "p",
+              JSON.stringify(
+                [...f.querySelectorAll("#sz .rw")].map((r) => [
+                  r.querySelector(".zs").value,
+                  r.querySelector(".zp").value,
+                ]),
+              ),
+            );
+            await api(
+              id ? "/api/admin/products/" + id : "/api/admin/products",
+              { method: id ? "PUT" : "POST", body: fd },
+            );
+            $("#ed").close();
+          }, btn);
+      });
+      $("#lb").onclick = async () => {
+        try {
+          await api(
+            "/api/admin/login",
+            jb("POST", { password: $("#pw").value }),
+          );
+          $("#pw").value = "";
+          load();
+        } catch (e) {
+          $("#lerr").textContent = e.message;
+        }
+      };
+      $("#pw").onkeydown = (e) => {
+        if (e.key === "Enter") $("#lb").click();
+      };
+      $("#lo").onclick = async () => {
+        await api("/api/admin/logout", { method: "POST" });
+        show(false);
+      };
+      load();
+    </script>
+  </body>
+</html>
