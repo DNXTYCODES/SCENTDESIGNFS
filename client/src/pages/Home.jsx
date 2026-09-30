@@ -35,7 +35,8 @@ export default function Home({
       >
         <div className="hero-inner">
           <div className="hero-copy">
-            <span className="eyebrow">Made in Ibadan since 1997</span>
+            {/* Temporarily hidden at the client's request. */}
+            {/* <span className="eyebrow">Made in Ibadan since 1997</span> */}
             <h1>
               Discover your <em>signature scent…</em>
             </h1>
@@ -52,7 +53,8 @@ export default function Home({
               </button>
             </div>
           </div>
-          <HeroStage />
+          {/* Temporarily hidden at the client's request. */}
+          {/* <HeroStage /> */}
         </div>
       </section>
 

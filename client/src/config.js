@@ -36,7 +36,7 @@ export const CFG = {
   currency: "₦",
 };
 export const HERO = ["/img/sk.webp", "/img/no.webp"];
-export const HERO_BACKGROUND = "/img/ngn.webp";
+export const HERO_BACKGROUND = "/img/bg.jpg";
 export const FOUNDER_IMG = "/img/men.jpeg";
 export const TICKER = [
   "Welcome to Scent Design Nigeria, where fragrance is our passion",

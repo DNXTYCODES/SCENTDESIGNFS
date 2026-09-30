@@ -616,10 +616,14 @@ export const Footer = ({ settings: providedSettings }) => {
             <Social footer />
           </div>
           <div>
-            <h4>Visit us</h4>
-            {settings.address}
-            <br />
-            Hours: {settings.hours || "Contact us for opening hours"}
+            <details className="sd-footer-disclosure">
+              <summary>Visit us</summary>
+              <div>
+                {settings.address}
+                <br />
+                Hours: {settings.hours || "Contact us for opening hours"}
+              </div>
+            </details>
           </div>
           <div>
             <h4>Quick links</h4>
@@ -633,10 +637,20 @@ export const Footer = ({ settings: providedSettings }) => {
             ))}
           </div>
           <div>
-            <h4>Payment</h4>Full payment before delivery by bank transfer.
-            <br />
-            <span className="pad">{settings.bank.bank}</span>
-            <span className="pad">Transfer</span>
+            <details className="sd-footer-disclosure">
+              <summary>Payment</summary>
+              <div>
+                Full payment before delivery by bank transfer.
+                <dl>
+                  <dt>Account name</dt>
+                  <dd>{settings.bank.name}</dd>
+                  <dt>Account number</dt>
+                  <dd>{settings.bank.no}</dd>
+                  <dt>Bank</dt>
+                  <dd>{settings.bank.bank}</dd>
+                </dl>
+              </div>
+            </details>
           </div>
         </div>
         <p

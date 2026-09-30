@@ -333,12 +333,10 @@ app.post(
       process.env.CONTACT_TO ||
       process.env.SMTP_USER;
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS || !to)
-      return r
-        .status(503)
-        .json({
-          error:
-            "Email delivery is not configured yet. Please contact us by phone or WhatsApp.",
-        });
+      return r.status(503).json({
+        error:
+          "Email delivery is not configured yet. Please contact us by phone or WhatsApp.",
+      });
     const nodemailer = require("nodemailer"),
       port = Number(process.env.SMTP_PORT || 465),
       transporter = nodemailer.createTransport({
