@@ -20,7 +20,7 @@ export default function ProductCard({ p: raw, onAdd }) {
     oldPrice:
       raw.disc > 0
         ? (raw.p?.[0]?.[2] ?? raw.oldPrice ?? 0)
-        : (raw.oldPrice || raw.compareAtPrice || 0),
+        : raw.oldPrice || raw.compareAtPrice || 0,
     size:
       raw.size ||
       raw.volume ||
@@ -29,11 +29,14 @@ export default function ProductCard({ p: raw, onAdd }) {
         ? `${raw.p[0][0]}${raw.c === "Gift sets" ? " set" : "ml"}`
         : raw.variants?.[0]?.size || ""),
     description: raw.d || raw.description || "",
-    image: assetUrl(raw.img || raw.image || raw.images?.[0]?.url || raw.images?.[0]),
+    image: assetUrl(
+      raw.img || raw.image || raw.images?.[0]?.url || raw.images?.[0],
+    ),
     stock: raw.stock ?? raw.countInStock ?? 99,
     bestSeller: !!(raw.f || raw.bestSeller || raw.isBestSeller),
     limited: !!raw.limited,
-    variants: raw.p?.map((v) => `${v[0]}${raw.c === "Gift sets" ? " set" : "ml"}`) ||
+    variants:
+      raw.p?.map((v) => `${v[0]}${raw.c === "Gift sets" ? " set" : "ml"}`) ||
       (raw.variants || raw.fragrances || []).map((v) =>
         typeof v === "string" ? v : v.name,
       ),
@@ -79,7 +82,9 @@ export default function ProductCard({ p: raw, onAdd }) {
         <img src={p.image} alt={p.name} loading="lazy" />
         {low && <span className="sdc-badge">&lt;5 units left</span>}
         {p.limited && <span className="sdc-badge sdc-dark">Limited</span>}
-        {p.bestSeller && <span className="sdc-badge sdc-dark">Best seller</span>}
+        {p.bestSeller && (
+          <span className="sdc-badge sdc-dark">Best seller</span>
+        )}
         {p.oldPrice > p.price && <span className="sdc-sale">Sale</span>}
       </button>
 
@@ -116,7 +121,9 @@ export default function ProductCard({ p: raw, onAdd }) {
         >
           <option value="">-- Choose size --</option>
           {p.variants.map((v) => (
-            <option key={v} value={v}>{v}</option>
+            <option key={v} value={v}>
+              {v}
+            </option>
           ))}
         </select>
       )}
