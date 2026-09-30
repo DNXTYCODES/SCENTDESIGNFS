@@ -49,6 +49,7 @@ export default function ProductCard({ p: raw, onAdd }) {
   const defaultVariant = p.variants[0] || "";
   const [variant, setVariant] = useState(defaultVariant);
   const [more, setMore] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
   const { add, notify, setUi } = useShop();
   const out = p.stock === 0;
   const low = p.stock > 0 && p.stock < 5;
@@ -80,8 +81,13 @@ export default function ProductCard({ p: raw, onAdd }) {
         onClick={openDetails}
         aria-label={`View ${p.name}`}
       >
-        {p.image ? (
-          <img src={p.image} alt={p.name} loading="lazy" />
+        {p.image && !imageFailed ? (
+          <img
+            src={p.image}
+            alt={p.name}
+            loading="lazy"
+            onError={() => setImageFailed(true)}
+          />
         ) : (
           <span className="sdc-placeholder">
             <Bottle color={raw.col || "#0f172a"} />
