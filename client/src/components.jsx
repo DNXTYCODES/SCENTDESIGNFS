@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
 import { CFG, HERO, TICKER, apiUrl, assetUrl } from "./config";
@@ -600,6 +600,22 @@ export function Header({ cartCount, onCart }) {
 export const Footer = ({ settings: providedSettings }) => {
   const { settings: storeSettings } = useShop();
   const settings = providedSettings || storeSettings;
+
+  // Keep "Visit us" and "Payment" open on desktop, collapsible on mobile.
+  // The 761px breakpoint matches the CSS.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 761px)");
+    const sync = () =>
+      document
+        .querySelectorAll(".sd-footer-disclosure")
+        .forEach((d) => {
+          d.open = mq.matches;
+        });
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   return (
     <footer className="sd-footer">
       <div className="wrap">
@@ -610,9 +626,12 @@ export const Footer = ({ settings: providedSettings }) => {
               src="/logo.jpg"
               alt={settings.businessName}
             />
-            <h4>{settings.businessName}</h4>fragrance is our passion.
-            <br />
-            Established 1997.
+            <h4>{settings.businessName}</h4>
+            <p className="sd-footer-tagline">
+              Fragrance is our passion.
+              <br />
+              Established 1997.
+            </p>
             <Social footer />
           </div>
           <div>
@@ -653,17 +672,6 @@ export const Footer = ({ settings: providedSettings }) => {
             </details>
           </div>
         </div>
-        <p
-          style={{
-            margin: "22px 0 0",
-            fontSize: ".85rem",
-            borderTop: "1px solid #ffffff33",
-            paddingTop: 14,
-          }}
-        >
-          © {new Date().getFullYear()} {settings.businessName}. All rights
-          reserved.
-        </p>
       </div>
     </footer>
   );

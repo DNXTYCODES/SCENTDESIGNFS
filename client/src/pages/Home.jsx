@@ -41,12 +41,12 @@ export default function Home({
               Discover your <em>signature scent…</em>
             </h1>
             <p>
-              Perfumes made and sold in Ibadan since 1997. Browse our
-              collection, pay by bank transfer and we deliver to your door.
+              {/* Perfumes made and sold in Ibadan since 1997. Browse our
+              collection, pay by bank transfer and we deliver to your door. */}
             </p>
             <div className="hero-actions">
               <button className="btn solid" data-go="products">
-                Explore collection
+                Explore our Collection
               </button>
               <button className="btn ghost" data-go="about">
                 Our story
