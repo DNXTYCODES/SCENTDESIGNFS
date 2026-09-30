@@ -32,9 +32,9 @@ Small labels: 0.6 to 0.72rem, uppercase, letter-spacing 0.2 to 0.35em.
 **Header:** white, 1px bottom border, logo left, minimal uppercase nav (small, wide tracking), cart as outlined uppercase button. Announcement ticker (if present): thin black bar, uppercase 0.68rem.
 
 **Homepage sections, in this order:**
-1. **Hero**: dark full-width banner (dark gradient or lifestyle photo with dark overlay). Eyebrow "Made in Ibadan since 1997". Big serif headline, second line italic and grey (e.g. "Discover your / *signature scent…*"). One sentence of copy. Two buttons: "Explore collection" (white solid) and "Our story" (ghost). Product image on the right on desktop, above the text on mobile. Use the best hero image the project has (a lifestyle photo is ideal).
+1. **Hero**: dark full-width banner (dark gradient or lifestyle photo with dark overlay). Eyebrow "Made in Ibadan since 1997". Big serif headline, second line italic and grey (e.g. "Discover your / *signature scent…*"). One sentence of copy. Two buttons: "Explore collection" (white solid) and "Our story" (ghost). On the right on desktop (above the text on mobile) keep the **existing floating perfume group** (`HeroStage`: 2 to 3 product bottles bobbing up and down, a soft gold glow, two slowly rotating thin rings, twinkling sparkles). Do NOT replace it with a static image. Reuse the existing component and its `HERO` images, and restyle it for the dark background (larger, gold rings) as in the reference CSS. Keep the existing `prefers-reduced-motion` handling.
 2. **Philosophy**: centred, max-width about 760px, small uppercase eyebrow "Our philosophy" + one quote paragraph.
-3. **Category tiles**: 3 columns (1 on mobile), portrait 4:5 image blocks, **the middle tile offset down about 44px on desktop**. Under each: lowercase italic serif name, tiny uppercase tagline, a short 28px hairline. Each links to the shop filtered by that category. Image = first product photo in that category (fallback: off-white block).
+3. **Category tiles**: 3 columns (1 on mobile), portrait 4:5 image blocks, **the middle tile offset down about 44px on desktop**. Under each: lowercase italic serif name, tiny uppercase tagline, a short 28px hairline. Each links to the shop filtered by that category. Image = first product photo in that category (fallback: off-white block with a simple bottle silhouette in that product's colour).
 4. **"The essentials"** (best sellers/featured): section header row = uppercase serif title + tiny uppercase subtitle on the left, underlined "View all" link on the right, hairline under the row. Below, product grid.
 5. **One section per category** (first 2 or 3 categories) with the same header row and a 4-item grid.
 6. **Founder story**: off-white background, 2 columns. Left: portrait photo with a black "EST. 1997" tag overlapping the bottom-right corner. Right: serif heading "Designed for the *signature.*", a quote, "Founder and Curator" in italic. Make the photo configurable (`FOUNDER_IMG` in config; fall back to the logo). Quote text is a TODO for the client.
@@ -97,7 +97,11 @@ nav button[aria-selected=true]{border-bottom:1px solid #111;background:none;colo
 .eh h1{font:500 clamp(2.4rem,6vw,4.4rem)/1.05 'Playfair Display',serif;text-transform:none}.eh h1 em{color:#ffffff88;display:block}
 .eh p{max-width:420px;color:#ffffffcc;letter-spacing:.06em;margin:20px 0 28px}
 .eh .acts{display:flex;gap:12px;flex-wrap:wrap}
-.eh-img{width:100%;max-height:440px;object-fit:contain;filter:drop-shadow(0 30px 40px #0008)}
+/* floating perfume group (HeroStage) on the dark hero */
+.eh .stage{width:min(440px,100%);height:380px;margin:0 auto}
+.eh .stage img{height:330px}.eh .stage img:nth-of-type(2){height:350px}
+.eh .stage .ring{width:340px;height:340px;margin:-170px 0 0 -170px;border-color:#e8c47a88}
+.eh .stage .ring.r2{width:260px;height:260px;margin:-130px 0 0 -130px}
 /* philosophy */
 .phil{text-align:center;max-width:760px;margin:0 auto;padding:clamp(56px,9vw,110px) 20px}
 .phil blockquote{margin:18px 0 0;font:400 clamp(1.15rem,2.2vw,1.5rem)/1.7 Jost,sans-serif;color:#222}
@@ -106,6 +110,7 @@ nav button[aria-selected=true]{border-bottom:1px solid #111;background:none;colo
 .tile{background:none;border:0;padding:0;text-align:center;color:#111}
 .tile:nth-child(2){margin-top:44px}
 .tile .ph{aspect-ratio:4/5;display:grid;place-items:center;overflow:hidden}.tile img{width:70%;height:80%;object-fit:contain;transition:transform .6s}
+.tile .bt{width:26%;aspect-ratio:1/2.6;border-radius:8px 8px 14px 14px;box-shadow:0 14px 24px #0002}
 .tile:hover img{transform:scale(1.06)}
 .tile em{display:block;font:italic 400 1.3rem 'Playfair Display',serif;margin-top:16px}
 .tile small{display:block;letter-spacing:.3em;text-transform:uppercase;font-size:.62rem;color:var(--mu);margin-top:4px}
@@ -138,14 +143,13 @@ nav button[aria-selected=true]{border-bottom:1px solid #111;background:none;colo
 footer{background:#fff;color:#333;border-top:1px solid var(--ln)}
 footer h4{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--go);font-weight:500}
 footer a{color:#333;text-decoration:none}
-@media(max-width:760px){.eh-in,.fw{grid-template-columns:1fr}.eh-img{max-height:280px;order:-1}
- .tiles{grid-template-columns:1fr}.tile:nth-child(2){margin-top:0}.fw4{grid-template-columns:1fr 1fr}.fph{max-width:340px}}
+@media(max-width:760px){.eh-in,.fw{grid-template-columns:1fr}.eh .stage{order:-1;height:260px}.eh .stage img{height:210px}.eh .stage img:nth-of-type(2){height:230px}.eh .stage .ring{width:240px;height:240px;margin:-120px 0 0 -120px}.eh .stage .ring.r2{width:180px;height:180px;margin:-90px 0 0 -90px}.tiles{grid-template-columns:1fr}.tile:nth-child(2){margin-top:0}.fw4{grid-template-columns:1fr 1fr}.fph{max-width:340px}}
 ```
 
 ### 6B. Homepage (`client/src/pages/Home.jsx`)
-It uses these from the old project: `useShop()` (gives `products`, `categories`), a `Card` component for products, `CFG` and `HERO` from config, and `data-go`/`data-cat` attributes that a global click handler turns into navigation. Replace those with my current equivalents.
+It uses these from the old project: `useShop()` (gives `products`, `categories`), the existing `HeroStage` floating-perfumes component, a `Card` component for products, `CFG` and `HERO` from config, and `data-go`/`data-cat` attributes that a global click handler turns into navigation. Replace those with my current equivalents.
 ```jsx
-import {useShop} from '../store';import {Card} from '../components';import {CFG,HERO,FOUNDER_IMG} from '../config';
+import {useShop} from '../store';import {Card,HeroStage} from '../components';import {CFG,FOUNDER_IMG} from '../config';
 const TAG={Men:'Bold and woody',Women:'Floral and elegant',Unisex:'Made for everyone','Body oils':'Soft and lasting','Gift sets':'Ready to give'};
 const wa=CFG.wa?{href:'https://wa.me/'+CFG.wa+'?text='+encodeURIComponent('Hi! I would love some help choosing a fragrance.'),target:'_blank',rel:'noopener noreferrer'}:{href:'#','data-go':'contact'};
 export default function Home(){const{products,categories}=useShop(),cats=categories.slice(0,3),of=c=>products.filter(p=>p.c===c);
@@ -154,12 +158,12 @@ return(<>
 <h1>Discover your <em>signature scent…</em></h1>
 <p>Premium perfumes and body oils, blended in Nigeria and delivered to your door.</p>
 <div className="acts"><button className="btn solid" data-go="products">Explore collection</button><button className="btn ghost" data-go="about">Our story</button></div></div>
-<img className="eh-img" src={HERO[0]} alt="Scent Design perfume"/></div></section>
+<HeroStage/></div></section>
 
 <section className="phil"><small className="eyebrow">Our philosophy</small><blockquote>“A fragrance is more than a scent. It is the quiet signature you leave behind. Every bottle is blended with care to become part of your story.”</blockquote></section>
 
 <section className="tiles">{cats.map(c=>{const p=of(c).find(x=>x.img);return <button key={c} className="tile" data-go="products" data-cat={c}>
-<div className="ph" style={{background:p?'#e6b955':'var(--paper)'}}>{p&&<img src={p.img} alt={c}/>}</div><em>{c}</em><small>{TAG[c]||'Explore'}</small><i/></button>})}</section>
+<div className="ph" style={{background:p?'#e6b955':'var(--paper)'}}>{p?<img src={p.img} alt={c}/>:of(c)[0]&&<span className="bt" style={{background:of(c)[0].col}}/>}</div><em>{c}</em><small>{TAG[c]||'Explore'}</small><i/></button>})}</section>
 
 <section className="es"><div className="sh"><div><h2>The essentials</h2><p>Our most loved fragrances</p></div><a href="#" data-go="products" data-cat="All">View all</a></div>
 <div className="grid">{products.filter(p=>p.f).map(p=><Card key={p.id} p={p}/>)}</div></section>

@@ -1,13 +1,13 @@
-import { useShop } from '../store';
-import { Card } from '../components';
-import { HERO, FOUNDER_IMG } from '../config';
+import { useShop } from "../store";
+import { Card } from "../components";
+import { HERO, FOUNDER_IMG } from "../config";
 
 const TAG = {
-  Men: 'Bold and woody',
-  Women: 'Floral and elegant',
-  Unisex: 'Made for everyone',
-  'Body oils': 'Soft and lasting',
-  'Gift sets': 'Ready to give',
+  Men: "Bold and woody",
+  Women: "Floral and elegant",
+  Unisex: "Made for everyone",
+  "Body oils": "Soft and lasting",
+  "Gift sets": "Ready to give",
 };
 
 export default function Home() {
@@ -16,8 +16,8 @@ export default function Home() {
   const featured = products.filter((p) => p.f).slice(0, 4);
   const getByCategory = (name) => products.filter((p) => p.c === name);
   const waLink = settings.wa
-    ? `https://wa.me/${settings.wa.replace(/\D/g, '')}?text=${encodeURIComponent('Hi! I would love some help choosing a fragrance.')}`
-    : '/contact';
+    ? `https://wa.me/${settings.wa.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I would love some help choosing a fragrance.")}`
+    : "/contact";
 
   return (
     <>
@@ -29,16 +29,23 @@ export default function Home() {
               Discover your <em>signature scent…</em>
             </h1>
             <p>
-              Premium perfumes and body oils blended in Nigeria for everyday elegance,
-              thoughtful gifting and memorable evenings.
+              Premium perfumes and body oils blended in Nigeria for everyday
+              elegance, thoughtful gifting and memorable evenings.
             </p>
             <div className="hero-actions">
-              <button className="btn solid" data-go="products">Explore collection</button>
-              <button className="btn ghost" data-go="about">Our story</button>
+              <button className="btn solid" data-go="products">
+                Explore collection
+              </button>
+              <button className="btn ghost" data-go="about">
+                Our story
+              </button>
             </div>
           </div>
           <div className="hero-media">
-            <img src={HERO[0] || '/img/sk.webp'} alt="Scent Design Nigeria fragrance" />
+            <img
+              src={HERO[0] || "/img/sk.webp"}
+              alt="Scent Design Nigeria fragrance"
+            />
           </div>
         </div>
       </section>
@@ -46,27 +53,40 @@ export default function Home() {
       <section className="philosophy">
         <span className="eyebrow">Our philosophy</span>
         <blockquote>
-          “A fragrance is more than a scent. It is the quiet signature you leave behind.
-          Every bottle is blended with care to become part of your story.”
+          “A fragrance is more than a scent. It is the quiet signature you leave
+          behind. Every bottle is blended with care to become part of your
+          story.”
         </blockquote>
       </section>
 
       <section className="category-rail">
         {displayCategories.map((category) => {
           const categoryProducts = getByCategory(category);
-          const imageProduct = categoryProducts.find((p) => p.img) || categoryProducts[0];
+          const imageProduct =
+            categoryProducts.find((p) => p.img) || categoryProducts[0];
 
           return (
-            <button key={category} className="category-tile" data-go="products" data-cat={category}>
+            <button
+              key={category}
+              className="category-tile"
+              data-go="products"
+              data-cat={category}
+            >
               <div className="tile-image">
                 {imageProduct && imageProduct.img ? (
                   <img src={imageProduct.img} alt={category} />
                 ) : (
-                  <div style={{ width: '100%', height: '100%', background: '#f4efe8' }} />
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      background: "#f4efe8",
+                    }}
+                  />
                 )}
               </div>
               <em>{category}</em>
-              <small>{TAG[category] || 'Explore the collection'}</small>
+              <small>{TAG[category] || "Explore the collection"}</small>
               <i />
             </button>
           );
@@ -79,7 +99,9 @@ export default function Home() {
             <span className="eyebrow">The essentials</span>
             <h2>Our most loved fragrances</h2>
           </div>
-          <a href="#" data-go="products" data-cat="All">View all</a>
+          <a href="#" data-go="products" data-cat="All">
+            View all
+          </a>
         </div>
 
         <div className="product-grid">
@@ -127,9 +149,12 @@ export default function Home() {
               Designed for the <em>signature.</em>
             </h2>
             <p>
-              “Scent Design Nigeria began in Old Bodija, Ibadan with one belief: the right
-              fragrance can change how you feel about your day. Nearly three decades on, we still blend with the same care.”
-              <span className="note">Replace this quote with the founder’s own words.</span>
+              “Scent Design Nigeria began in Old Bodija, Ibadan with one belief:
+              the right fragrance can change how you feel about your day. Nearly
+              three decades on, we still blend with the same care.”
+              <span className="note">
+                Replace this quote with the founder’s own words.
+              </span>
             </p>
             <p className="note" style={{ marginTop: 12 }}>
               Founder and Curator
@@ -143,13 +168,16 @@ export default function Home() {
         <h2>
           Need help choosing <em>your scent?</em>
         </h2>
-        <p>Whether it is a gift or for yourself, we are happy to guide you on WhatsApp.</p>
+        <p>
+          Whether it is a gift or for yourself, we are happy to guide you on
+          WhatsApp.
+        </p>
         <a
           className="help-link"
           href={waLink}
-          target={settings.wa ? '_blank' : undefined}
-          rel={settings.wa ? 'noopener noreferrer' : undefined}
-          data-go={settings.wa ? undefined : 'contact'}
+          target={settings.wa ? "_blank" : undefined}
+          rel={settings.wa ? "noopener noreferrer" : undefined}
+          data-go={settings.wa ? undefined : "contact"}
         >
           Send us a message
         </a>
@@ -176,4 +204,3 @@ export default function Home() {
     </>
   );
 }
-
