@@ -17,7 +17,21 @@ const AdminRedirect = () => {
 export default function App() {
   const nav = useNavigate(),
     { pathname } = useLocation(),
-    { setUi, toast, settings } = useShop();
+    {
+      setUi,
+      toast,
+      settings,
+      count,
+      products,
+      categories,
+      status,
+      retryCatalog,
+      add,
+      maxDisc,
+    } = useShop();
+  const openCart = () => setUi((ui) => ({ ...ui, drawer: true }));
+  const openProduct = (product) =>
+    setUi((ui) => ({ ...ui, view: product.id }));
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -75,12 +89,36 @@ export default function App() {
   }, [setUi]);
   return (
     <>
-      <Header />
+      <Header cartCount={count} onCart={openCart} />
       <main>
         <div className="tab on" key={pathname}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  products={products}
+                  categories={categories}
+                  settings={settings}
+                  status={status}
+                  retryCatalog={retryCatalog}
+                  onAdd={openProduct}
+                />
+              }
+            />
+            <Route
+              path="/products"
+              element={
+                <Products
+                  products={products}
+                  categories={categories}
+                  status={status}
+                  maxDisc={maxDisc}
+                  retryCatalog={retryCatalog}
+                  onAdd={openProduct}
+                />
+              }
+            />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminRedirect />} />
@@ -100,7 +138,7 @@ export default function App() {
           </Routes>
         </div>
       </main>
-      <Footer />
+      <Footer settings={settings} />
       <div className="contact-fabs" aria-label="Contact us">
         <a
           className="contact-fab call-fab"
@@ -130,7 +168,7 @@ export default function App() {
         </a>
       </div>
       <CartDrawer />
-      <ProductModal />
+      <ProductModal onAdd={add} />
       <div
         className="toast"
         role="status"

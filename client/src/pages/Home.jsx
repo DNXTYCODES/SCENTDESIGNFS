@@ -1,6 +1,5 @@
-import { useShop } from "../store";
-import { Card, HeroStage } from "../components";
-import { FOUNDER_IMG } from "../config";
+import { Card } from "../components";
+import { FOUNDER_IMG, HERO, assetUrl } from "../config";
 
 const TAG = {
   Men: "Bold and woody",
@@ -10,8 +9,14 @@ const TAG = {
   "Gift sets": "Ready to give",
 };
 
-export default function Home() {
-  const { products, categories, settings } = useShop();
+export default function Home({
+  products,
+  categories,
+  settings,
+  status,
+  retryCatalog,
+  onAdd,
+}) {
   const displayCategories = categories.slice(0, 3);
   const featured = products.filter((p) => p.f).slice(0, 4);
   const getByCategory = (name) => products.filter((p) => p.c === name);
@@ -21,7 +26,10 @@ export default function Home() {
 
   return (
     <>
-      <section className="home-hero">
+      <section
+        className="home-hero"
+        style={{ backgroundImage: HERO[0] ? `url("${HERO[0]}")` : undefined }}
+      >
         <div className="hero-inner">
           <div className="hero-copy">
             <span className="eyebrow">Made in Ibadan since 1997</span>
@@ -29,8 +37,8 @@ export default function Home() {
               Discover your <em>signature scent…</em>
             </h1>
             <p>
-              Premium perfumes and body oils, blended in Nigeria and delivered
-              to your door.
+              Perfumes made and sold in Ibadan since 1997. Browse our collection,
+              pay by bank transfer and we deliver to your door.
             </p>
             <div className="hero-actions">
               <button className="btn solid" data-go="products">
@@ -41,7 +49,6 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <HeroStage />
         </div>
       </section>
 
@@ -69,7 +76,7 @@ export default function Home() {
             >
               <div className="tile-image">
                 {imageProduct && imageProduct.img ? (
-                  <img src={imageProduct.img} alt={category} />
+                  <img src={assetUrl(imageProduct.img)} alt={category} />
                 ) : (
                   <div
                     style={{
@@ -91,7 +98,7 @@ export default function Home() {
       <section className="section">
         <div className="section-head">
           <div>
-            <span className="eyebrow">The essentials</span>
+            <span className="eyebrow">Best sellers</span>
             <h2>Our most loved fragrances</h2>
           </div>
           <a href="#" data-go="products" data-cat="All">
@@ -99,34 +106,44 @@ export default function Home() {
           </a>
         </div>
 
-        <div className="product-grid">
-          {featured.map((p) => (
-            <Card key={p.id} p={p} />
-          ))}
-        </div>
+        {status === "loading" ? (
+          <p className="sub" aria-live="polite">Connecting to the catalog…</p>
+        ) : status === "error" ? (
+          <div>
+            <p className="sub">The catalog is temporarily unavailable.</p>
+            <button className="btn line" onClick={retryCatalog}>Retry catalog</button>
+          </div>
+        ) : (
+          <div className="product-grid">
+            {featured.map((p) => <Card key={p.id} p={p} onAdd={onAdd} />)}
+          </div>
+        )}
       </section>
 
-      {displayCategories.map((category) => (
-        <section className="section" key={category}>
-          <div className="section-head">
-            <div>
-              <span className="eyebrow">Curated picks</span>
-              <h2>{category}</h2>
+      <section className="section collections-section">
+        <div className="section-head">
+          <div>
+            <span className="eyebrow">Explore the range</span>
+            <h2>Our collections</h2>
+          </div>
+          <a href="#" data-go="products" data-cat="All">View all</a>
+        </div>
+        {displayCategories.map((category) => (
+          <div className="collection-row" key={category}>
+            <div className="collection-heading">
+              <h3>{category}</h3>
+              <a href="#" data-go="products" data-cat={category}>
+                View {category}
+              </a>
             </div>
-            <a href="#" data-go="products" data-cat={category}>
-              View {category}
-            </a>
-          </div>
-
-          <div className="product-grid">
-            {getByCategory(category)
-              .slice(0, 4)
-              .map((p) => (
-                <Card key={p.id} p={p} />
+            <div className="product-grid">
+              {getByCategory(category).slice(0, 4).map((p) => (
+                <Card key={p.id} p={p} onAdd={onAdd} />
               ))}
+            </div>
           </div>
-        </section>
-      ))}
+        ))}
+      </section>
 
       <section className="founder-wrap">
         <div className="founder">
@@ -147,9 +164,6 @@ export default function Home() {
               “Scent Design Nigeria began in Old Bodija, Ibadan with one belief:
               the right fragrance can change how you feel about your day. Nearly
               three decades on, we still blend with the same care.”
-              <span className="note">
-                Replace this quote with the founder’s own words.
-              </span>
             </p>
             <p className="note" style={{ marginTop: 12 }}>
               Founder and Curator
@@ -158,44 +172,28 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="help-banner">
-        <span className="eyebrow">Personalised guidance</span>
-        <h2>
-          Need help choosing <em>your scent?</em>
-        </h2>
-        <p>
-          Whether it is a gift or for yourself, we are happy to guide you on
-          WhatsApp.
-        </p>
-        <a
-          className="help-link"
-          href={waLink}
-          target={settings.wa ? "_blank" : undefined}
-          rel={settings.wa ? "noopener noreferrer" : undefined}
-          data-go={settings.wa ? undefined : "contact"}
-        >
-          Send us a message
-        </a>
+      <section className="home-cta">
+        <div className="help-banner">
+          <span className="eyebrow">Personalised guidance</span>
+          <h2>Need help choosing <em>your scent?</em></h2>
+          <p>Whether it is a gift or for yourself, we are happy to guide you on WhatsApp.</p>
+          <a
+            className="help-link"
+            href={waLink}
+            target={settings.wa ? "_blank" : undefined}
+            rel={settings.wa ? "noopener noreferrer" : undefined}
+            data-go={settings.wa ? undefined : "contact"}
+          >
+            Send us a message
+          </a>
+        </div>
+        <div className="order-strip">
+          <div className="order-step"><b>01</b>Pick your perfume</div>
+          <div className="order-step"><b>02</b>Enter delivery details</div>
+          <div className="order-step"><b>03</b>Pay by bank transfer</div>
+          <div className="order-step"><b>04</b>Send proof, we dispatch</div>
+        </div>
       </section>
-
-      <div className="order-strip">
-        <div className="order-step">
-          <b>01</b>
-          Pick your perfume
-        </div>
-        <div className="order-step">
-          <b>02</b>
-          Enter delivery details
-        </div>
-        <div className="order-step">
-          <b>03</b>
-          Pay by bank transfer
-        </div>
-        <div className="order-step">
-          <b>04</b>
-          Send proof, we dispatch
-        </div>
-      </div>
     </>
   );
 }

@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useShop } from "../store";
 import { Card } from "../components";
-export default function Products() {
-  const { products, categories, status, maxDisc, retryCatalog } = useShop(),
-    [sp, setSp] = useSearchParams(),
+export default function Products({
+  products,
+  categories,
+  status,
+  maxDisc,
+  retryCatalog,
+  onAdd,
+}) {
+  const [sp, setSp] = useSearchParams(),
     cat = sp.get("cat") || "All",
     [q, setQ] = useState(""),
     [sort, setSort] = useState("");
@@ -20,18 +25,17 @@ export default function Products() {
     );
   return (
     <>
-      <div className="banner">
-        <div className="wrap">
-          <h2>Our perfumes</h2>
+      <main className="sd-shop">
+        <div className="sd-shop-head">
+          <span className="eyebrow">The collection</span>
+          <h1>Our perfumes</h1>
           <p className="sub">Choose a size, add to cart, pay by transfer.</p>
+          <hr />
         </div>
-      </div>
-      <div className="wrap" style={{ paddingTop: 26 }}>
-        <div className="chips">
+        <div className="sd-filter-tabs" aria-label="Filter by category">
           {cats.map((c) => (
             <button
               key={c}
-              className="chip"
               aria-pressed={c === cat}
               onClick={() => setSp(c === "All" ? {} : { cat: c })}
             >
@@ -39,17 +43,20 @@ export default function Products() {
             </button>
           ))}
         </div>
-        <div className="tools">
-          <div style={{ flex: 1, minWidth: 200 }}>
+        <label className="sd-search" htmlFor="products-search">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4-4" />
+          </svg>
             <input
+              id="products-search"
               type="search"
-              placeholder="Search perfumes"
-              aria-label="Search perfumes"
+              placeholder="Search fragrances..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
             />
-          </div>
-          <div style={{ width: 200 }}>
+        </label>
+        <div className="sd-shop-tools">
             <select
               aria-label="Sort"
               value={sort}
@@ -59,15 +66,14 @@ export default function Products() {
               <option value="lo">Price: low to high</option>
               <option value="hi">Price: high to low</option>
             </select>
-          </div>
         </div>
         {status === "loading" && (
-          <p className="sub" aria-live="polite">
+          <p className="sub sd-shop-message" aria-live="polite">
             Connecting to the catalog…
           </p>
         )}
         {status === "error" && (
-          <div>
+          <div className="sd-shop-message">
             <p className="sub">
               The catalog is temporarily unavailable. The rest of the site is
               still available.
@@ -77,17 +83,17 @@ export default function Products() {
             </button>
           </div>
         )}
-        <div className="grid">
+        <div className="sd-grid">
           {l.map((p) => (
-            <Card key={p.id} p={p} />
+            <Card key={p.id} p={p} onAdd={onAdd} />
           ))}
         </div>
         {status === "ready" && !l.length && (
-          <p className="sub">
+          <p className="sub sd-shop-message">
             No perfumes match. Try another search or category.
           </p>
         )}
-      </div>
+      </main>
     </>
   );
 }

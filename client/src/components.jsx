@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ShoppingBag } from "lucide-react";
 import { CFG, HERO, TICKER, apiUrl, assetUrl } from "./config";
 import { useShop } from "./store";
 export const fmt = (n) => CFG.currency + n.toLocaleString("en-NG");
@@ -31,7 +32,7 @@ export const Bottle = ({ c }) => (
       y="82"
       fontSize="14"
       textAnchor="middle"
-      fill="#7a1fc4"
+      fill="#0f172a"
       fontFamily="serif"
       fontWeight="700"
     >
@@ -49,7 +50,6 @@ export const Pic = ({ p, h }) =>
         width: "auto",
         maxWidth: "100%",
         objectFit: "contain",
-        borderRadius: 6,
       }}
     />
   ) : (
@@ -57,30 +57,64 @@ export const Pic = ({ p, h }) =>
   );
 const Was = ({ v }) => <s className="was">{fmt(v)}</s>;
 const unit = (p) => (p.c === "Gift sets" ? " set" : "ml");
-export function Card({ p }) {
-  const { setUi } = useShop(),
-    open = () => setUi((u) => ({ ...u, view: p.id }));
+export function Card({ p, onAdd }) {
+  const { setUi } = useShop();
+  const [more, setMore] = useState(false);
+  const mapped = {
+    _id: p.id,
+    name: p.n,
+    category: p.c,
+    price: p.p?.[0]?.[1] ?? 0,
+    oldPrice: p.disc > 0 ? (p.p?.[0]?.[2] ?? null) : null,
+    size: p.p?.[0]?.[0] ?? "",
+    description: p.d ?? "",
+    image: p.img,
+    stock: null,
+    bestSeller: Boolean(p.f),
+    limited: null,
+    variants: p.p ?? [],
+    rating: null,
+    reviewCount: null,
+  };
+  const open = () =>
+    onAdd ? onAdd(p) : setUi((u) => ({ ...u, view: p.id }));
   return (
-    <article className="card pc">
-      {p.disc > 0 && <span className="sale">-{p.disc}%</span>}
-      {p.f ? <span className="ribbon">Best seller</span> : null}
-      <button className="img" onClick={open} aria-label={"View " + p.n}>
+    <article className="card pc sd-product-card">
+      {mapped.oldPrice > mapped.price && <span className="sale">-{p.disc}%</span>}
+      {mapped.bestSeller && <span className="ribbon">Best seller</span>}
+      <button className="img sd-product-image" onClick={open} aria-label={"View " + mapped.name}>
         <Pic p={p} h={150} />
       </button>
-      <div className="in">
-        <span className="tag">{p.c}</span>
-        <h3>{p.n}</h3>
-        <span className="price">
-          {p.disc > 0 && <Was v={p.p[0][2]} />}From {fmt(p.p[0][1])}
+      <div className="in sd-card-info">
+        <span className="tag sd-category">{mapped.category}</span>
+        <h3>{mapped.name}</h3>
+        {mapped.description && (
+          <p className={"sd-desc" + (more ? "" : " clamp")}>
+            {mapped.description}
+            {mapped.description.length > 90 && (
+              <button
+                className="sd-more"
+                type="button"
+                aria-expanded={more}
+                onClick={() => setMore((value) => !value)}
+              >
+                {more ? "Show less" : "...Show more"}
+              </button>
+            )}
+          </p>
+        )}
+        <span className="price sd-price">
+          {mapped.oldPrice > mapped.price && <Was v={mapped.oldPrice} />}
+          From {fmt(mapped.price)}
         </span>
-        <button className="btn" onClick={open}>
+        <button className="btn sd-add" onClick={open}>
           View and add
         </button>
       </div>
     </article>
   );
 }
-export function ProductModal() {
+export function ProductModal({ onAdd }) {
   const { products, ui, setUi, add, notify } = useShop(),
     [i, setI] = useState(0),
     p = products.find((x) => x.id === ui.view),
@@ -103,7 +137,6 @@ export function ProductModal() {
             <div
               style={{
                 background: "var(--tint)",
-                borderRadius: 10,
                 display: "grid",
                 placeItems: "center",
                 padding: 18,
@@ -153,7 +186,7 @@ export function ProductModal() {
                 id="add"
                 style={{ width: "100%" }}
                 onClick={() => {
-                  add(p, s);
+                  (onAdd || add)(p, s);
                   notify(p.n + " added to cart");
                   close();
                 }}
@@ -612,9 +645,11 @@ export function MsgForm() {
     </form>
   );
 }
-export function Header() {
+export function Header({ cartCount, onCart }) {
   const { count, setUi, maxDisc } = useShop(),
     { pathname } = useLocation(),
+    displayedCount = cartCount ?? count,
+    openCart = onCart || (() => setUi((u) => ({ ...u, drawer: true }))),
     cur = pathname === "/" ? "home" : pathname.slice(1),
     T = maxDisc
       ? ["Sale: up to " + maxDisc + "% off selected perfumes", ...TICKER]
@@ -628,7 +663,7 @@ export function Header() {
           ))}
         </div>
       </div>
-      <header>
+      <header className="sd-header">
         <div className="bar">
           <button
             className="brand"
@@ -649,24 +684,28 @@ export function Header() {
             ))}
           </nav>
           <button
-            className="cartbtn"
-            onClick={() => setUi((u) => ({ ...u, drawer: true }))}
+            className="cartbtn sd-bag"
+            onClick={openCart}
             aria-label="Open cart"
+            title="Open cart"
           >
-            Cart<span>{count}</span>
+            <ShoppingBag size={21} aria-hidden="true" />
+            {displayedCount > 0 && <span>{displayedCount}</span>}
           </button>
         </div>
       </header>
     </>
   );
 }
-export const Footer = () => {
-  const { settings } = useShop();
+export const Footer = ({ settings: providedSettings }) => {
+  const { settings: storeSettings } = useShop();
+  const settings = providedSettings || storeSettings;
   return (
-    <footer>
+    <footer className="sd-footer">
       <div className="wrap">
-        <div className="grid">
+        <div className="grid sd-footer-grid">
           <div>
+            <img className="sd-footer-brand" src="/logo.jpg" alt={settings.businessName} />
             <h4>{settings.businessName}</h4>Where fragrance is our passion.
             <br />
             Established 1997.
