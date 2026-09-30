@@ -291,7 +291,7 @@ main {
 }
 
 .home-hero {
-  background: linear-gradient(115deg, #171310 28%, #3e352f 100%);
+  background: linear-gradient(115deg, #151412 30%, #3b342b);
   color: #fff;
   overflow: hidden;
 }
@@ -317,14 +317,14 @@ main {
 }
 
 .home-hero h1 {
-  font-size: clamp(2.8rem, 5vw, 4.6rem);
-  line-height: 1.02;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1.05;
   color: #fff;
 }
 
 .home-hero h1 em {
   display: block;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.53);
 }
 
 .hero-copy p {
@@ -340,15 +340,39 @@ main {
   gap: 12px;
 }
 
-.hero-media {
-  display: flex;
-  justify-content: center;
+.home-hero .stage {
+  width: min(440px, 100%);
+  height: 380px;
+  margin: 0 auto;
 }
 
-.hero-media img {
-  width: min(100%, 420px);
-  object-fit: contain;
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.28));
+.home-hero .stage img {
+  height: 330px;
+}
+
+.home-hero .stage img:nth-of-type(2) {
+  height: 350px;
+}
+
+.home-hero .stage .ring {
+  width: 340px;
+  height: 340px;
+  margin: -170px 0 0 -170px;
+  border-color: rgba(232, 196, 122, 0.55);
+}
+
+.home-hero .stage .ring.r2 {
+  width: 260px;
+  height: 260px;
+  margin: -130px 0 0 -130px;
+  border-color: rgba(232, 196, 122, 0.4);
+}
+
+.home-hero .stage .glow {
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
+  background: radial-gradient(circle, rgba(232, 196, 122, 0.5), transparent 68%);
 }
 
 .philosophy {
@@ -754,8 +778,35 @@ footer .foot-bottom {
     grid-template-columns: 1fr;
   }
 
-  .hero-media {
+  .home-hero .stage {
     order: -1;
+    height: 260px;
+  }
+
+  .home-hero .stage img {
+    height: 210px;
+  }
+
+  .home-hero .stage img:nth-of-type(2) {
+    height: 230px;
+  }
+
+  .home-hero .stage .ring {
+    width: 240px;
+    height: 240px;
+    margin: -120px 0 0 -120px;
+  }
+
+  .home-hero .stage .ring.r2 {
+    width: 180px;
+    height: 180px;
+    margin: -90px 0 0 -90px;
+  }
+
+  .home-hero .stage .glow {
+    width: 210px;
+    height: 210px;
+    margin: -105px 0 0 -105px;
   }
 
   .category-rail,

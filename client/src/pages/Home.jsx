@@ -1,6 +1,6 @@
 import { useShop } from "../store";
-import { Card } from "../components";
-import { HERO, FOUNDER_IMG } from "../config";
+import { Card, HeroStage } from "../components";
+import { FOUNDER_IMG } from "../config";
 
 const TAG = {
   Men: "Bold and woody",
@@ -29,8 +29,8 @@ export default function Home() {
               Discover your <em>signature scent…</em>
             </h1>
             <p>
-              Premium perfumes and body oils blended in Nigeria for everyday
-              elegance, thoughtful gifting and memorable evenings.
+              Premium perfumes and body oils, blended in Nigeria and delivered
+              to your door.
             </p>
             <div className="hero-actions">
               <button className="btn solid" data-go="products">
@@ -41,12 +41,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="hero-media">
-            <img
-              src={HERO[0] || "/img/sk.webp"}
-              alt="Scent Design Nigeria fragrance"
-            />
-          </div>
+          <HeroStage />
         </div>
       </section>
 
