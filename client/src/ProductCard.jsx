@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useShop } from "./store";
 import { assetUrl } from "./config";
+import Bottle from "./Bottle";
 import "./ProductCard.css";
 
 const naira = (n) => "₦" + Number(n || 0).toLocaleString("en-NG");
@@ -42,25 +43,24 @@ export default function ProductCard({ p: raw, onAdd }) {
       ),
     rating: raw.rating || 4,
     reviewCount: raw.numReviews ?? raw.reviewCount ?? raw.reviews?.length ?? 0,
+    isSet: /set/i.test(raw.c || raw.category || "") || raw.isSet === true,
   };
   // ----------------------------------------------------
-  const [variant, setVariant] = useState("");
+  const defaultVariant = p.variants[0] || "";
+  const [variant, setVariant] = useState(defaultVariant);
   const [more, setMore] = useState(false);
   const { add, notify, setUi } = useShop();
   const out = p.stock === 0;
   const low = p.stock > 0 && p.stock < 5;
-  const needsVariant = p.variants.length > 0 && !variant;
   const selectOrAdd = () => {
     if (onAdd) {
-      onAdd(raw, variant || null);
-      return;
-    }
-    if (!variant) {
-      setUi((ui) => ({ ...ui, view: p.id }));
+      onAdd(raw, variant || defaultVariant || null);
       return;
     }
     const unit = raw.c === "Gift sets" ? " set" : "ml";
-    const selected = raw.p?.find((entry) => `${entry[0]}${unit}` === variant);
+    const selected = raw.p?.find(
+      (entry) => `${entry[0]}${unit}` === (variant || defaultVariant),
+    ) || raw.p?.[0];
     if (selected) {
       add(raw, selected);
       notify(`${p.name} added to cart`);
@@ -79,7 +79,13 @@ export default function ProductCard({ p: raw, onAdd }) {
         onClick={openDetails}
         aria-label={`View ${p.name}`}
       >
-        <img src={p.image} alt={p.name} loading="lazy" />
+        {p.image ? (
+          <img src={p.image} alt={p.name} loading="lazy" />
+        ) : (
+          <span className="sdc-placeholder">
+            <Bottle color={raw.col || "#0f172a"} />
+          </span>
+        )}
         {low && <span className="sdc-badge">&lt;5 units left</span>}
         {p.limited && <span className="sdc-badge sdc-dark">Limited</span>}
         {p.bestSeller && (
@@ -112,7 +118,7 @@ export default function ProductCard({ p: raw, onAdd }) {
 
       {p.size && <div className="sdc-size">{p.size}</div>}
 
-      {p.variants.length > 0 && (
+      {!p.isSet && p.variants.length > 1 && (
         <select
           className="sdc-select"
           value={variant}
@@ -142,7 +148,7 @@ export default function ProductCard({ p: raw, onAdd }) {
       <button
         type="button"
         className="sdc-add"
-        disabled={out || needsVariant}
+        disabled={out}
         onClick={selectOrAdd}
       >
         {out ? "Out of stock" : "Add to cart"}

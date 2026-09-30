@@ -870,6 +870,20 @@ footer p[style] {
   text-align: center;
 }
 
+.sdc .sdc-placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  background: #faf8f4;
+}
+
+.sdc .sdc-placeholder svg {
+  width: auto;
+  height: 78%;
+  max-width: 70%;
+}
+
 .sd-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
