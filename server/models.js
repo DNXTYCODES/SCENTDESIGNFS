@@ -15,6 +15,8 @@ const Product = m.model(
       d: { type: String, maxlength: 500, default: "" },
       col: { type: String, default: "#7a1fc4" },
       f: { type: Number, default: 0 },
+      rating: { type: Number, min: 1, max: 5, default: 4 },
+      reviewCount: { type: Number, min: 0, default: 0 },
       img: { type: String, default: "" },
       imgId: { type: String, default: "" },
       discount: { pct: Number, end: String },

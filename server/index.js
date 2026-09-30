@@ -420,6 +420,13 @@ function clean(b) {
     .sort((a, b) => a[0] - b[0]);
   if (!n || !c || !p.length)
     throw bad("Name, category and at least one size and price are required");
+  const rating = b.rating === "" || b.rating == null ? 4 : Number(b.rating);
+  const reviewCount =
+    b.reviewCount === "" || b.reviewCount == null ? 0 : Number(b.reviewCount);
+  if (!Number.isFinite(rating) || rating < 1 || rating > 5)
+    throw bad("Rating must be between 1 and 5");
+  if (!Number.isInteger(reviewCount) || reviewCount < 0)
+    throw bad("Review count must be a nonnegative whole number");
   return {
     n,
     c,
@@ -427,6 +434,8 @@ function clean(b) {
     d: String(b.d || "").slice(0, 500),
     col: /^#[0-9a-f]{6}$/i.test(b.col) ? b.col : "#7a1fc4",
     f: b.f === "1" ? 1 : 0,
+    rating,
+    reviewCount,
   };
 }
 function disc(b) {

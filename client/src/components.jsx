@@ -84,12 +84,6 @@ export function ProductModal({ onAdd }) {
                   </span>
                 )}
               </div>
-              <p className="tag">
-                Notes:{" "}
-                <span className="todo">
-                  top, heart and base notes to be added
-                </span>
-              </p>
               <button
                 className="btn"
                 id="add"
