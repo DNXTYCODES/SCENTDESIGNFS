@@ -36,6 +36,7 @@ export const CFG = {
   currency: "₦",
 };
 export const HERO = ["/img/sk.webp", "/img/no.webp"];
+export const FOUNDER_IMG = "";
 export const TICKER = [
   "Welcome to Scent Design Nigeria, where fragrance is our passion",
   "Perfumes made in Ibadan since 1997",
