@@ -30,8 +30,7 @@ export default function App() {
       maxDisc,
     } = useShop();
   const openCart = () => setUi((ui) => ({ ...ui, drawer: true }));
-  const openProduct = (product) =>
-    setUi((ui) => ({ ...ui, view: product.id }));
+  const openProduct = (product) => setUi((ui) => ({ ...ui, view: product.id }));
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);

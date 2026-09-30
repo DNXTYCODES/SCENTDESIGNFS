@@ -76,13 +76,18 @@ export function Card({ p, onAdd }) {
     rating: null,
     reviewCount: null,
   };
-  const open = () =>
-    onAdd ? onAdd(p) : setUi((u) => ({ ...u, view: p.id }));
+  const open = () => (onAdd ? onAdd(p) : setUi((u) => ({ ...u, view: p.id })));
   return (
     <article className="card pc sd-product-card">
-      {mapped.oldPrice > mapped.price && <span className="sale">-{p.disc}%</span>}
+      {mapped.oldPrice > mapped.price && (
+        <span className="sale">-{p.disc}%</span>
+      )}
       {mapped.bestSeller && <span className="ribbon">Best seller</span>}
-      <button className="img sd-product-image" onClick={open} aria-label={"View " + mapped.name}>
+      <button
+        className="img sd-product-image"
+        onClick={open}
+        aria-label={"View " + mapped.name}
+      >
         <Pic p={p} h={150} />
       </button>
       <div className="in sd-card-info">
@@ -705,7 +710,11 @@ export const Footer = ({ settings: providedSettings }) => {
       <div className="wrap">
         <div className="grid sd-footer-grid">
           <div>
-            <img className="sd-footer-brand" src="/logo.jpg" alt={settings.businessName} />
+            <img
+              className="sd-footer-brand"
+              src="/logo.jpg"
+              alt={settings.businessName}
+            />
             <h4>{settings.businessName}</h4>Where fragrance is our passion.
             <br />
             Established 1997.

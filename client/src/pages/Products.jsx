@@ -44,28 +44,35 @@ export default function Products({
           ))}
         </div>
         <label className="sd-search" htmlFor="products-search">
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
             <circle cx="11" cy="11" r="7" />
             <path d="m21 21-4-4" />
           </svg>
-            <input
-              id="products-search"
-              type="search"
-              placeholder="Search fragrances..."
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-            />
+          <input
+            id="products-search"
+            type="search"
+            placeholder="Search fragrances..."
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+          />
         </label>
         <div className="sd-shop-tools">
-            <select
-              aria-label="Sort"
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-            >
-              <option value="">Sort: Featured</option>
-              <option value="lo">Price: low to high</option>
-              <option value="hi">Price: high to low</option>
-            </select>
+          <select
+            aria-label="Sort"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="">Sort: Featured</option>
+            <option value="lo">Price: low to high</option>
+            <option value="hi">Price: high to low</option>
+          </select>
         </div>
         {status === "loading" && (
           <p className="sub sd-shop-message" aria-live="polite">

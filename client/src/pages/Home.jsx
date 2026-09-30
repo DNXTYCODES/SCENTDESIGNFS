@@ -37,8 +37,8 @@ export default function Home({
               Discover your <em>signature scent…</em>
             </h1>
             <p>
-              Perfumes made and sold in Ibadan since 1997. Browse our collection,
-              pay by bank transfer and we deliver to your door.
+              Perfumes made and sold in Ibadan since 1997. Browse our
+              collection, pay by bank transfer and we deliver to your door.
             </p>
             <div className="hero-actions">
               <button className="btn solid" data-go="products">
@@ -107,15 +107,21 @@ export default function Home({
         </div>
 
         {status === "loading" ? (
-          <p className="sub" aria-live="polite">Connecting to the catalog…</p>
+          <p className="sub" aria-live="polite">
+            Connecting to the catalog…
+          </p>
         ) : status === "error" ? (
           <div>
             <p className="sub">The catalog is temporarily unavailable.</p>
-            <button className="btn line" onClick={retryCatalog}>Retry catalog</button>
+            <button className="btn line" onClick={retryCatalog}>
+              Retry catalog
+            </button>
           </div>
         ) : (
           <div className="product-grid">
-            {featured.map((p) => <Card key={p.id} p={p} onAdd={onAdd} />)}
+            {featured.map((p) => (
+              <Card key={p.id} p={p} onAdd={onAdd} />
+            ))}
           </div>
         )}
       </section>
@@ -126,7 +132,9 @@ export default function Home({
             <span className="eyebrow">Explore the range</span>
             <h2>Our collections</h2>
           </div>
-          <a href="#" data-go="products" data-cat="All">View all</a>
+          <a href="#" data-go="products" data-cat="All">
+            View all
+          </a>
         </div>
         {displayCategories.map((category) => (
           <div className="collection-row" key={category}>
@@ -137,9 +145,11 @@ export default function Home({
               </a>
             </div>
             <div className="product-grid">
-              {getByCategory(category).slice(0, 4).map((p) => (
-                <Card key={p.id} p={p} onAdd={onAdd} />
-              ))}
+              {getByCategory(category)
+                .slice(0, 4)
+                .map((p) => (
+                  <Card key={p.id} p={p} onAdd={onAdd} />
+                ))}
             </div>
           </div>
         ))}
@@ -175,8 +185,13 @@ export default function Home({
       <section className="home-cta">
         <div className="help-banner">
           <span className="eyebrow">Personalised guidance</span>
-          <h2>Need help choosing <em>your scent?</em></h2>
-          <p>Whether it is a gift or for yourself, we are happy to guide you on WhatsApp.</p>
+          <h2>
+            Need help choosing <em>your scent?</em>
+          </h2>
+          <p>
+            Whether it is a gift or for yourself, we are happy to guide you on
+            WhatsApp.
+          </p>
           <a
             className="help-link"
             href={waLink}
@@ -188,10 +203,18 @@ export default function Home({
           </a>
         </div>
         <div className="order-strip">
-          <div className="order-step"><b>01</b>Pick your perfume</div>
-          <div className="order-step"><b>02</b>Enter delivery details</div>
-          <div className="order-step"><b>03</b>Pay by bank transfer</div>
-          <div className="order-step"><b>04</b>Send proof, we dispatch</div>
+          <div className="order-step">
+            <b>01</b>Pick your perfume
+          </div>
+          <div className="order-step">
+            <b>02</b>Enter delivery details
+          </div>
+          <div className="order-step">
+            <b>03</b>Pay by bank transfer
+          </div>
+          <div className="order-step">
+            <b>04</b>Send proof, we dispatch
+          </div>
         </div>
       </section>
     </>
