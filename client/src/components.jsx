@@ -460,24 +460,106 @@ export const CV = ({ k }) => {
     v = { wa: settings.wa, ph: settings.phone, em: settings.email }[k];
   return v || <span className="todo">to be added</span>;
 };
+
+/* Inline SVG icons: lucide-react has no TikTok/WhatsApp, so all socials are
+   drawn here in one consistent style with no extra dependency. */
+const ICONS = {
+  instagram: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  ),
+  facebook: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  ),
+  youtube: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+      <path d="m10 15 5-3-5-3z" />
+    </svg>
+  ),
+  whatsapp: (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+      <path d="M9 10a5 5 0 0 0 5 5l1.5-1.5-2-1-1 .8a3 3 0 0 1-1.8-1.8l.8-1-1-2z" />
+    </svg>
+  ),
+  x: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  ),
+  tiktok: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+    </svg>
+  ),
+};
+
+// Maps whatever keys you use in settings.social to an icon above.
+const ALIAS = {
+  ig: "instagram",
+  fb: "facebook",
+  twitter: "x",
+  yt: "youtube",
+  wa: "whatsapp",
+};
+
 export const Social = ({ footer }) => {
   const { settings } = useShop();
   return (
-    <div className="soc" style={footer ? { marginTop: 10 } : undefined}>
-      {Object.entries(settings.social).map(([k, u]) =>
-        u ? (
+    <div className={"soc" + (footer ? " soc-footer" : "")}>
+      {Object.entries(settings.social).map(([k, u]) => {
+        if (!u) return null;
+        const key = k.toLowerCase();
+        const icon = ICONS[ALIAS[key] || key];
+        return (
           <a
             key={k}
-            className={footer ? "pad" : "btn line"}
+            className={footer ? "soc-ico" : "btn line"}
             style={footer ? undefined : { padding: "6px 14px" }}
             target="_blank"
             rel="noopener noreferrer"
             href={u}
+            aria-label={k}
+            title={k[0].toUpperCase() + k.slice(1)}
           >
-            {k}
+            {footer && icon ? icon : k}
           </a>
-        ) : null,
-      )}
+        );
+      })}
     </div>
   );
 };
@@ -606,11 +688,9 @@ export const Footer = ({ settings: providedSettings }) => {
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 761px)");
     const sync = () =>
-      document
-        .querySelectorAll(".sd-footer-disclosure")
-        .forEach((d) => {
-          d.open = mq.matches;
-        });
+      document.querySelectorAll(".sd-footer-disclosure").forEach((d) => {
+        d.open = mq.matches;
+      });
     sync();
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
@@ -627,11 +707,6 @@ export const Footer = ({ settings: providedSettings }) => {
               alt={settings.businessName}
             />
             <h4>{settings.businessName}</h4>
-            <p className="sd-footer-tagline">
-              Fragrance is our passion.
-              <br />
-              Established 1997.
-            </p>
             <Social footer />
           </div>
           <div>
@@ -671,6 +746,18 @@ export const Footer = ({ settings: providedSettings }) => {
               </div>
             </details>
           </div>
+        </div>
+
+        <div className="sd-footer-signoff">
+          <span className="rule" aria-hidden="true" />
+          <div className="mark">
+            <span className="orn" aria-hidden="true">
+              ✦
+            </span>
+            <em>Fragrance is our passion</em>
+            {/* <small>Scent Design Nigeria · Est. 1997</small> */}
+          </div>
+          <span className="rule" aria-hidden="true" />
         </div>
       </div>
     </footer>
