@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useShop } from "./store";
 import { API_BASE } from "./config";
 import { Header, Footer, CartDrawer, ProductModal } from "./components";
-import { MessageCircle, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import About from "./pages/About";
@@ -180,7 +180,25 @@ export default function App() {
           aria-label="Chat with us on WhatsApp"
           title="Chat on WhatsApp"
         >
-          <MessageCircle size={22} aria-hidden="true" />
+          <svg
+            width="23"
+            height="23"
+            viewBox="0 0 32 32"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M16 3.2a12.7 12.7 0 0 0-10.9 19.2L3.5 28l5.8-1.5A12.7 12.7 0 1 0 16 3.2Z"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M21.8 16.6v3.1c0 .8-.7 1.5-1.5 1.5A16.8 16.8 0 0 1 4.8 5.7c0-.8.7-1.5 1.5-1.5h3.1c.8 0 1.4.6 1.5 1.4.1.8.3 1.5.6 2.2.3.6.2 1.3-.3 1.7l-1.3 1.3a13.5 13.5 0 0 0 5.3 5.3l1.3-1.3c.5-.5 1.1-.6 1.7-.3.7.3 1.4.5 2.2.6.8.1 1.4.8 1.4 1.5z"
+              fill="currentColor"
+            />
+          </svg>
         </a>
       </div>
       <CartDrawer />
