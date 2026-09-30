@@ -58,9 +58,10 @@ export default function ProductCard({ p: raw, onAdd }) {
       return;
     }
     const unit = raw.c === "Gift sets" ? " set" : "ml";
-    const selected = raw.p?.find(
-      (entry) => `${entry[0]}${unit}` === (variant || defaultVariant),
-    ) || raw.p?.[0];
+    const selected =
+      raw.p?.find(
+        (entry) => `${entry[0]}${unit}` === (variant || defaultVariant),
+      ) || raw.p?.[0];
     if (selected) {
       add(raw, selected);
       notify(`${p.name} added to cart`);
