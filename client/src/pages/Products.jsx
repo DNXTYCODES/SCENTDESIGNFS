@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Card } from "../components";
+import ProductCard from "../ProductCard";
 export default function Products({
   products,
   categories,
@@ -92,7 +92,7 @@ export default function Products({
         )}
         <div className="sd-grid">
           {l.map((p) => (
-            <Card key={p.id} p={p} onAdd={onAdd} />
+            <ProductCard key={p.id} p={p} onAdd={onAdd} />
           ))}
         </div>
         {status === "ready" && !l.length && (

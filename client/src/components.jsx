@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
 import { CFG, HERO, TICKER, apiUrl, assetUrl } from "./config";
+import ProductCard from "./ProductCard";
 import { useShop } from "./store";
 export const fmt = (n) => CFG.currency + n.toLocaleString("en-NG");
 export const Bottle = ({ c }) => (
@@ -57,68 +58,6 @@ export const Pic = ({ p, h }) =>
   );
 const Was = ({ v }) => <s className="was">{fmt(v)}</s>;
 const unit = (p) => (p.c === "Gift sets" ? " set" : "ml");
-export function Card({ p, onAdd }) {
-  const { setUi } = useShop();
-  const [more, setMore] = useState(false);
-  const mapped = {
-    _id: p.id,
-    name: p.n,
-    category: p.c,
-    price: p.p?.[0]?.[1] ?? 0,
-    oldPrice: p.disc > 0 ? (p.p?.[0]?.[2] ?? null) : null,
-    size: p.p?.[0]?.[0] ?? "",
-    description: p.d ?? "",
-    image: p.img,
-    stock: null,
-    bestSeller: Boolean(p.f),
-    limited: null,
-    variants: p.p ?? [],
-    rating: null,
-    reviewCount: null,
-  };
-  const open = () => (onAdd ? onAdd(p) : setUi((u) => ({ ...u, view: p.id })));
-  return (
-    <article className="card pc sd-product-card">
-      {mapped.oldPrice > mapped.price && (
-        <span className="sale">-{p.disc}%</span>
-      )}
-      {mapped.bestSeller && <span className="ribbon">Best seller</span>}
-      <button
-        className="img sd-product-image"
-        onClick={open}
-        aria-label={"View " + mapped.name}
-      >
-        <Pic p={p} h={150} />
-      </button>
-      <div className="in sd-card-info">
-        <span className="tag sd-category">{mapped.category}</span>
-        <h3>{mapped.name}</h3>
-        {mapped.description && (
-          <p className={"sd-desc" + (more ? "" : " clamp")}>
-            {mapped.description}
-            {mapped.description.length > 90 && (
-              <button
-                className="sd-more"
-                type="button"
-                aria-expanded={more}
-                onClick={() => setMore((value) => !value)}
-              >
-                {more ? "Show less" : "...Show more"}
-              </button>
-            )}
-          </p>
-        )}
-        <span className="price sd-price">
-          {mapped.oldPrice > mapped.price && <Was v={mapped.oldPrice} />}
-          From {fmt(mapped.price)}
-        </span>
-        <button className="btn sd-add" onClick={open}>
-          View and add
-        </button>
-      </div>
-    </article>
-  );
-}
 export function ProductModal({ onAdd }) {
   const { products, ui, setUi, add, notify } = useShop(),
     [i, setI] = useState(0),
@@ -480,7 +419,7 @@ export const HeroStage = () => (
     ))}
   </div>
 );
-export function Featured() {
+export function Featured({ onAdd }) {
   const { products, status, retryCatalog } = useShop();
   return (
     <div className="grid" id="featured">
@@ -498,12 +437,14 @@ export function Featured() {
           Connecting to the catalog…
         </p>
       ) : (
-        products.filter((p) => p.f).map((p) => <Card key={p.id} p={p} />)
+        products
+          .filter((p) => p.f)
+          .map((p) => <ProductCard key={p.id} p={p} onAdd={onAdd} />)
       )}
     </div>
   );
 }
-export function Collections() {
+export function Collections({ onAdd }) {
   const { products, categories, status, retryCatalog } = useShop(),
     [t, setT] = useState(),
     tab = t || categories[0],
@@ -539,7 +480,7 @@ export function Collections() {
       </div>
       <div className="grid" id="cgrid">
         {l.slice(0, 4).map((p) => (
-          <Card key={p.id} p={p} />
+          <ProductCard key={p.id} p={p} onAdd={onAdd} />
         ))}
       </div>
       <div className="more">
@@ -655,7 +596,6 @@ export function Header({ cartCount, onCart }) {
     { pathname } = useLocation(),
     displayedCount = cartCount ?? count,
     openCart = onCart || (() => setUi((u) => ({ ...u, drawer: true }))),
-    cur = pathname === "/" ? "home" : pathname.slice(1),
     T = maxDisc
       ? ["Sale: up to " + maxDisc + "% off selected perfumes", ...TICKER]
       : TICKER;
@@ -678,15 +618,11 @@ export function Header({ cartCount, onCart }) {
             <img src="/logo.jpg" alt="SDN logo" />
             <span>
               <b>Scent Design Nigeria</b>
-              <small>Fragrance is our passion</small>
+              <small>fragrance is our passion</small>
             </span>
           </button>
-          <nav role="tablist" aria-label="Main">
-            {["home", "products", "about", "contact"].map((t) => (
-              <button key={t} role="tab" data-go={t} aria-selected={cur === t}>
-                {t === "about" ? "About us" : t[0].toUpperCase() + t.slice(1)}
-              </button>
-            ))}
+          <nav aria-label="Store navigation">
+            <button data-go="products">Shop</button>
           </nav>
           <button
             className="cartbtn sd-bag"
@@ -715,7 +651,7 @@ export const Footer = ({ settings: providedSettings }) => {
               src="/logo.jpg"
               alt={settings.businessName}
             />
-            <h4>{settings.businessName}</h4>Where fragrance is our passion.
+            <h4>{settings.businessName}</h4>fragrance is our passion.
             <br />
             Established 1997.
             <Social footer />

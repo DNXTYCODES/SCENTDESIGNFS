@@ -257,30 +257,6 @@ section.alt {
 .alt .card {
   background: var(--bg);
 }
-.pc {
-  padding: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.pc .img {
-  background: var(--tint);
-  display: grid;
-  place-items: center;
-  padding: 16px;
-  border: 0;
-  width: 100%;
-}
-.pc .img svg {
-  height: 150px;
-}
-.pc .in {
-  padding: 14px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
-}
 .tag {
   font-size: 0.78rem;
   color: var(--mu);
@@ -289,11 +265,6 @@ section.alt {
   font-weight: 600;
   color: var(--pu);
   font-size: 1.1rem;
-}
-.pc .btn {
-  margin-top: auto;
-  padding: 9px;
-  width: 100%;
 }
 .chips {
   display: flex;
@@ -644,23 +615,6 @@ footer .grid {
 .card {
   box-shadow: 0 2px 10px #7a1fc414;
 }
-.pc:hover {
-  border-color: var(--go);
-}
-.ribbon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: var(--go);
-  color: #26192f;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 10px;
-  border-radius: 99px;
-}
-.pc {
-  position: relative;
-}
 .cta {
   background: linear-gradient(120deg, var(--go), var(--go2));
   border-radius: 16px;
@@ -798,15 +752,6 @@ h1 {
 }
 .btn.gold {
   background: linear-gradient(135deg, #b8862c, #e8c47a 50%, #b8862c);
-}
-.pc {
-  border-color: #ecdcb8;
-}
-.pc .img {
-  background: linear-gradient(180deg, #fbf6ea, #f6effb);
-}
-.ribbon {
-  background: linear-gradient(135deg, #b8862c, #e8c47a);
 }
 .card {
   border-color: #ecdcb8;
@@ -1041,16 +986,9 @@ details p {
   .tools > div {
     width: 100% !important;
   }
-  .pc .img svg,
-  .pc .img img {
-    height: 120px !important;
-  }
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-  }
-  .pc .in {
-    padding: 10px;
   }
   h3 {
     font-size: 1.2rem;
@@ -1059,9 +997,6 @@ details p {
   .drawer .pn {
     padding: 16px;
   }
-}
-.pc {
-  position: relative;
 }
 .sale {
   position: absolute;
@@ -1286,42 +1221,10 @@ body {
   .grid {
     gap: 12px;
   }
-  .pc .img {
-    padding: 12px 8px;
-  }
-  .pc .in {
-    padding: 10px 10px 12px;
-    gap: 2px;
-  }
-  .pc h3 {
-    font-size: 1.1rem;
-    line-height: 1.15;
-  }
-  .pc .tag {
-    font-size: 0.72rem;
-  }
-  .pc .price {
-    font-size: 0.95rem;
-    line-height: 1.3;
-    margin-bottom: 8px;
-  }
-  .pc .price .was {
-    display: block;
-    margin: 0;
-  }
-  .pc .btn {
-    margin-top: auto;
-    padding: 11px 6px;
-    font-size: 0.9rem;
-  }
-  .ribbon,
   .sale {
     font-size: 0.68rem;
     padding: 2px 8px;
     top: 8px;
-  }
-  .ribbon {
-    left: 8px;
   }
   .sale {
     right: 8px;

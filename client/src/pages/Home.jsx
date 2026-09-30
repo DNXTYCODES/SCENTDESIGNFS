@@ -1,13 +1,12 @@
-import { Card } from "../components";
-import { FOUNDER_IMG, HERO, assetUrl } from "../config";
+import { HeroStage } from "../components";
+import ProductCard from "../ProductCard";
+import { FOUNDER_IMG, HERO_BACKGROUND } from "../config";
 
-const TAG = {
-  Men: "Bold and woody",
-  Women: "Floral and elegant",
-  Unisex: "Made for everyone",
-  "Body oils": "Soft and lasting",
-  "Gift sets": "Ready to give",
-};
+const HOME_COLLECTIONS = [
+  { name: "Candles", image: "/img/candleImage.webp" },
+  { name: "Diffusers", image: "/img/DiffuserImage.webp" },
+  { name: "Room spray", image: "/img/spray.webp" },
+];
 
 export default function Home({
   products,
@@ -28,7 +27,11 @@ export default function Home({
     <>
       <section
         className="home-hero"
-        style={{ backgroundImage: HERO[0] ? `url("${HERO[0]}")` : undefined }}
+        style={{
+          backgroundImage: HERO_BACKGROUND
+            ? `url("${HERO_BACKGROUND}")`
+            : undefined,
+        }}
       >
         <div className="hero-inner">
           <div className="hero-copy">
@@ -49,6 +52,7 @@ export default function Home({
               </button>
             </div>
           </div>
+          <HeroStage />
         </div>
       </section>
 
@@ -62,37 +66,20 @@ export default function Home({
       </section>
 
       <section className="category-rail">
-        {displayCategories.map((category) => {
-          const categoryProducts = getByCategory(category);
-          const imageProduct =
-            categoryProducts.find((p) => p.img) || categoryProducts[0];
-
-          return (
-            <button
-              key={category}
-              className="category-tile"
-              data-go="products"
-              data-cat={category}
-            >
-              <div className="tile-image">
-                {imageProduct && imageProduct.img ? (
-                  <img src={assetUrl(imageProduct.img)} alt={category} />
-                ) : (
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      background: "#f4efe8",
-                    }}
-                  />
-                )}
-              </div>
-              <em>{category}</em>
-              <small>{TAG[category] || "Explore the collection"}</small>
-              <i />
-            </button>
-          );
-        })}
+        {HOME_COLLECTIONS.map((collection) => (
+          <button
+            key={collection.name}
+            className="category-tile"
+            data-go="products"
+          >
+            <div className="tile-image">
+              <img src={collection.image} alt={collection.name} />
+            </div>
+            <em>{collection.name}</em>
+            <small>Explore the collection</small>
+            <i />
+          </button>
+        ))}
       </section>
 
       <section className="section">
@@ -120,7 +107,7 @@ export default function Home({
         ) : (
           <div className="product-grid">
             {featured.map((p) => (
-              <Card key={p.id} p={p} onAdd={onAdd} />
+              <ProductCard key={p.id} p={p} onAdd={onAdd} />
             ))}
           </div>
         )}
@@ -148,7 +135,7 @@ export default function Home({
               {getByCategory(category)
                 .slice(0, 4)
                 .map((p) => (
-                  <Card key={p.id} p={p} onAdd={onAdd} />
+                  <ProductCard key={p.id} p={p} onAdd={onAdd} />
                 ))}
             </div>
           </div>
@@ -159,7 +146,7 @@ export default function Home({
         <div className="founder">
           <div className="founder-visual">
             {FOUNDER_IMG ? (
-              <img src={FOUNDER_IMG} alt="Founder" />
+              <img src={FOUNDER_IMG} alt="Scent Design Nigeria founder" />
             ) : (
               <img src="/logo.jpg" alt="Scent Design Nigeria" />
             )}

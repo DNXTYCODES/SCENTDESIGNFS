@@ -27,10 +27,27 @@ export default function App() {
       status,
       retryCatalog,
       add,
+      notify,
       maxDisc,
     } = useShop();
   const openCart = () => setUi((ui) => ({ ...ui, drawer: true }));
   const openProduct = (product) => setUi((ui) => ({ ...ui, view: product.id }));
+  const handleCardAdd = (product, selectedVariant) => {
+    if (!selectedVariant) {
+      openProduct(product);
+      return;
+    }
+    const sizeUnit = product.c === "Gift sets" ? " set" : "ml";
+    const selectedSize = product.p?.find(
+      (option) => `${option[0]}${sizeUnit}` === selectedVariant,
+    );
+    if (!selectedSize) {
+      openProduct(product);
+      return;
+    }
+    add(product, selectedSize);
+    notify(`${product.n} added to cart`);
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -101,7 +118,7 @@ export default function App() {
                   settings={settings}
                   status={status}
                   retryCatalog={retryCatalog}
-                  onAdd={openProduct}
+                  onAdd={handleCardAdd}
                 />
               }
             />
@@ -114,7 +131,7 @@ export default function App() {
                   status={status}
                   maxDisc={maxDisc}
                   retryCatalog={retryCatalog}
-                  onAdd={openProduct}
+                  onAdd={handleCardAdd}
                 />
               }
             />
